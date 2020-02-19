@@ -1,3 +1,5 @@
   public class Test{
-
+   public void static main(args[]){
+     System.out.println("123");
+   }
   }
