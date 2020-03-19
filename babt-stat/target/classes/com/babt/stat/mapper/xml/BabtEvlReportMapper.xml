@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.babt.stat.mapper.BabtEvlReportDao">
+
+     <resultMap id="BaseResultMap" type="com.babt.stat.entity.BabtEvlReport">
+        <id column="ID" property="id" />
+        <result column="TaskId" property="taskId" />
+        <result column="SOC" property="soc" />
+        <result column="TotalTime" property="totalTime" />
+        <result column="Barrier" property="barrier" />
+        <result column="VoltageDelta" property="voltageDelta" />
+        <result column="ODO" property="odo" />
+        <result column="SOH" property="soh" />
+        <result column="ChargeLift" property="chargeLift" />
+        <result column="RepairSugesstion" property="repairSugesstion" />
+        <result column="Discription" property="discription" />
+        <result column="Area" property="area" />
+        <result column="Accuracy" property="accuracy" />
+     </resultMap>
+     
+<select id="queryBabtEvlReport" resultMap="BaseResultMap">
+select *from babt_evl_report
+</select>
+
+</mapper>

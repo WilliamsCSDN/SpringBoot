@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.babt.stat.mapper.BabtStGoeWeekDistrictDao">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.babt.stat.entity.BabtStGoeWeekDistrict">
+		<id column="id" property="id" />
+		<result column="province_code" property="provinceCode" />
+		<result column="city_code" property="cityCode" />
+		<result column="district_code" property="districtCode" />
+		<result column="manufacturer" property="manufacturer" />
+		<result column="car_model_id" property="carModelId" />
+		<result column="car_model_name" property="carModelName" />
+		<result column="avg_mile" property="avgMile" />
+		<result column="car_count" property="carCount" />
+		<result column="monday_date" property="mondayDate" />
+		<result column="create_time" property="createTime" />
+		<result column="update_time" property="updateTime" />
+		<result column="longitude" property="longitude" />
+		<result column="latitude" property="latitude" />
+	</resultMap>
+
+</mapper>

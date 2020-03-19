@@ -1,0 +1,118 @@
+<!doctype html>  
+
+<html>  
+<head>  
+ <meta charset='utf-8'/>  
+<link href="/css/jquery-ui.css" rel="stylesheet" type="text/css"/> 
+ <style type="text/css">  
+    
+     a{  
+    text-decoration: none;  
+    }  
+      
+    .table2{  
+     border:#C8C8C8 solid;     
+    border-width:1px 0px 0px 1px;   
+    background: #F3F0F0;  
+    margin-top:25px;  
+    }  
+      
+    .td0{  
+        border:#C8C8C8 solid;    
+    border-width:0 0 1px 0;  
+    }  
+      
+    .td2{  
+        border:#C8C8C8 solid;     
+    border-width:0 1px 1px 0 ;  
+    }  
+      
+    .barcon {  
+     width: 1000px;  
+     margin: 0 auto;  
+     text-align: center;  
+        }  
+  
+    .barcon1 {  
+        font-size: 17px;  
+        float: left;  
+        margin-top: 20px;  
+    }  
+  
+    .barcon2 {  
+     float: right;  
+    }  
+  
+    .barcon2 ul {  
+        margin: 20px 0;  
+        padding-left: 0;  
+        list-style: none;  
+        text-align: center;  
+    }  
+  
+    .barcon2 li {  
+        display: inline;  
+    }  
+  
+    .barcon2 a {  
+        font-size: 16px;  
+    font-weight: normal;  
+    display: inline-block;  
+    padding: 5px;  
+    padding-top: 0;  
+    color: black;  
+    border: 1px solid #ddd;  
+    background-color: #fff;  
+    }  
+  
+    .barcon2 a:hover{  
+    background-color: #eee;  
+    }  
+  
+    .ban {  
+        opacity: .4;  
+    }  
+ </style>  
+</head>  
+<body >  
+<input type="hidden" th:value="${companyId}"/>
+班次名称：<textarea rows="1" cols="30"  readonly="readonly" th:text="${planTable.planName}"></textarea>
+线路名称：<textarea rows="1" cols="50"  readonly="readonly" th:text="${planTable.lineName}"></textarea>
+    <table width="950" cellpadding="0" cellspacing="0" class="table2" align="center">  
+    
+    <thead>  
+    <tr align="center">  
+        <th width="30" height="33" class="td2">编号</th>  
+        <th width="50" class="td2">点位名</th> 
+         <th width="50" class="td2">计划时间</th>  
+         <th width="50" class="td2">开始时间</th>
+          <th width="50" class="td2">结束时间</th>
+         <th width="50" class="td2">刷卡时间</th>  
+    </tr>  
+    </thead>  
+    <tbody th:if="${records}==null"> 没有记录，请修改开始时间和结束时间</tbody>
+    <tbody id="adminTbody" th:unless="${records}==null">  
+    <tr align="center" th:each="loc :  ${records}">  
+     	<td class="td2" th:text="${loc.userName}"></td>  
+     	<td class="td2" th:text="${loc.positionName}"></td> 
+     	<td class="td2" th:text="${#dates.format(loc.positionOnTime,'YYYY-MM-dd HH:mm')}"></td>  
+     	<td class="td2" th:text="${#dates.format(loc.positionStartTime,'YYYY-MM-dd HH:mm')}"></td>  
+     	<td class="td2" th:text="${#dates.format(loc.positionEndTime,'YYYY-MM-dd HH:mm')}"></td>  
+     	<td class="td2" th:if="${loc.checkInTime}==null" th:text="未打卡"></td>  
+     	<td class="td2" th:unless="${loc.checkInTime} ==null" th:text="${#dates.format(loc.checkInTime,'YYYY-MM-dd HH:mm')}"></td>  
+    </tr>  
+    
+    </tbody>  
+</table>  
+
+<script src="/js/jquery-3.2.1.min.js"></script> 
+<script src="/js/jquery-ui.js"></script> 
+<script src="/js/user.js"></script> 
+
+<script  th:inline="javascript">
+$(document).ready(function() { 
+
+}); 
+</script>
+</body>   
+</html>   

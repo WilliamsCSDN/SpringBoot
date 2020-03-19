@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.babt.stat.mapper.BabtAreaCodeDao">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.babt.stat.entity.BabtAreaCode">
+		<id column="ID" property="id" />
+		<result column="Code" property="code" />
+		<result column="Area" property="area" />
+		<result column="Province" property="province" />
+		<result column="City" property="city" />
+		<result column="District" property="district" />
+		<result column="Abbreviation" property="abbreviation" />
+		<result column="TelCode" property="telcode" />
+		<result column="ZipCode" property="zipcode" />
+		<result column="Longitude" property="longitude" />
+		<result column="Latitude" property="latitude" />
+	</resultMap>
+
+</mapper>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.babt.stat.mapper.BabtEvlTaskDao">
+
+    <resultMap id="BaseResultMap" type="com.babt.stat.entity.BabtEvlTask">
+        <id column="ID" property="id" />
+        <result column="Name" property="name" />
+        <result column="RecordId" property="recordId" />
+        <result column="ObjectType" property="objectType" />
+        <result column="CarId" property="carId" />
+        <result column="BatteryId" property="batteryId" />
+        <result column="CreateTime" property="createTime" />
+        <result column="StartTime" property="startTime" />
+        <result column="EndTime" property="endTime" />
+        <result column="Status" property="status" />
+        <result column="ModelID" property="modelID" />
+        <result column="AlgId" property="algId" />
+        <result column="GuideSteps" property="guideSteps" />
+        <result column="EvaluationDataBck" property="evaluationDataBck" />
+        <result column="Creator" property="creator" />
+        <result column="CarModleId" property="carModleId" />
+        <result column="BatteryModelId" property="batteryModelId" />
+        <result column="TestDataId" property="testDataId" />
+        <result column="RunDataId" property="runDataId" />
+        <result column="EvaluationType" property="evaluationType" />
+        <result column="CarRawDataId" property="carRawDataId" />
+    </resultMap>
+
+
+
+</mapper>
