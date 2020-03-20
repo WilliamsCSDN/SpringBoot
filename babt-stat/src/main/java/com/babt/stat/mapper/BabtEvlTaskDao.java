@@ -138,4 +138,48 @@ public interface BabtEvlTaskDao extends BaseMapper<BabtEvlTask> {
 	@Select("")
 	public List<BabtEvlTask> evlAvgSOHCar90();
 
+	//36.车辆电池包评估次数
+	@Select("select count(t.CarId) from  babt_evl_task t,babt_mc_car c,babt_mc_battery b where t.CarId=c.ID and c.BatteryId=b.ID and status=4 and RecordId is null")
+	public int carBatteryEvlCount();
+
+	//37.车辆电池包评估车辆数
+	@Select("select count(Distinct t.CarId) from  babt_evl_task t,babt_mc_car c,babt_mc_battery b where t.CarId=c.ID and c.BatteryId=b.ID and status=4 and RecordId is null")
+	public int carBatteryEvlCarCount();
+
+	//38.车辆电池包评估车辆数
+	@Select("select count(DISTINCT c.CarModelId) from  babt_evl_task t,babt_mc_car c,babt_mc_battery b where t.CarId=c.ID and c.BatteryId=b.ID and status=4 and RecordId is null")
+	public int carBatteryEvlCarModelCount();
+
+	//39.独立电池包评估次数
+	@Select("select count(t.BatteryId) from babt_evl_task t,babt_mc_battery b where t.BatteryId=b.ID")
+	public int dBatteryEvlCount();
+
+	//40.独立电池包评估电池数
+	@Select("select count(distinct t.BatteryId) from babt_evl_task t,babt_mc_battery b where t.BatteryId=b.ID")
+	public int dBatteryEvlBatteryCount();
+
+	//41.独立电池包评估电池包型号数
+	@Select("select count(distinct b.ProductModeID) from babt_evl_task t,babt_mc_battery b where t.BatteryId=b.ID")
+	public int dBatteryEvlBatteryModelCount();
+
+	//42.过去一年，从1月-12月，每个月的车辆电池包评估次数
+	@Select("select count(t.CarId) from  babt_evl_task t,babt_mc_car c,babt_mc_battery b where t.CarId=c.ID and c.BatteryId=b.ID and status=4 and RecordId is null and EndTime BETWEEN #{startTime} and #{endTime}")
+	public int carBatteryEvlCountLastYear(@Param("startTime") String startTime,@Param("endTime") String endTime);
+
+	//43.过去一年，从1月-12月，每个月的车辆电池包评估车辆数
+	@Select("select count(DISTINCT t.CarId) from  babt_evl_task t,babt_mc_car c,babt_mc_battery b where t.CarId=c.ID and c.BatteryId=b.ID and status=4 and RecordId is null and EndTime BETWEEN #{startTime} and #{endTime}")
+	public int carBatteryEvlCarCountLastYear(@Param("startTime") String startTime,@Param("endTime") String endTime);
+
+	//44.过去一年，从1月-12月，每个月的独立电池包评估次数
+	@Select("select count(t.BatteryId) from babt_evl_task t,babt_mc_battery b where t.BatteryId=b.ID and status=4 and RecordId is null and EndTime BETWEEN #{startTime} and #{endTime}")
+	public int dBatteryEvlCountLastYear(@Param("startTime") String startTime,@Param("endTime") String endTime);
+
+	//45.过去一年，从1月-12月，每个月的独立电池包评估电池数
+	@Select("select count(DISTINCT t.BatteryId) from babt_evl_task t,babt_mc_battery b where t.BatteryId=b.ID and status=4 and RecordId is null and EndTime BETWEEN #{startTime} and #{endTime}")
+	public int dBatteryEvlBatteryCountLastYear(@Param("startTime") String startTime,@Param("endTime") String endTime);
+
+	//46.评估次数前十名的车辆型号
+	@Select("select c.CarModelId from  babt_evl_task t,babt_mc_car c,babt_mc_battery b where t.CarId=c.ID and c.BatteryId=b.ID and status=4 and RecordId is null ")
+	public List<Integer> dBatteryEvlBatteryCountLastYear();
+
 }

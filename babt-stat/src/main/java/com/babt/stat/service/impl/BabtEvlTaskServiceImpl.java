@@ -134,6 +134,40 @@ public class BabtEvlTaskServiceImpl extends ServiceImpl<BabtEvlTaskDao, BabtEvlT
 	@Override
 	public List<BabtEvlTask> evlAvgSOHCar90(){return baseMapper.evlAvgSOHCar90();}
 
+	@Override
+	public int carBatteryEvlCount(){return baseMapper.carBatteryEvlCount();}
+
+	@Override
+	public int carBatteryEvlCarCount(){return baseMapper.carBatteryEvlCarCount();}
+
+	@Override
+	public int carBatteryEvlCarModelCount(){return baseMapper.carBatteryEvlCarModelCount();}
+
+	@Override
+	public int dBatteryEvlCount(){return baseMapper.dBatteryEvlCount();}
+
+	@Override
+	public int dBatteryEvlBatteryCount(){return baseMapper.dBatteryEvlBatteryCount();}
+
+	@Override
+	public int dBatteryEvlBatteryModelCount(){return baseMapper.dBatteryEvlBatteryModelCount();}
+
+	@Override
+	public int carBatteryEvlCountLastYear(String startTime,String endTime){return baseMapper.carBatteryEvlCountLastYear(startTime, endTime);}
+
+	@Override
+	public int carBatteryEvlCarCountLastYear(String startTime,String endTime){return baseMapper.carBatteryEvlCarCountLastYear(startTime, endTime);}
+
+	@Override
+	public int dBatteryEvlCountLastYear(String startTime,String endTime){return baseMapper.dBatteryEvlCountLastYear(startTime, endTime);}
+
+	@Override
+	public int dBatteryEvlBatteryCountLastYear(String startTime,String endTime){return baseMapper.dBatteryEvlBatteryCountLastYear(startTime, endTime);}
+
+	@Override
+	public List<Integer> dBatteryEvlBatteryCountLastYear(){return baseMapper.dBatteryEvlBatteryCountLastYear();}
+
+
 }
 
 

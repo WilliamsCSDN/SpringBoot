@@ -190,17 +190,99 @@ public class BatteryStatController {
 			for(BabtEvlTaskBattery babtEvlTaskBatteryList:map.get(i)) {
 //				System.out.println(babtEvlTaskBatteryList.getTaskID() + "---" + babtEvlTaskBatteryList.getCarModelId());
 				for (BabtEvlReport babtEvlReport : evlTaskService.evlAvgSoc60(babtEvlTaskBatteryList.getTaskID())) {
-					for (int d = 0; d < evlTaskService.evlAvgSoc60(babtEvlTaskBatteryList.getTaskID()).size(); d++)
-
-					System.out.println(babtEvlTaskBatteryList.getTaskID()+"---"+babtEvlTaskBatteryList.getCarModelId()+"---"+babtEvlReport.getSoh());
 
 
-
+					System.out.println(babtEvlTaskBatteryList.getTaskID() + "---" + babtEvlTaskBatteryList.getCarModelId() + "---" + babtEvlReport.getSoh());
 				}
 			}
 
 		}
 		return mapnum;
+	}
+	@RequestMapping("/carBatteryEvlCount")
+	@ResponseBody
+	public int carBatteryEvlCount(){
+		return evlTaskService.carBatteryEvlCount();
+	}
+	@RequestMapping("/carBatteryEvlCarCount")
+	@ResponseBody
+	public int carBatteryEvlCarCount(){
+		return evlTaskService.carBatteryEvlCarCount();
+	}
+	@RequestMapping("/carBatteryEvlCarModelCount")
+	@ResponseBody
+	public int carBatteryEvlCarModelCount(){
+		return evlTaskService.carBatteryEvlCarModelCount();
+	}
+	@RequestMapping("/dBatteryEvlCount")
+	@ResponseBody
+	public int dBatteryEvlCount(){
+		return evlTaskService.dBatteryEvlCount();
+	}
+	@RequestMapping("/dBatteryEvlBatteryCount")
+	@ResponseBody
+	public int dBatteryEvlBatteryCount(){
+		return evlTaskService.dBatteryEvlBatteryCount();
+	}
+	@RequestMapping("/dBatteryEvlBatteryModelCount")
+	@ResponseBody
+	public int dBatteryEvlBatteryModelCount(){
+		return evlTaskService.dBatteryEvlBatteryModelCount();
+	}
+	@RequestMapping("/carBatteryEvlCountLastYear")
+	@ResponseBody
+	public Map<Integer,Integer> carBatteryEvlCountLastYear(){
+		Map<Integer,Integer> countLastYear=new HashMap<Integer, Integer>();
+		Calendar c=Calendar.getInstance();
+		c.setTime(new Date());
+		for(int i=1;i<=12;i++) {
+			countLastYear.put(i, evlTaskService.carBatteryEvlCountLastYear(((c.get(Calendar.YEAR) - 1) + "-" + i + "-1"), (c.get(Calendar.YEAR) - 1) + "-" + (i + 1) + "-1"));
+		}
+		return countLastYear;
+	}
+	@RequestMapping("/carBatteryEvlCarCountLastYear")
+	@ResponseBody
+	public Map<Integer,Integer> carBatteryEvlCarCountLastYear(){
+		Map<Integer,Integer> countLastYear=new HashMap<Integer, Integer>();
+		Calendar c=Calendar.getInstance();
+		c.setTime(new Date());
+		for(int i=1;i<=12;i++) {
+			countLastYear.put(i, evlTaskService.carBatteryEvlCarCountLastYear(((c.get(Calendar.YEAR) - 1) + "-" + i + "-1"), (c.get(Calendar.YEAR) - 1) + "-" + (i + 1) + "-1"));
+		}
+		return countLastYear;
+	}
+	@RequestMapping("/dBatteryEvlCountLastYear")
+	@ResponseBody
+	public Map<Integer,Integer> dBatteryEvlCountLastYear(){
+		Map<Integer,Integer> countLastYear=new HashMap<Integer, Integer>();
+		Calendar c=Calendar.getInstance();
+		c.setTime(new Date());
+		for(int i=1;i<=12;i++) {
+			countLastYear.put(i, evlTaskService.dBatteryEvlCountLastYear(((c.get(Calendar.YEAR) - 1) + "-" + i + "-1"), (c.get(Calendar.YEAR) - 1) + "-" + (i + 1) + "-1"));
+		}
+		return countLastYear;
+	}
+	@RequestMapping("/dBatteryEvlBatteryCountLastYear")
+	@ResponseBody
+	public Map<Integer,Integer> dBatteryEvlBatteryCountLastYear(){
+		Map<Integer,Integer> countLastYear=new HashMap<Integer, Integer>();
+		Calendar c=Calendar.getInstance();
+		c.setTime(new Date());
+		for(int i=1;i<=12;i++) {
+			countLastYear.put(i, evlTaskService.dBatteryEvlBatteryCountLastYear(((c.get(Calendar.YEAR) - 1) + "-" + i + "-1"), (c.get(Calendar.YEAR) - 1) + "-" + (i + 1) + "-1"));
+		}
+		return countLastYear;
+	}
+	@RequestMapping("/dBatteryEvlBatteryCountLastYear")
+	@ResponseBody
+	public Map<Integer,Integer> dBatteryEvlBatteryCountLastYear(){
+		Map<Integer,Integer> countLastYear=new HashMap<Integer, Integer>();
+		Calendar c=Calendar.getInstance();
+		c.setTime(new Date());
+		for(int i=1;i<=12;i++) {
+			countLastYear.put(i, evlTaskService.dBatteryEvlBatteryCountLastYear(((c.get(Calendar.YEAR) - 1) + "-" + i + "-1"), (c.get(Calendar.YEAR) - 1) + "-" + (i + 1) + "-1"));
+		}
+		return countLastYear;
 	}
 
 
