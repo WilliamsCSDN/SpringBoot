@@ -58,26 +58,25 @@ public interface IBabtEvlTaskService extends IService<BabtEvlTask> {
 	public int totalBatteryEvlCapacityCount(int id);
 
 	//电池包评估平均SOC（车辆电池包评估+独立电池包评估）
-	public List<BabtEvlTaskBattery> evlAvgSoc();
-	public int evlAvgSoc1(int id);
-	public double evlAvgSoc2(int id);
-	public List<BabtEvlTask> evlAvgSoc3();
-	public List<BabtEvlTask> evlAvgSoc4(int id);
+	public List<BabtEvlTaskBattery> evlAvgSocCar(int id);
+	public List<BabtEvlTask> evlAvgSocBattery(int id);
+	public double evlAvgSoc(int id);
+
 
 	//电池包评估SOC高于90%的电池包数量（车辆电池包评估+独立电池包评估）
-	public int evlAvgSoc90();
+	public List<BabtEvlReport>  evlAvgSoc90(int id);
 
 	//电池包评估SOC在80-90%之间的电池包数量（车辆电池包评估+独立电池包评估）
-	public int evlAvgSoc80();
+	public List<BabtEvlReport>  evlAvgSoc80(int id);
 
 	//电池包评估SOC在70-80%之间的电池包数量（车辆电池包评估+独立电池包评估）
-	public int evlAvgSoc70();
+	public List<BabtEvlReport>  evlAvgSoc70(int id);
 
 	//电池包评估SOC在60-70%之间的电池包数量（车辆电池包评估+独立电池包评估）
-	public int evlAvgSoc60();
+	public List<BabtEvlReport>  evlAvgSoc60(int id);
 
 	//电池包评估SOC低于60%的电池包数量（车辆电池包评估+独立电池包评估）
-	public int evlAvgSoc0();
+	public List<BabtEvlReport>  evlAvgSoc0(int id);
 
 	//车辆电池包总评估次数
 	public int carTotalEvlCount();
@@ -93,6 +92,13 @@ public interface IBabtEvlTaskService extends IService<BabtEvlTask> {
 
 	//过去一年，从1月-12月，每个月的评估次数
 	public int batteryEvlCountLastYear(String startTime,String endTime);
+
+	//过去一年，从1月-12月，每个月的评估电池数
+	public List<Integer>  batteryEvlBatteryCountLastYearCar(String startTime,String endTime);
+	public List<Integer>  batteryEvlBatteryCountLastYearBattery(String startTime,String endTime);
+
+	//车辆电池包评估SOH在90-100%之间的车辆型号TOP10，以及该车型对应的SOH
+	public List<BabtEvlTask> evlAvgSOHCar90();
 
 
 

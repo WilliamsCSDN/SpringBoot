@@ -87,26 +87,28 @@ public class BabtEvlTaskServiceImpl extends ServiceImpl<BabtEvlTaskDao, BabtEvlT
 	public int totalBatteryEvlCapacityCount(int id){return baseMapper.totalBatteryEvlCapacityCount(id);}
 
 	@Override
-	public List<BabtEvlTaskBattery> evlAvgSoc(){return baseMapper.evlAvgSoc();}
-	public int evlAvgSoc1(int id){return baseMapper.evlAvgSoc1(id);}
-	public double evlAvgSoc2(int id){return baseMapper.evlAvgSoc2(id);}
-	public List<BabtEvlTask> evlAvgSoc3(){return baseMapper.evlAvgSoc3();}
-	public List<BabtEvlTask> evlAvgSoc4(int id){return baseMapper.evlAvgSoc4(id);}
+	public List<BabtEvlTaskBattery> evlAvgSocCar(int id){return baseMapper.evlAvgSocCar(id);}
 
 	@Override
-	public int evlAvgSoc90(){return baseMapper.evlAvgSoc90();}
+	public List<BabtEvlTask> evlAvgSocBattery(int id){return baseMapper.evlAvgSocBattery(id);}
 
 	@Override
-	public int evlAvgSoc80(){return baseMapper.evlAvgSoc80();}
+	public double evlAvgSoc(int id){return baseMapper.evlAvgSoc(id);}
 
 	@Override
-	public int evlAvgSoc70(){return baseMapper.evlAvgSoc70();}
+	public List<BabtEvlReport> evlAvgSoc90(int id){return baseMapper.evlAvgSoc90(id);}
 
 	@Override
-	public int evlAvgSoc60(){return baseMapper.evlAvgSoc60();}
+	public List<BabtEvlReport>  evlAvgSoc80(int id){return baseMapper.evlAvgSoc80(id);}
 
 	@Override
-	public int evlAvgSoc0(){return baseMapper.evlAvgSoc0();}
+	public List<BabtEvlReport>  evlAvgSoc70(int id){return baseMapper.evlAvgSoc70(id);}
+
+	@Override
+	public List<BabtEvlReport>  evlAvgSoc60(int id){return baseMapper.evlAvgSoc60(id);}
+
+	@Override
+	public List<BabtEvlReport>  evlAvgSoc0(int id){return baseMapper.evlAvgSoc0(id);}
 
 	@Override
 	public int carTotalEvlCount(){return baseMapper.carTotalEvlCount();}
@@ -122,6 +124,15 @@ public class BabtEvlTaskServiceImpl extends ServiceImpl<BabtEvlTaskDao, BabtEvlT
 
 	@Override
 	public int batteryEvlCountLastYear(String startTime,String endTime){return baseMapper.batteryEvlCountLastYear(startTime,endTime);}
+
+	@Override
+	public List<Integer>  batteryEvlBatteryCountLastYearCar(String startTime,String endTime){return baseMapper.batteryEvlBatteryCountLastYearCar(startTime,endTime);}
+
+	@Override
+	public List<Integer>  batteryEvlBatteryCountLastYearBattery(String startTime,String endTime){return baseMapper.batteryEvlBatteryCountLastYearBattery(startTime,endTime);}
+
+	@Override
+	public List<BabtEvlTask> evlAvgSOHCar90(){return baseMapper.evlAvgSOHCar90();}
 
 }
 

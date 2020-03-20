@@ -1,22 +1,52 @@
 package com.babt.stat.entity;
 
-public class BabtEvlTaskBattery {
-    public int taskID;
-    public int batteryID;
 
-    public int getTaskID() {
+import java.util.Date;
+
+public class BabtEvlTaskBattery {
+    public Integer taskID;
+    public Integer batteryID;
+    public Date EndTime;
+    public Integer CarId;
+    public Integer CarModelId;
+
+    public Integer getTaskID() {
         return taskID;
     }
 
-    public void setTaskID(int taskID) {
+    public void setTaskID(Integer taskID) {
         this.taskID = taskID;
     }
 
-    public int getBatteryID() {
+    public Integer getBatteryID() {
         return batteryID;
     }
 
-    public void setBatteryID(int batteryID) {
+    public void setBatteryID(Integer batteryID) {
         this.batteryID = batteryID;
+    }
+
+    public Date getEndTime() {
+        return EndTime;
+    }
+
+    public void setEndTime(Date endTime) {
+        EndTime = endTime;
+    }
+
+    public Integer getCarId() {
+        return CarId;
+    }
+
+    public void setCarId(Integer carId) {
+        CarId = carId;
+    }
+
+    public Integer getCarModelId() {
+        return CarModelId;
+    }
+
+    public void setCarModelId(Integer carModelId) {
+        CarModelId = carModelId;
     }
 }

@@ -6,6 +6,7 @@ import java.util.Map;
 
 import com.babt.stat.entity.*;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Property;
 import org.apache.ibatis.annotations.Select;
 
 import com.baomidou.mybatisplus.mapper.BaseMapper;
@@ -63,7 +64,7 @@ public interface BabtEvlTaskDao extends BaseMapper<BabtEvlTask> {
 
 
 	//20.总评估次数（车辆电池包评估+独立电池包评估）
-	@Select("select count(*) from babt_evl_task where Status=4")
+	@Select("select count(*) from babt_evl_task where Status=4 and t.RecordId is null")
 	public int totalEvlCount();
 
 	//21.总评估电池数（车辆电池包评估+独立电池包评估）
@@ -78,56 +79,63 @@ public interface BabtEvlTaskDao extends BaseMapper<BabtEvlTask> {
 
 	//23.电池包评估平均SOC（车辆电池包评估+独立电池包评估）
 	    //车辆
-	@Select("select t.ID as taskID,b.ID as batteryID from babt_evl_task t,babt_mc_car c,babt_mc_battery b where t.CarId=c.ID and c.BatteryId=b.ID and status=4 ORDER BY EndTime desc")
-	public List<BabtEvlTaskBattery> evlAvgSoc();
-	@Select("select t.ID from babt_evl_task t,babt_mc_car c,babt_mc_battery b where t.CarId=c.ID and c.BatteryId=b.ID and status=4 and b.ID=${id} ORDER BY EndTime desc limit 1")
-	public int evlAvgSoc1(@Param("id") int id);
-	@Select("select r.SOC from babt_evl_task t,babt_evl_report r where r.TaskId=t.ID and t.ID=${id}")
-	public double evlAvgSoc2(@Param("id") int id);
+	@Select("select t.ID as taskID,t.EndTime,b.ID as batteryID,t.CarId,c.CarModelId from babt_evl_task t,babt_mc_car c,babt_mc_battery b where t.CarId=c.ID and c.BatteryId=b.ID and b.ID=${id} and status=4 and t.RecordId is null  ORDER BY EndTime desc limit 1")
+	public List<BabtEvlTaskBattery> evlAvgSocCar(@Param("id") int id);
 	    //电池
-	@Select("select t.ID,t.BatteryId from babt_evl_task t,babt_mc_battery b where t.BatteryId=b.ID and t.Status=4  ORDER BY EndTime desc")
-	public List<BabtEvlTask> evlAvgSoc3();
-	@Select("select * from babt_evl_task t,babt_mc_battery b where t.BatteryId=b.ID and t.Status=4 and t.BatteryId=${id}  ORDER BY EndTime desc limit 1")
-	public List<BabtEvlTask> evlAvgSoc4(@Param("id") int id);
+	@Select("select t.ID,t.EndTime,t.CarId,t.BatteryId from babt_evl_task t,babt_mc_battery b where t.BatteryId=b.ID and b.ID=${id} and status=4 and t.RecordId is null  ORDER BY EndTime desc limit 1")
+	public List<BabtEvlTask> evlAvgSocBattery(@Param("id") int id);
+	@Select("select r.SOH from babt_evl_task t,babt_evl_report r where t.ID=r.TaskId and t.ID=${id}")
+	public double evlAvgSoc(@Param("id") int id);
+
 
 	//24.电池包评估SOC高于90%的电池包数量（车辆电池包评估+独立电池包评估）
-	@Select("")
-	public int evlAvgSoc90();
+	@Select("select r.SOH from babt_evl_task t,babt_evl_report r where t.ID=r.TaskId and t.ID=${id} and r.SOH>0.9")
+	public List<BabtEvlReport>  evlAvgSoc90(@Param("id") int id);
 
 	//25.电池包评估SOC在80-90%之间的电池包数量（车辆电池包评估+独立电池包评估）
-	@Select("")
-	public int evlAvgSoc80();
+	@Select("select r.SOH from babt_evl_task t,babt_evl_report r where t.ID=r.TaskId and t.ID=${id} and r.SOH>0.8 and r.SOH<=0.9")
+	public List<BabtEvlReport>  evlAvgSoc80(@Param("id") int id);
 
 	//26.电池包评估SOC在70-80%之间的电池包数量（车辆电池包评估+独立电池包评估）
-	@Select("")
-	public int evlAvgSoc70();
+	@Select("select r.SOH from babt_evl_task t,babt_evl_report r where t.ID=r.TaskId and t.ID=${id} and r.SOH>0.7 and r.SOH<=0.8")
+	public List<BabtEvlReport>  evlAvgSoc70(@Param("id") int id);
 
 	//27.电池包评估SOC在60-70%之间的电池包数量（车辆电池包评估+独立电池包评估）
-	@Select("")
-	public int evlAvgSoc60();
+	@Select("select r.SOH from babt_evl_task t,babt_evl_report r where t.ID=r.TaskId and t.ID=${id} and r.SOH>0.6 and r.SOH<=0.7")
+	public List<BabtEvlReport>  evlAvgSoc60(@Param("id") int id);
 
 	//28.电池包评估SOC低于60%的电池包数量（车辆电池包评估+独立电池包评估）
-	@Select("")
-	public int evlAvgSoc0();
+	@Select("select r.SOH from babt_evl_task t,babt_evl_report r where t.ID=r.TaskId and t.ID=${id} and r.SOH<=0.6")
+	public List<BabtEvlReport>  evlAvgSoc0(@Param("id") int id);
 
 	//29.车辆电池包总评估次数
-	@Select("select count(CarId) from babt_evl_task where status=4")
+	@Select("select count(CarId) from babt_evl_task where status=4 and RecordId is null")
 	public int carTotalEvlCount();
 
 	//30.独立电池包总评估次数
-	@Select("select count(BatteryId) from babt_evl_task where status=4")
+	@Select("select count(BatteryId) from babt_evl_task where status=4 and RecordId is null")
 	public int batteryTotalEvlCount();
 
 	//31.车辆电池包评估车辆数
-	@Select("select count(DISTINCT CarId) from babt_evl_task where status=4")
+	@Select("select count(DISTINCT CarId) from babt_evl_task where status=4 and RecordId is null")
 	public int batteryEvlCarCount();
 
 	//32.独立电池包总评估电池数
-	@Select("select count(DISTINCT BatteryId) from babt_evl_task where status=4")
+	@Select("select count(DISTINCT BatteryId) from babt_evl_task where status=4 and RecordId is null")
 	public int batteryEvlBatteryCount();
 
 	//33.过去一年，从1月-12月，每个月的评估次数
-	@Select("select count(ID) from babt_evl_task where status=4 and EndTime between #{startTime} and #{endTime}")
+	@Select("select count(ID) from babt_evl_task where status=4 and t.RecordId is null and EndTime between #{startTime} and #{endTime}")
 	public int batteryEvlCountLastYear(@Param("startTime") String startTime,@Param("endTime") String endTime);
+
+	//34.过去一年，从1月-12月，每个月的评估电池数
+	@Select("select b.ID from babt_evl_task t,babt_mc_car c,babt_mc_battery b where t.CarId=c.ID and c.BatteryId=b.ID and status=4 and t.RecordId is null and t.EndTime between #{startTime} and #{endTime}")
+	public List<Integer> batteryEvlBatteryCountLastYearCar(@Param("startTime") String startTime,@Param("endTime") String endTime);
+	@Select("select t.BatteryId from babt_evl_task t,babt_mc_battery b where t.BatteryId=b.ID and t.status=4 and t.RecordId is null and t.EndTime between #{startTime} and #{endTime}")
+	public List<Integer> batteryEvlBatteryCountLastYearBattery(@Param("startTime") String startTime,@Param("endTime") String endTime);
+
+	//35.车辆电池包评估SOH在90-100%之间的车辆型号TOP10，以及该车型对应的SOH
+	@Select("")
+	public List<BabtEvlTask> evlAvgSOHCar90();
 
 }
