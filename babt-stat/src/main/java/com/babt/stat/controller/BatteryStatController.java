@@ -130,6 +130,28 @@ public class BatteryStatController {
 	@ResponseBody
 	public int batteryTotalEvlCount(){return evlTaskService.batteryTotalEvlCount();}
 
+	@RequestMapping(value = "/batteryEvlCarCount")
+	@ResponseBody
+	public int batteryEvlCarCount(){return evlTaskService.batteryEvlCarCount();}
+
+	@RequestMapping(value = "/batteryEvlBatteryCount")
+	@ResponseBody
+	public int batteryEvlBatteryCount(){return evlTaskService.batteryEvlBatteryCount();}
+
+	@RequestMapping(value = "/batteryEvlCountLastYear")
+	@ResponseBody
+	public Map<Integer,Integer> batteryEvlCountLastYear(){
+		Map<Integer,Integer> countLastYear=new HashMap<Integer, Integer>();
+
+		Calendar c=Calendar.getInstance();
+		c.setTime(new Date());
+		for(int i=1;i<=12;i++) {
+			countLastYear.put(i, evlTaskService.batteryEvlCountLastYear(((c.get(Calendar.YEAR) - 1) + "-" + i + "-1"), (c.get(Calendar.YEAR) - 1) + "-" + (i + 1) + "-1"));
+		}
+		return countLastYear;
+	}
+
+
 
 	
 	

@@ -85,6 +85,15 @@ public interface IBabtEvlTaskService extends IService<BabtEvlTask> {
 	//独立电池包总评估次数
 	public int batteryTotalEvlCount();
 
+	//车辆电池包评估车辆数
+	public int batteryEvlCarCount();
+
+	//独立电池包总评估电池数
+	public int batteryEvlBatteryCount();
+
+	//过去一年，从1月-12月，每个月的评估次数
+	public int batteryEvlCountLastYear(String startTime,String endTime);
+
 
 
 

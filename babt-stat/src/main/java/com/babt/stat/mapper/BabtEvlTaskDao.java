@@ -118,6 +118,16 @@ public interface BabtEvlTaskDao extends BaseMapper<BabtEvlTask> {
 	@Select("select count(BatteryId) from babt_evl_task where status=4")
 	public int batteryTotalEvlCount();
 
+	//31.车辆电池包评估车辆数
+	@Select("select count(DISTINCT CarId) from babt_evl_task where status=4")
+	public int batteryEvlCarCount();
 
+	//32.独立电池包总评估电池数
+	@Select("select count(DISTINCT BatteryId) from babt_evl_task where status=4")
+	public int batteryEvlBatteryCount();
+
+	//33.过去一年，从1月-12月，每个月的评估次数
+	@Select("select count(ID) from babt_evl_task where status=4 and EndTime between #{startTime} and #{endTime}")
+	public int batteryEvlCountLastYear(@Param("startTime") String startTime,@Param("endTime") String endTime);
 
 }
