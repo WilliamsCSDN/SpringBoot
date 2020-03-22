@@ -273,17 +273,32 @@ public class BatteryStatController {
 		}
 		return countLastYear;
 	}
-	@RequestMapping("/dBatteryEvlBatteryCountLastYear")
+
+	@RequestMapping("/carBatteryEvlCarModelCountTop")
 	@ResponseBody
-	public Map<Integer,Integer> dBatteryEvlBatteryCountLastYear(){
-		Map<Integer,Integer> countLastYear=new HashMap<Integer, Integer>();
-		Calendar c=Calendar.getInstance();
-		c.setTime(new Date());
-		for(int i=1;i<=12;i++) {
-			countLastYear.put(i, evlTaskService.dBatteryEvlBatteryCountLastYear(((c.get(Calendar.YEAR) - 1) + "-" + i + "-1"), (c.get(Calendar.YEAR) - 1) + "-" + (i + 1) + "-1"));
+	public Map<Integer, Integer> carBatteryEvlCarModelCountTop(){
+		List<Integer> a=evlTaskService.carBatteryEvlCarModelCountTop();
+		Map<Integer,Integer> map=new HashMap<Integer, Integer>();
+		for(int i=0;i<a.size();i++){
+			if(!map.containsKey(a.get(i)))
+				map.put(a.get(i),1);
+			else map.put(a.get(i),map.get(a.get(i))+1);
 		}
-		return countLastYear;
+		return map;
 	}
+
+	@RequestMapping("/carBatteryEvlManufacturerCount")
+	@ResponseBody
+	public int carBatteryEvlManufacturerCount(){
+		return evlTaskService.carBatteryEvlManufacturerCount();
+	}
+	@RequestMapping("/dBatteryEvlManufacturerCount")
+	@ResponseBody
+	public int dBatteryEvlManufacturerCount(){
+		return evlTaskService.dBatteryEvlManufacturerCount();
+	}
+
+
 
 
 

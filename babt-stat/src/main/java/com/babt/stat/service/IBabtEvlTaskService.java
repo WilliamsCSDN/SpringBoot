@@ -131,7 +131,13 @@ public interface IBabtEvlTaskService extends IService<BabtEvlTask> {
 	public int dBatteryEvlBatteryCountLastYear(String startTime,String endTime);
 
 	//评估次数前十名的车辆型号
-	public List<Integer> dBatteryEvlBatteryCountLastYear();
+	public List<Integer> carBatteryEvlCarModelCountTop();
+
+	//车辆电池包评估厂商数
+	public int carBatteryEvlManufacturerCount();
+
+	//独立电池包评估厂商数
+	public int dBatteryEvlManufacturerCount();
 
 
 

@@ -165,7 +165,13 @@ public class BabtEvlTaskServiceImpl extends ServiceImpl<BabtEvlTaskDao, BabtEvlT
 	public int dBatteryEvlBatteryCountLastYear(String startTime,String endTime){return baseMapper.dBatteryEvlBatteryCountLastYear(startTime, endTime);}
 
 	@Override
-	public List<Integer> dBatteryEvlBatteryCountLastYear(){return baseMapper.dBatteryEvlBatteryCountLastYear();}
+	public List<Integer> carBatteryEvlCarModelCountTop(){return baseMapper.carBatteryEvlCarModelCountTop();}
+
+	@Override
+	public int carBatteryEvlManufacturerCount(){return baseMapper.carBatteryEvlManufacturerCount();}
+
+	@Override
+	public int dBatteryEvlManufacturerCount(){return baseMapper.dBatteryEvlManufacturerCount();}
 
 
 }
