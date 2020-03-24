@@ -98,7 +98,7 @@ public interface IBabtEvlTaskService extends IService<BabtEvlTask> {
 	public List<Integer>  batteryEvlBatteryCountLastYearBattery(String startTime,String endTime);
 
 	//车辆电池包评估SOH在90-100%之间的车辆型号TOP10，以及该车型对应的SOH
-	public List<BabtEvlTask> evlAvgSOHCar90();
+	public List<BabtEvlCar> evlAvgSOHCar90();
 
 	//车辆电池包评估次数
 	public int carBatteryEvlCount();
@@ -138,6 +138,26 @@ public interface IBabtEvlTaskService extends IService<BabtEvlTask> {
 
 	//独立电池包评估厂商数
 	public int dBatteryEvlManufacturerCount();
+
+	//独立电池包评估SOH电池包型号TOP10
+	public List<BabtEvlBattery> evlAvgSOHBattery90();
+
+	//评估次数前十名的厂商
+	public List<String> carBatteryEvlManufacturerCountTop();
+	public int carBatteryEvlManufacturerCountTOPCount(String NameCN);
+
+	//平均soh前十名的厂商
+	public List<BabtEvlCarManufacturer> carBatteryEvlSohManufacturerCountTop();
+
+	//评估次数前十名的电池包型号
+	public List<Integer> dBatteryEvlCarModelCountTop();
+
+	//评估次数前十名的厂商
+	public List<String> dBatteryEvlManufacturerCountTop();
+	public int dBatteryEvlManufacturerCountTopCount(String BatteryManufacturer);
+
+	//54.平均soh前十名的厂商
+	public List<BabtEvlBatteryManufacturer> dBatteryEvlSohManufacturerCountTop();
 
 
 

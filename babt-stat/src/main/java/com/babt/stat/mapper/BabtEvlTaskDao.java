@@ -64,7 +64,7 @@ public interface BabtEvlTaskDao extends BaseMapper<BabtEvlTask> {
 
 
 	//20.总评估次数（车辆电池包评估+独立电池包评估）
-	@Select("select count(*) from babt_evl_task where Status=4 and t.RecordId is null")
+	@Select("select count(*) from babt_evl_task where Status=4 and RecordId is null")
 	public int totalEvlCount();
 
 	//21.总评估电池数（车辆电池包评估+独立电池包评估）
@@ -135,8 +135,8 @@ public interface BabtEvlTaskDao extends BaseMapper<BabtEvlTask> {
 	public List<Integer> batteryEvlBatteryCountLastYearBattery(@Param("startTime") String startTime,@Param("endTime") String endTime);
 
 	//35.车辆电池包评估SOH在90-100%之间的车辆型号TOP10，以及该车型对应的SOH
-	@Select("")
-	public List<BabtEvlTask> evlAvgSOHCar90();
+	@Select("SELECT c.CarModelId,r.SOH FROM babt_evl_task t,babt_evl_report r,babt_mc_car c where t.ID=r.TaskId and t.CarId=c.ID and t.status=4 and t.RecordId is null")
+	public List<BabtEvlCar> evlAvgSOHCar90();
 
 	//36.车辆电池包评估次数
 	@Select("select count(t.CarId) from  babt_evl_task t,babt_mc_car c,babt_mc_battery b where t.CarId=c.ID and c.BatteryId=b.ID and status=4 and RecordId is null")
@@ -179,7 +179,7 @@ public interface BabtEvlTaskDao extends BaseMapper<BabtEvlTask> {
 	public int dBatteryEvlBatteryCountLastYear(@Param("startTime") String startTime,@Param("endTime") String endTime);
 
 	//46.评估次数前十名的车辆型号
-	@Select("select c.CarModelId from  babt_evl_task t,babt_mc_car c,babt_mc_battery b where t.CarId=c.ID and c.BatteryId=b.ID and status=4 and RecordId is null ")
+	@Select("select c.CarModelId from  babt_evl_task t,babt_mc_car c where t.CarId=c.ID and status=4 and RecordId is null")
 	public List<Integer> carBatteryEvlCarModelCountTop();
 
 	//47.车辆电池包评估厂商数
@@ -189,5 +189,34 @@ public interface BabtEvlTaskDao extends BaseMapper<BabtEvlTask> {
 	//48.独立电池包评估厂商数
 	@Select("select count(distinct b.BatteryManufacturer) from babt_evl_task t,babt_mc_battery b where t.BatteryId=b.ID and t.status=4 and t.RecordId is null")
 	public int dBatteryEvlManufacturerCount();
+
+	//49.独立电池包评估SOH电池包型号TOP10
+	@Select("SELECT b.ProductModeID,r.SOH FROM babt_evl_task t,babt_evl_report r,babt_mc_battery b where t.ID=r.TaskId and t.BatteryId=b.ID and t.status=4 and t.RecordId is null")
+	public List<BabtEvlBattery> evlAvgSOHBattery90();
+
+	//50.评估次数前十名的厂商
+	@Select("select o.NameCN from babt_evl_task t,babt_mc_car c,babt_mc_product_model m,babt_mc_orgnization o where t.CarId=c.ID and c.CarModelId=m.ID and m.BPManufacturer=o.NameCN and t.status=4 and t.RecordId is null")
+	public List<String> carBatteryEvlManufacturerCountTop();
+	@Select("select count(o.NameCN) from babt_evl_task t,babt_mc_car c,babt_mc_product_model m,babt_mc_orgnization o where t.CarId=c.ID and c.CarModelId=m.ID and m.BPManufacturer=o.NameCN and t.status=4 and t.RecordId is null and o.NameCN=#{NameCN}")
+	public int carBatteryEvlManufacturerCountTOPCount(@Param("NameCN") String NameCN);
+
+	//51.平均soh前十名的厂商
+	@Select("select o.NameCN,r.SOH from babt_evl_task t,babt_mc_car c,babt_mc_product_model m,babt_mc_orgnization o,babt_evl_report r where t.CarId=c.ID and c.CarModelId=m.ID and m.BPManufacturer=o.NameCN and t.status=4 and t.RecordId is null and t.ID=r.TaskId")
+	public List<BabtEvlCarManufacturer> carBatteryEvlSohManufacturerCountTop();
+
+	//52.评估次数前十名的电池包型号
+	@Select("select t.BatteryId from  babt_evl_task t,babt_mc_battery b where t.BatteryId=b.ID and status=4 and RecordId is null")
+	public List<Integer> dBatteryEvlCarModelCountTop();
+
+	//53.评估次数前十名的厂商
+	@Select("select b.BatteryManufacturer from babt_evl_task t,babt_mc_battery b,babt_evl_report r where t.BatteryId=b.ID and t.status=4 and t.RecordId is null and t.ID=r.TaskId")
+	public List<String> dBatteryEvlManufacturerCountTop();
+	@Select("select count(b.BatteryManufacturer) from babt_evl_task t,babt_mc_battery b,babt_evl_report r where t.BatteryId=b.ID and t.status=4 and t.RecordId is null and t.ID=r.TaskId and b.BatteryManufacturer=#{BatteryManufacturer}")
+	public int dBatteryEvlManufacturerCountTopCount(@Param("BatteryManufacturer") String BatteryManufacturer);
+
+	//54.平均soh前十名的厂商
+	@Select("select b.BatteryManufacturer,r.SOH from babt_evl_task t,babt_mc_battery b,babt_evl_report r where t.BatteryId=b.ID and t.status=4 and t.RecordId is null and t.ID=r.TaskId")
+	public List<BabtEvlBatteryManufacturer> dBatteryEvlSohManufacturerCountTop();
+
 
 }

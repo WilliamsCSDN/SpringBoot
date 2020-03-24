@@ -132,7 +132,7 @@ public class BabtEvlTaskServiceImpl extends ServiceImpl<BabtEvlTaskDao, BabtEvlT
 	public List<Integer>  batteryEvlBatteryCountLastYearBattery(String startTime,String endTime){return baseMapper.batteryEvlBatteryCountLastYearBattery(startTime,endTime);}
 
 	@Override
-	public List<BabtEvlTask> evlAvgSOHCar90(){return baseMapper.evlAvgSOHCar90();}
+	public List<BabtEvlCar> evlAvgSOHCar90(){return baseMapper.evlAvgSOHCar90();}
 
 	@Override
 	public int carBatteryEvlCount(){return baseMapper.carBatteryEvlCount();}
@@ -172,6 +172,29 @@ public class BabtEvlTaskServiceImpl extends ServiceImpl<BabtEvlTaskDao, BabtEvlT
 
 	@Override
 	public int dBatteryEvlManufacturerCount(){return baseMapper.dBatteryEvlManufacturerCount();}
+
+	@Override
+	public List<BabtEvlBattery> evlAvgSOHBattery90(){return baseMapper.evlAvgSOHBattery90();}
+
+	@Override
+	public List<String> carBatteryEvlManufacturerCountTop(){ return baseMapper.carBatteryEvlManufacturerCountTop();}
+
+	@Override
+	public int carBatteryEvlManufacturerCountTOPCount(String NameCN){return baseMapper.carBatteryEvlManufacturerCountTOPCount(NameCN);}
+
+	@Override
+	public List<BabtEvlCarManufacturer> carBatteryEvlSohManufacturerCountTop(){return baseMapper.carBatteryEvlSohManufacturerCountTop();}
+
+	@Override
+	public List<Integer> dBatteryEvlCarModelCountTop(){return baseMapper.dBatteryEvlCarModelCountTop();}
+
+	@Override
+	public List<String> dBatteryEvlManufacturerCountTop(){return baseMapper.dBatteryEvlManufacturerCountTop();}
+	@Override
+	public int dBatteryEvlManufacturerCountTopCount(String BatteryManufacturer){return baseMapper.dBatteryEvlManufacturerCountTopCount(BatteryManufacturer);}
+
+	@Override
+	public List<BabtEvlBatteryManufacturer> dBatteryEvlSohManufacturerCountTop(){return  baseMapper.dBatteryEvlSohManufacturerCountTop();}
 
 
 }
