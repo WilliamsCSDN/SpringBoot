@@ -1,0 +1,89 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD com.example.Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dubbo.provider.mapper.LearnContentMapper">
+    <resultMap id="result" type="com.dubbo.api.model.LearnRouter">
+        <id property="id" column="sid"></id>
+        <result property="name" column="name" />
+
+        <collection property="learnContent" ofType="com.dubbo.api.model.LearnContent" column="id">
+
+            <id property="id" column="id"></id>
+            <result property="iid" column="iid" />
+            <result property="title" column="title" />
+            <result property="content" column="content" />
+            <result property="bz" column="bz" />
+            <result property="kc" column="kc" />
+            <result property="sc" column="sc" />
+            <result property="src" column="src"></result>
+            <result property="author" column="author"></result>
+
+        </collection>
+
+    </resultMap>
+
+    <select id="selectAll" resultMap="result">
+      select a.id as sid,a.name,b.* from learnrouter a join learncontent b on a.id=b.iid
+      <where>
+          <if test="id!=null">
+              b.id=${id}
+          </if>
+      </where>
+        <if test="start!=null and num!=null">
+            limit ${start},${num}
+        </if>
+   </select>
+
+    <select id="selectHot" resultMap="result">
+        select a.id,b.name,a.title,a.content,a.bz,a.kc,a.sc,a.src from learncontent a join learnrouter b on a.iid=b.id ORDER BY sc desc limit 0,6
+        <where>
+            <if test="id!=null">
+                b.id=${id}
+            </if>
+        </where>
+    </select>
+
+    <select id="getrouterbyid" resultType="com.dubbo.api.model.LearnRouter1">
+        select * from learnrouter1 where iid=${id} ORDER BY id
+    </select>
+
+    <select id="getlearncontent" resultType="com.dubbo.api.model.LearnContent">
+        select * from learncontent
+         <where>
+             <if test="id!=null">
+                 id=#{id}
+             </if>
+             <if test="author!=null">
+                 author=#{author}
+             </if>
+         </where>
+    </select>
+    <delete id="deletelearncontent">
+        delete from learncontent where id=#{id}
+    </delete>
+    <insert id="insertlearncontent" parameterType="com.dubbo.api.model.LearnContent">
+       insert into learncontent(iid,title,content,bz,kc,sc,src,author) values(${lc.iid},#{lc.title},#{lc.content},#{lc.bz},#{lc.kc},#{lc.sc},#{lc.src},#{lc.author})
+    </insert>
+    <update id="updatelearncontent" parameterType="com.dubbo.api.model.LearnContent">
+        update learncontent set title=#{lc.title},src=#{lc.src},content=#{lc.content},bz=#{lc.bz},kc=#{lc.kc},sc=${lc.sc},iid=${lc.iid},author=#{lc.author} where id=${lc.id}
+    </update>
+
+
+    <insert id="insertlearnrouter" parameterType="com.dubbo.api.model.LearnRouter1">
+        insert into learnrouter1(iid,searchid,bz,name,title) values(${lr.iid},${lr.searchid},${lr.bz},#{lr.name},#{lr.title})
+    </insert>
+    <delete id="deletelearnrouter">
+        delete from learnrouter1 where id=${id}
+    </delete>
+    <update id="updatelearnrouter" parameterType="com.dubbo.api.model.LearnRouter1">
+        update learnrouter1 set searchid=${lr.searchid},bz=${lr.bz},name=#{lr.name},title=#{lr.title},iid=${lr.iid} where id=${lr.id}
+    </update>
+
+    <update id="updatelearnrouter1" parameterType="com.dubbo.api.model.LearnRouter1">
+        update learnrouter1 set bz=#{lr.bz} where id=${lr.id}
+    </update>
+
+
+
+</mapper>

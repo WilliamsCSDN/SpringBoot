@@ -1,0 +1,71 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD com.example.Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dubbo.provider.mapper.SearchContentMapper">
+    <resultMap id="result" type="com.dubbo.api.model.SearchContent">
+        <id property="id" column="id"></id>
+        <result property="iid" column="iid" />
+        <result property="zj" column="zj" />
+        <result property="title" column="title" />
+
+        <collection property="searchContent1" ofType="com.dubbo.api.model.SearchContent1" column="id">
+
+            <id property="id" column="sid"></id>
+            <result property="iid" column="siid" />
+            <result property="zj" column="szj" />
+            <result property="zjj" column="zjj" />
+            <result property="title" column="stitle" />
+            <result property="url" column="url" />
+
+
+        </collection>
+
+    </resultMap>
+
+    <select id="findAll" resultMap="result">
+        select a.*,b.zjj,b.title as stitle,b.url,b.id as sid from searchcontent a left join searchcontent1 b on a.iid=b.iid and a.zj=b.zj
+        <where>
+           <if test="id!=null">
+               a.iid=${id} ORDER BY zjj
+           </if>
+        </where>
+    </select>
+
+    <insert id="insertzj">
+        insert into searchcontent(iid,zj,title) values(${iid},${zj},#{title})
+    </insert>
+
+    <insert id="insertzj1" parameterType="com.dubbo.api.model.SearchContent1">
+        insert into searchcontent1(iid,zj,zjj,title,url) values(#{searchcontent1.iid},#{searchcontent1.zj},#{searchcontent1.zjj},#{searchcontent1.title},#{searchcontent1.url})
+    </insert>
+
+    <update id="updatezj">
+        update searchcontent set title=#{title} where id=${id}
+    </update>
+
+    <update id="updatezj1">
+        update searchcontent1 set title=#{title},url=#{url} where id=${id}
+    </update>
+
+    <delete id="deletezj1">
+        delete from searchcontent1 where id=${id}
+</delete>
+
+    <delete id="deletesearchcontent">
+        delete from searchcontent where iid=${iid} and zj=${zj}
+    </delete>
+
+    <update id="updatesearchcontent">
+        update searchcontent set zj=${zj} where id=${id}
+    </update>
+
+    <update id="updatesearchcontent1">
+        update searchcontent1 set zj=${zj},zjj=#{zjj} where id=${id}
+    </update>
+
+
+
+
+
+</mapper>
