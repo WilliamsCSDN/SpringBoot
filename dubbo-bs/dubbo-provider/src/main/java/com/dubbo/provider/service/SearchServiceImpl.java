@@ -5,12 +5,17 @@ import com.dubbo.api.model.Search;
 import com.dubbo.api.service.CommentService;
 import com.dubbo.api.service.SearchService;
 import com.dubbo.provider.mapper.SearchMapper;
+import javafx.beans.binding.BooleanExpression;
+import org.redisson.api.RLock;
+import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class SearchServiceImpl implements SearchService {
@@ -18,14 +23,36 @@ public class SearchServiceImpl implements SearchService {
     SearchMapper searchMapper;
     @Resource
     private RedisTemplate<String, Object> redisTemplate;
+    @Autowired
+    private RedissonClient redissonClient;
+    @Resource
+    public RedisLockCommon redisLock;
     public List<Search> findAll(String a, String start, String num){
         return searchMapper.findAll(a,start,num);
     }
     public List<Search> findById(String id,String author){return searchMapper.findById(id,author);}
-    public void updateimg(Search search){
+    public Boolean updateimg(Search search){
+        String searchId=""+search.getId();
+
+
+        RLock lock = redissonClient.getLock(searchId);
+
+
+        try{
+            boolean res=lock.tryLock(100,10,TimeUnit.SECONDS);
+            if(!res) return false;
+            System.out.println("加锁成功！");
         searchMapper.updateimg(search);
-        redisTemplate.opsForZSet().removeRange("page",0,-1);
-        search2(null,null);
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }finally {
+            lock.unlock();
+            redisTemplate.opsForZSet().removeRange("page",0,-1);
+            search2(null,null);
+            System.out.println("解锁成功！");
+        }
+        return true;
     }
     public void insertlesson(Search search){
         searchMapper.insertlesson(search);

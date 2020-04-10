@@ -38,8 +38,8 @@ public class CommentController {
         commentService.insertcomment1(comment_id,name,replyname,content,prase_count,valueOf(simpleDate.format(date)));
     }
     @RequestMapping("/updatesh")
-    public void updatesh(String id,String state){
-        commentService.updatesh(id,state);
+    public boolean updatesh(String id,String state){
+       return commentService.updatesh(id,state);
     }
     @RequestMapping("/deletecomment")
     public void deletecomment(String id){

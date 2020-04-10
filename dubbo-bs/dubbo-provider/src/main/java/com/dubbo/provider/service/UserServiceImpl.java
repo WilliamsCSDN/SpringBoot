@@ -95,7 +95,6 @@ public class UserServiceImpl implements UserService {
     }
 
     public Object getUser(String username, String password, String token){
-        System.out.println(username+password);
         if(token==null||"".equals(token)){
             String md5password = MD5Util.formPassToDBPass(password, "456789");
             if(username==null||password==null) return false;

@@ -11,7 +11,7 @@ public interface SearchService {
 
     public List<Search> findAll(String a, String start, String num);
     public List<Search> findById(String id,String author);
-    public void updateimg(Search search);
+    public Boolean updateimg(Search search);
     public void insertlesson(Search search);
     public void deletelesson(String id);
     public List<Search> getHotsearch();

@@ -24,7 +24,9 @@ public class LearnContentServiceImpl implements LearnContentService {
     public List<LearnContent> getlearncontent(String id,String author){return learnContentMapper.getlearncontent(id,author);}
     public void deletelearncontent(String id){learnContentMapper.deletelearncontent(id);}
     public void insertlearncontent(LearnContent learnContent){learnContentMapper.insertlearncontent(learnContent);}
-    public void updatelearncontent(LearnContent learnContent){learnContentMapper.updatelearncontent(learnContent);}
+    public void updatelearncontent(LearnContent learnContent){
+        learnContentMapper.updatelearncontent(learnContent);
+    }
     public void insertlearnrouter(LearnRouter1 learnRouter1){learnContentMapper.insertlearnrouter(learnRouter1);}
     public void deletelearnrouter(String id){learnContentMapper.deletelearnrouter(id);}
     public void updatelearnrouter(LearnRouter1 learnRouter1){learnContentMapper.updatelearnrouter(learnRouter1);}

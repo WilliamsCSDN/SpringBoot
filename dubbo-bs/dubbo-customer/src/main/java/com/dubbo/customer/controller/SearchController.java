@@ -39,8 +39,8 @@ public class SearchController {
     }
 
     @RequestMapping("/updateimg")
-    public void updateimg(Search search){
-        searchService.updateimg(search);
+    public Boolean updateimg(Search search){
+       return searchService.updateimg(search);
     }
     @RequestMapping("/insertlesson")
     public void insertlesson(Search search){
