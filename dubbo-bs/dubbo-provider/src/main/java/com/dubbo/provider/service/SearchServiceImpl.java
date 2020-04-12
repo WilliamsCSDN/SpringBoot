@@ -33,11 +33,7 @@ public class SearchServiceImpl implements SearchService {
     public List<Search> findById(String id,String author){return searchMapper.findById(id,author);}
     public Boolean updateimg(Search search){
         String searchId=""+search.getId();
-
-
         RLock lock = redissonClient.getLock(searchId);
-
-
         try{
             boolean res=lock.tryLock(100,10,TimeUnit.SECONDS);
             if(!res) return false;

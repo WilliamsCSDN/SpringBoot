@@ -52,8 +52,8 @@ public class LearnContentController {
     @RequestMapping("/insertlearncontent")
     public void insertlearncontent(LearnContent learnContent){learnContentService.insertlearncontent(learnContent);}
     @RequestMapping("/updatelearncontent")
-    public void updatelearncontent(LearnContent learnContent){
-        learnContentService.updatelearncontent(learnContent);
+    public boolean updatelearncontent(LearnContent learnContent){
+        return learnContentService.updatelearncontent(learnContent);
     }
 
     @RequestMapping("/insertlearnrouter")
@@ -70,7 +70,7 @@ public class LearnContentController {
 
     @GetMapping("/1")
     public void getStreamData(HttpServletResponse response, String id, String zj) {
-        File file = new File("E:\\bs\\video\\"+id+"\\"+zj+".mp4");
+        File file = new File("F:\\bs\\video\\"+id+"\\"+zj+".mp4");
         ServletOutputStream out = null;
         try {
             FileInputStream instream = new FileInputStream(file);
@@ -104,7 +104,7 @@ public class LearnContentController {
                 if ("mp4".equals(type.toUpperCase())||"MP4".equals(type.toUpperCase())) {
                     String realPath = request.getSession().getServletContext().getRealPath("/");
                     String trueFileName = zj+fileName.substring(fileName.indexOf("."));
-                    path = "E:\\bs\\video\\"+title+"\\" + trueFileName;
+                    path = "F:\\bs\\video\\"+title+"\\" + trueFileName;
                     File dest = new File(path);
                     if (!dest.getParentFile().exists()) {
                         dest.getParentFile().mkdir();
@@ -130,7 +130,7 @@ public class LearnContentController {
         byte[] imageContent ;
         String path = "your image path with image_name";
         try {
-            imageContent = fileToByte(new File("E:\\bs\\image\\"+cc+"\\"+a));
+            imageContent = fileToByte(new File("F:\\bs\\image\\"+cc+"\\"+a));
             final HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.IMAGE_PNG);
             return new ResponseEntity<>(imageContent, headers, HttpStatus.OK);
@@ -156,13 +156,12 @@ public class LearnContentController {
     }
     @RequestMapping("/4")
     public String addImage(@RequestParam(name = "image_data", required = false) MultipartFile file,String a) {
-        //文件上传
         int cc;
         if("l".equals(a.substring(0,1))) cc=2;
         else cc=1;
         if (!file.isEmpty()) {
             try {
-                String newCompanyImagepath = "E:\\bs\\image\\"+cc+"\\"+a;
+                String newCompanyImagepath = "F:\\bs\\image\\"+cc+"\\"+a;
                 File newFile = new File(newCompanyImagepath);
                 if (!newFile.exists()) {
                     newFile.createNewFile();
@@ -182,9 +181,4 @@ public class LearnContentController {
         }
         return "图片上传失败！";
     }
-
-
-
-
-
 }

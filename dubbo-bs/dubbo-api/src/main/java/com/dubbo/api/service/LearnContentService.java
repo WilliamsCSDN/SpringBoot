@@ -16,7 +16,7 @@ public interface LearnContentService {
     public List<LearnContent> getlearncontent(String id,String author);
     public void deletelearncontent(String id);
     public void insertlearncontent(LearnContent learnContent);
-    public void updatelearncontent(LearnContent learnContent);
+    public boolean updatelearncontent(LearnContent learnContent);
     public void insertlearnrouter(LearnRouter1 learnRouter1);
     public void deletelearnrouter(String id);
     public void updatelearnrouter(LearnRouter1 learnRouter1);
