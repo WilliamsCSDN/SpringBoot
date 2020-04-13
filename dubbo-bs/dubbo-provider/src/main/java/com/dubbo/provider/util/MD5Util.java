@@ -1,4 +1,4 @@
-package com.dubbo.provider.service;
+package com.dubbo.provider.util;
 
 import org.apache.commons.codec.digest.DigestUtils;
 

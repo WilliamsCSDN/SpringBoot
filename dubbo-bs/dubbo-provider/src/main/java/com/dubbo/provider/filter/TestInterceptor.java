@@ -18,7 +18,7 @@ public class TestInterceptor implements HandlerInterceptor {
 
     @Override
     public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, ModelAndView modelAndView) throws Exception {
-//        System.out.println("Interceptor cost="+(System.currentTimeMillis()-start));
+        System.out.println("Interceptor cost="+(System.currentTimeMillis()-start));
     }
 
     @Override

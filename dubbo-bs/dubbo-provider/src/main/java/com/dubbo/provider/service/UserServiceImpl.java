@@ -4,6 +4,8 @@ import com.dubbo.api.model.Permission;
 import com.dubbo.api.model.User;
 import com.dubbo.api.service.UserService;
 import com.dubbo.provider.mapper.UserMapper;
+import com.dubbo.provider.util.MD5Util;
+import com.dubbo.provider.util.RedisUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -32,8 +34,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> findByName(String username, String password) {
-        String md5password = MD5Util.formPassToDBPass(password, "456789");
-        return userMapper.findByName(username, password);
+        if(username != null && password != null) {
+            String md5password = MD5Util.formPassToDBPass(password, "456789");
+            return userMapper.findByName(username, password);
+        }else return null;
     }
 
     @Override
@@ -48,40 +52,48 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<Permission> getpermission(String iid) {
+        if(iid != null)
         return userMapper.getpermission(iid);
+        else return null;
     }
 
     @Override
     public void updateUser(User user) {
-        if(user.getPassword()!=null){
+        if(user != null && user.getPassword()!=null) {
             String md5password = MD5Util.formPassToDBPass(user.getPassword(), "456789");
             user.setPassword(md5password);
+            userMapper.updateUser(user);
         }
-        userMapper.updateUser(user);
     }
 
     @Override
     public void updateUser1(User user) {
-        userMapper.updateUser1(user);
+        if(user != null)
+           userMapper.updateUser1(user);
     }
 
     @Override
     public List<User> findById(String id) {
+        if(id != null)
         return userMapper.findById(id);
+        else return null;
     }
 
     @Override
     public void deleteById(String id) {
+        if(id != null)
         userMapper.deleteById(id);
     }
 
     @Override
     public void updatePassword(String username,String password,String oldpassword) {
-        for(User a:findByName(username,oldpassword)) {
-            if (String.valueOf(a.getId())!="") {
-                String md5password = MD5Util.formPassToDBPass(password, "456789");
-                userMapper.updatePassword(String.valueOf(a.getId()), md5password);
+        if(username != null) {
+            for (User a : findByName(username, oldpassword)) {
+                if (String.valueOf(a.getId()) != "") {
+                    String md5password = MD5Util.formPassToDBPass(password, "456789");
+                    userMapper.updatePassword(String.valueOf(a.getId()), md5password);
 
+                }
             }
         }
 
@@ -89,9 +101,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void addUser(User user) {
-        String md5password = MD5Util.formPassToDBPass(user.getPassword(), "456789");
-        user.setPassword(md5password);
-        userMapper.addUser(user);
+        if(user != null) {
+            String md5password = MD5Util.formPassToDBPass(user.getPassword(), "456789");
+            user.setPassword(md5password);
+            userMapper.addUser(user);
+        }
     }
 
     public Object getUser(String username, String password, String token){
@@ -120,6 +134,7 @@ public class UserServiceImpl implements UserService {
         }
     }
     public void remove(String token){
-        redisUtil.del(token);
+        if(token != null)
+           redisUtil.del(token);
     }
 }

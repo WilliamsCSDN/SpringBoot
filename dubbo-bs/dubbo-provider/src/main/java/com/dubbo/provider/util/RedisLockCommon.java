@@ -1,4 +1,4 @@
-package com.dubbo.provider.service;
+package com.dubbo.provider.util;
 
 import org.apache.commons.lang3.StringUtils;
 import org.redisson.Redisson;

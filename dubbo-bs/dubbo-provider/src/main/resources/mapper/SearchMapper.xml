@@ -44,10 +44,10 @@
     </select>
 
     <update id="updateimg" parameterType="com.dubbo.api.model.Search">
-        update search set title=#{search.title},src=#{search.src},content=#{search.content},author=#{search.author},level=#{search.level},sc=${search.sc} where id=${search.id}
+        update search set title=#{search.title},src=#{search.src},content=#{search.content},author=#{search.author},level=#{search.level},sc=${search.sc},url=#{search.url} where id=${search.id}
     </update>
     <insert id="insertlesson" parameterType="com.dubbo.api.model.Search">
-        insert into search(title,content,author,level,sc,src) values(#{search.title},#{search.content},#{search.author},#{search.level},#{search.sc},#{search.src})
+        insert into search(title,content,author,level,sc,src,url) values(#{search.title},#{search.content},#{search.author},#{search.level},#{search.sc},#{search.src},#{search.url})
     </insert>
     <delete id="deletelesson">
         delete from search where id=${id}
