@@ -20,27 +20,31 @@ public class SearchContentServiceImpl implements SearchContentService {
     public List<SearchContent> findAll(String id){
         return searchContentMapper.findAll(id);
     }
-    public void insertzj(String iid,String zj,String title){
+    public int insertzj(String iid,String zj,String title){
         if(iid  != null && zj != null && title != null)
-            searchContentMapper.insertzj(iid,zj,title);
+            return searchContentMapper.insertzj(iid,zj,title);
+        else return 0;
     }
-    public void insertzj1(SearchContent1 searchContent1){
+    public int insertzj1(SearchContent1 searchContent1){
         if(searchContent1 != null)
-           searchContentMapper.insertzj1(searchContent1);
+           return searchContentMapper.insertzj1(searchContent1);
+        else return 0;
     }
-    public void updatezj(String id,String title){
+    public int updatezj(String id,String title){
         if(id != null && title != null)
-           searchContentMapper.updatezj(id,title);
+          return searchContentMapper.updatezj(id,title);
+        else return 0;
     }
-    public void updatezj1(String id,String title,String url){
+    public int updatezj1(String id,String title,String url){
         if(id != null && title != null && url != null)
-           searchContentMapper.updatezj1(id,title,url);
+         return searchContentMapper.updatezj1(id,title,url);
+        else return 0;
     }
 
     @Transactional(rollbackFor = {RuntimeException.class, Error.class})
-    public void deletezj1(String id,String iid,int zj){
+    public int deletezj1(String id,String iid,int zj){
         if(id != null && iid != null && (Integer)zj !=null) {
-            searchContentMapper.deletezj1(id);
+           int num = searchContentMapper.deletezj1(id);
             for (SearchContent a : findAll(iid)) {
                 if ((a.zj == zj) && (a.searchContent1.size() == 0)) {
                     deletesearchcontent(iid, String.valueOf(zj));
@@ -56,19 +60,23 @@ public class SearchContentServiceImpl implements SearchContentService {
                     }
                 }
             }
-        }
+            return num;
+        }else return 0;
     }
-    public void deletesearchcontent(String iid,String zj){
+    public int deletesearchcontent(String iid,String zj){
         if(iid != null && zj != null)
-           searchContentMapper.deletesearchcontent(iid,zj);
+           return searchContentMapper.deletesearchcontent(iid,zj);
+        else return 0;
     }
-    public void updatesearchcontent(String id,String zj){
+    public int updatesearchcontent(String id,String zj){
         if(id != null && zj != null)
-           searchContentMapper.updatesearchcontent(id,zj);
+           return searchContentMapper.updatesearchcontent(id,zj);
+        else return 0;
     }
-    public void updatesearchcontent1(String id,String zj,String zjj){
+    public int updatesearchcontent1(String id,String zj,String zjj){
         if(id != null && zj != null && zjj != null)
-           searchContentMapper.updatesearchcontent1(id,zj,zjj);
+           return searchContentMapper.updatesearchcontent1(id,zj,zjj);
+        else return 0;
     }
 
 }

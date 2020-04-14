@@ -25,33 +25,38 @@ public class LearnContentServiceImpl implements LearnContentService {
         if(id != null) return  learnContentMapper.getrouterbyid(id);
         else return null;
     }
-    public List<LearnContent> getlearncontent(String id,String author){return learnContentMapper.getlearncontent(id,author);}
-    public void deletelearncontent(String id){
-        if(id!=null) learnContentMapper.deletelearncontent(id);
+    public List<LearnContent> getlearncontent(String id,String author){
+        return learnContentMapper.getlearncontent(id,author);
     }
-    public void insertlearncontent(LearnContent learnContent){
-        if(learnContent != null)
-        learnContentMapper.insertlearncontent(learnContent);
+    public int deletelearncontent(String id){
+        if(id!=null) return learnContentMapper.deletelearncontent(id);
+        else return 0;
     }
-    public void updatelearncontent(LearnContent learnContent){
+    public int insertlearncontent(LearnContent learnContent){
+        if(learnContent != null) return learnContentMapper.insertlearncontent(learnContent);
+        else return 0;
+    }
+    public int updatelearncontent(LearnContent learnContent){
         if(learnContent != null && (Integer)learnContent.getId() != null)
-           learnContentMapper.updatelearncontent(learnContent);
+          return learnContentMapper.updatelearncontent(learnContent);
+        else return 0;
     }
-    public void insertlearnrouter(LearnRouter1 learnRouter1){
+    public int insertlearnrouter(LearnRouter1 learnRouter1){
         if(learnRouter1 != null && (Integer)learnRouter1.getIid() != null)
-        learnContentMapper.insertlearnrouter(learnRouter1);
+        return   learnContentMapper.insertlearnrouter(learnRouter1);
+        else return 0;
     }
-    public void deletelearnrouter(String id){
-        if(id != null)
-           learnContentMapper.deletelearnrouter(id);
+    public int deletelearnrouter(String id){
+        if(id != null) return learnContentMapper.deletelearnrouter(id);
+        else return 0;
     }
-    public void updatelearnrouter(LearnRouter1 learnRouter1){
-        if(learnRouter1 != null)
-           learnContentMapper.updatelearnrouter(learnRouter1);
+    public int updatelearnrouter(LearnRouter1 learnRouter1){
+        if(learnRouter1 != null) return learnContentMapper.updatelearnrouter(learnRouter1);
+        else return 0;
     }
-    public void updatelearnrouter1(LearnRouter1 learnRouter1){
-        if(learnRouter1 != null)
-        learnContentMapper.updatelearnrouter1(learnRouter1);
+    public int updatelearnrouter1(LearnRouter1 learnRouter1){
+        if(learnRouter1 != null)  return learnContentMapper.updatelearnrouter1(learnRouter1);
+        else return 0;
     }
 
 

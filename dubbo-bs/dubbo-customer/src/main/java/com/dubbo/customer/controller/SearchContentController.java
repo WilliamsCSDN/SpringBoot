@@ -18,33 +18,77 @@ public class SearchContentController {
     @Resource
     SearchContentService searchContentService;
     @RequestMapping("/searchcontent")
-    public  List<SearchContent> findAll(String id){
+    public  Object findAll(String id){
 //        for(SearchContent a: searchContentService.findAll(id))
 //        System.out.println(a.id);
-        return searchContentService.findAll(id);
+        List<SearchContent> searchContents = searchContentService.findAll(id);
+        if(searchContents != null) return searchContents;
+        else return "找不到课程内容!";
     }
     @RequestMapping("/insertzj")
-    public void insertzj(String iid,String zj,String title){
-        searchContentService.insertzj(iid,zj,title);
+    public String insertzj(String iid,String zj,String title){
+        if(iid != null && zj != null && title != null) {
+            int a = searchContentService.insertzj(iid, zj, title);
+            if (a > 0) return "添加成功!";
+            else return "添加失败!";
+        }else return "参数缺失！";
     }
     @RequestMapping("/insertzj1")
-    public void insertzj1(SearchContent1 searchContent1){
-        searchContentService.insertzj1(searchContent1);
+    public String insertzj1(SearchContent1 searchContent1){
+        if(searchContent1 !=null) {
+            int a = searchContentService.insertzj1(searchContent1);
+            if (a > 0) return "添加成功!";
+            else return "添加失败!";
+        }else return "参数缺失！";
     }
     @RequestMapping("/updatezj")
-    public void updatezj(String id,String title){ searchContentService.updatezj(id,title); }
+    public String updatezj(String id,String title){
+        if(id != null && title != null) {
+            int a = searchContentService.updatezj(id, title);
+            if (a > 0) return "修改成功!";
+            else return "修改失败!";
+        }else return "参数缺失！";
+    }
     @RequestMapping("/updatezj1")
-    public void updatezj1(String id,String title,String url){ searchContentService.updatezj1(id,title,url); }
+    public String updatezj1(String id,String title,String url){
+        if(id != null && title != null && url != null) {
+            int a = searchContentService.updatezj1(id, title, url);
+            if (a > 0) return "修改成功!";
+            else return "修改失败!";
+        }else return "参数缺失！";
+    }
 
     @RequestMapping("/deletezj1")
-    public void deletezj1(String id,String iid,int zj){
-        searchContentService.deletezj1(id,iid,zj);
+    public String deletezj1(String id,String iid,int zj){
+        if(id != null && iid != null && (Integer)zj != null) {
+            int a = searchContentService.deletezj1(id, iid, zj);
+            if (a > 0) return "删除成功!";
+            else return "删除失败!";
+        }else return "参数缺失！";
     }
 
     @RequestMapping("/deletesearchcontent")
-    public void deletesearchcontent(String iid,String zj){searchContentService.deletesearchcontent(iid,zj);}
+    public String deletesearchcontent(String iid,String zj){
+        if(iid != null && zj != null) {
+            int a = searchContentService.deletesearchcontent(iid, zj);
+            if (a > 0) return "删除成功!";
+            else return "删除失败!";
+        }else return "参数缺失！";
+    }
     @RequestMapping("/updatesearchcontent")
-    public void updatesearchcontent(String id,String zj){searchContentService.updatesearchcontent(id,zj);}
+    public String updatesearchcontent(String id,String zj){
+        if(id != null && zj != null) {
+            int a = searchContentService.updatesearchcontent(id, zj);
+            if (a > 0) return "修改成功!";
+            else return "修改失败!";
+        }else return "参数缺失！";
+    }
     @RequestMapping("/updatesearchcontent1")
-    public void updatesearchcontent1(String id,String zj,String zjj){searchContentService.updatesearchcontent1(id,zj,zjj);}
+    public String updatesearchcontent1(String id,String zj,String zjj){
+        if(id != null && zj != null && zjj != null) {
+            int a = searchContentService.updatesearchcontent1(id, zj, zjj);
+            if (a > 0) return "修改成功!";
+            else return "修改失败!";
+        }else return "参数缺失！";
+    }
 }

@@ -2,6 +2,7 @@ package com.dubbo.customer.controller;
 
 
 import com.alibaba.dubbo.common.serialize.Serialization;
+import com.dubbo.api.model.Permission;
 import com.dubbo.api.model.User;
 import com.dubbo.api.service.UserService;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
@@ -27,8 +28,10 @@ public class UserController {
     UserService userService;
 
     @RequestMapping("/getAllUser")
-    public List<User> getAllUser(){
-        return userService.findAll();
+    public Object getAllUser(){
+        List<User> users = userService.findAll();
+        if(users != null) return users;
+        else return "暂无用户!";
     }
 
     @RequestMapping("/getUser")
@@ -36,50 +39,90 @@ public class UserController {
        return userService.getUser(username, password, token);
     }
     @RequestMapping("/deleteById")
-    public void deleteById(String id){
-        userService.deleteById(id);
+    public String deleteById(String id){
+        if(id != null) {
+            int a = userService.deleteById(id);
+            if(a>0) return "删除成功!";
+            else return "删除失败!";
+        }else return "参数缺失!";
     }
     @RequestMapping("/findByUsername")
-    public User findByUsername(String username){return userService.findByUsername(username);}
+    public Object findByUsername(String username){
+        if(username != null) {
+            User user = userService.findByUsername(username);
+            if(user != null) return user;
+            else return "用户不存在!";
+        }else return "参数缺失!";
+    }
     @RequestMapping("/findById")
     public Object findById(String id){
         return userService.findById(id);
     }
     @RequestMapping("/remove")
-    public void remove(String token){
-        userService.remove(token);
+    public String remove(String token){
+        if(token != null) {
+            int a = userService.remove(token);
+            if(a>0) return "删除token成功!";
+            else return "删除token失败!";
+        }else return "参数缺失!";
     }
     @RequestMapping("/registerUser")
     public String register(String username,String password,String identity){
-        return userService.register(username, password, identity);
+        if(username != null && password != null && identity != null){
+            int a = userService.register(username, password, identity);
+            if(a>0) return "注册成功!";
+            else return "注册失败!";
+        }else return "参数缺失!";
     }
 
     @RequestMapping("/findByName")
-    public List<User> findByName(String username, String password){
-        return userService.findByName(username, password);
+    public Object findByName(String username, String password){
+        if(username != null && password != null) {
+            List<User> users = userService.findByName(username, password);
+            if(users != null) return users;
+            else return "用户不存在!";
+        }else return "参数缺失!";
     }
     @RequestMapping("/getpermission")
     public Object getpermission(String iid){
-        return userService.getpermission(iid);
+        if(iid != null) {
+            List<Permission> permissions = userService.getpermission(iid);
+            if(permissions != null) return permissions;
+            else return null;
+        }else return "参数缺失!";
     }
 
 
     @RequestMapping("/updateUser")
-    public void updateUser(User user){
-        userService.updateUser(user);
+    public String updateUser(User user){
+        if(user != null && user.getUsername() != null) {
+            int a = userService.updateUser(user);
+            if(a>0) return "修改成功!";
+            else return "修改失败!";
+        }else return "参数缺失!";
     }
     @RequestMapping("/updateUser1")
-    public void updateUser1(User user){
-        userService.updateUser1(user);
+    public String updateUser1(User user){
+        if(user != null && user.getUsername() != null) {
+            int a = userService.updateUser1(user);
+            if(a>0) return "修改成功!";
+            else return "修改失败!";
+        }else return "参数缺失!";
     }
     @RequestMapping("/updatePassword")
-    public void updatePassword(String username,String password,String oldpassword){
-        userService.updatePassword(username,password,oldpassword);
+    public String updatePassword(String username,String password,String oldpassword){
+        if(username != null && password != null && oldpassword != null) {
+            int a = userService.updatePassword(username, password, oldpassword);
+            if(a>0) return "修改成功!";
+            else return "修改失败!";
+        }else return "参数缺失!";
     }
     @RequestMapping("/addUser")
-    public void addUser(User user){
-        userService.addUser(user);
+    public String addUser(User user){
+        if(user != null && user.getUsername() != null) {
+            int a = userService.addUser(user);
+            if(a>0) return "添加成功!";
+            else return "添加失败!";
+        }else return "参数缺失!";
     }
-
-
 }

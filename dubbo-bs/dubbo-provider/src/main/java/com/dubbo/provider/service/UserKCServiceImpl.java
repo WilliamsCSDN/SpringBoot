@@ -16,10 +16,10 @@ public class UserKCServiceImpl implements UserKCService {
     @Resource
     UserKCMapper userKCMapper;
 
-    public void insertkc(String id,String kc){
+    public int insertkc(String id,String kc){
         if(id !=null &&kc != null) {
-            userKCMapper.insertkc(id, kc);
-        }
+            return userKCMapper.insertkc(id, kc);
+        }else return 0;
     }
 
     public List<UserKC> getuserk(String id){
@@ -27,19 +27,19 @@ public class UserKCServiceImpl implements UserKCService {
             return userKCMapper.getuserk(id);
         }else return null;
     }
-    public void deletekc(String id,String kc){
+    public int deletekc(String id,String kc){
         if(id != null && kc != null) {
-            userKCMapper.deletekc(id, kc);
-        }
+           return userKCMapper.deletekc(id, kc);
+        }else return 0;
     }
-    public void updateSearch1(int id){
+    public int updateSearch1(int id){
         if((Integer)id != null) {
-            userKCMapper.updateSearch1(id);
-        }
+           return userKCMapper.updateSearch1(id);
+        }else return 0;
     }
-    public void updateSearch2(int id){
+    public int updateSearch2(int id){
         if((Integer)id != null) {
-            userKCMapper.updateSearch2(id);
-        }
+           return userKCMapper.updateSearch2(id);
+        }else return 0;
     }
 }

@@ -1,6 +1,7 @@
 package com.dubbo.customer.controller;
 
 
+import com.dubbo.api.model.Comment;
 import com.dubbo.api.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import static java.lang.String.valueOf;
 
@@ -20,29 +22,47 @@ public class CommentController {
     CommentService commentService;
     @RequestMapping("/comment")
     public Object findAll(String articleid){
-
-        return commentService.findAll(articleid);
+        if(articleid != null) {
+            List<Comment> comments = commentService.findAll(articleid);
+            if (comments != null && !comments.isEmpty()) {
+                return commentService.findAll(articleid);
+            } else {
+                return "该课程没有评论";
+            }
+        }else return "课程不存在,请输入课程id!";
     }
     @RequestMapping("/insertcomment")
-    public void insertcomment(String articleid,String name,String content,String state){
-        Date date=new Date();
-        SimpleDateFormat simpleDate=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
-            commentService.insertcomment(articleid,name,content, valueOf(simpleDate.format(date)),state);
-
+    public String insertcomment(String articleid,String name,String content,String state){
+        if(articleid!=null&&name!=null&&content!=null&&state==null) {
+            Date date = new Date();
+            SimpleDateFormat simpleDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            int a = commentService.insertcomment(articleid, name, content, valueOf(simpleDate.format(date)), state);
+            if (a > 0) return "添加成功!";
+            else return "添加失败!";
+        }else return "参数缺失！";
     }
     @RequestMapping("/insertcomment1")
-    public void insertcomment1(String comment_id,String name,String replyname,String content,String prase_count){
-        Date date=new Date();
-        SimpleDateFormat simpleDate=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        commentService.insertcomment1(comment_id,name,replyname,content,prase_count,valueOf(simpleDate.format(date)));
+    public String insertcomment1(String comment_id,String name,String replyname,String content,String prase_count){
+        if(comment_id!=null&&name!=null&&replyname!=null&&content!=null&&prase_count!=null){
+            Date date = new Date();
+            SimpleDateFormat simpleDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            int a = commentService.insertcomment1(comment_id, name, replyname, content, prase_count, valueOf(simpleDate.format(date)));
+            if (a > 0) return "添加成功!";
+            else return "添加失败!";
+        }else return "参数缺失！";
     }
     @RequestMapping("/updatesh")
     public boolean updatesh(String id,String state){
-       return commentService.updatesh(id,state);
+        if(id!=null && state!=null) {
+            return commentService.updatesh(id, state);
+        }else return false;
     }
     @RequestMapping("/deletecomment")
-    public void deletecomment(String id){
-        commentService.deletecomment(id);
+    public String deletecomment(String id){
+        if(id != null) {
+            int a = commentService.deletecomment(id);
+            if (a > 0) return "删除成功!";
+            else return "删除失败!";
+        }else return "参数缺失！";
     }
 }

@@ -31,42 +31,89 @@ public class LearnContentController {
     SearchService searchService;
 
     @GetMapping("/getlearncontent")
-    public List<LearnContent> selectAll(String id, String start, String num) {
-
-        return learnContentService.selectAll(id,start,num);
+    public Object selectAll(String id, String start, String num) {
+        List<LearnContent> learnContents = learnContentService.selectAll(id,start,num);
+        if(learnContents != null) return learnContents;
+        else return "学习线路不存在!";
     }
 
     @GetMapping("/gethot")
-    public List<LearnContent> selectHot(String id) {
-        return learnContentService.selectHot(id);
+    public Object selectHot(String id) {
+        List<LearnContent> learnContents = learnContentService.selectHot(id);
+        if(learnContents != null) return learnContents;
+        else return "学习线路不存在!";
     }
     @GetMapping("/getrouterbyid")
     public Object getrouterbyid(String id){
-        return learnContentService.getrouterbyid(id);
+        if(id != null) {
+            List<LearnRouter1> learnRouter1s = learnContentService.getrouterbyid(id);
+            if(learnRouter1s != null) return learnRouter1s;
+            else return "线路没有内容!";
+        }else return "参数缺失！";
     }
     @GetMapping("/getlearncontent1")
-    public List<LearnContent> getlearncontent(String id,String author){return learnContentService.getlearncontent(id,author);}
-
+    public Object getlearncontent(String id,String author){
+        List<LearnContent> learnContents = learnContentService.getlearncontent(id,author);
+        if(learnContents != null) return learnContents;
+        else return "没有该线路!";
+    }
     @RequestMapping("/deletelearncontent")
-    public void deletelearncontent(String id){learnContentService.deletelearncontent(id);}
+    public String deletelearncontent(String id){
+        if(id != null) {
+            int a = learnContentService.deletelearncontent(id);
+            if (a > 0) return "删除成功!";
+            else return "删除失败!";
+        }else return "参数缺失！";
+    }
     @RequestMapping("/insertlearncontent")
-    public void insertlearncontent(LearnContent learnContent){learnContentService.insertlearncontent(learnContent);}
+    public String insertlearncontent(LearnContent learnContent){
+        if(learnContent != null) {
+            int a = learnContentService.insertlearncontent(learnContent);
+            if (a > 0) return "添加成功!";
+            else return "添加失败!";
+        }else return "参数缺失！";
+    }
     @RequestMapping("/updatelearncontent")
-    public void updatelearncontent(LearnContent learnContent){
-        learnContentService.updatelearncontent(learnContent);
+    public String updatelearncontent(LearnContent learnContent){
+        if(learnContent != null) {
+            int a = learnContentService.updatelearncontent(learnContent);
+            if (a > 0) return "修改成功!";
+            else return "修改失败!";
+        }else return "参数缺失！";
     }
 
     @RequestMapping("/insertlearnrouter")
-    public void insertlearnrouter(LearnRouter1 learnRouter1){
-        learnContentService.insertlearnrouter(learnRouter1);
+    public String insertlearnrouter(LearnRouter1 learnRouter1){
+        if(learnRouter1 != null) {
+            int a = learnContentService.insertlearnrouter(learnRouter1);
+            if (a > 0) return "添加成功!";
+            else return "添加失败!";
+        }else return "参数缺失！";
     }
     @RequestMapping("/deletelearnrouter")
-    public void deletelearnrouter(String id){learnContentService.deletelearnrouter(id);}
+    public String deletelearnrouter(String id){
+        if(id != null) {
+            int a = learnContentService.deletelearnrouter(id);
+            if (a > 0) return "删除成功!";
+            else return "删除失败!";
+        }else return "参数缺失！";
+    }
     @RequestMapping("/updatelearnrouter")
-    public void updatelearnrouter(LearnRouter1 learnRouter1){learnContentService.updatelearnrouter(learnRouter1);}
+    public String updatelearnrouter(LearnRouter1 learnRouter1){
+        if(learnRouter1 != null) {
+            int a = learnContentService.updatelearnrouter(learnRouter1);
+            if (a > 0) return "修改成功!";
+            else return "修改失败!";
+        }else return "参数缺失！";
+    }
     @RequestMapping("/updatelearnrouter1")
-    public void updatelearnrouter1(LearnRouter1 learnRouter1){learnContentService.updatelearnrouter1(learnRouter1);}
-
+    public String updatelearnrouter1(LearnRouter1 learnRouter1){
+        if(learnRouter1 != null) {
+            int a = learnContentService.updatelearnrouter1(learnRouter1);
+            if (a > 0) return "修改成功!";
+            else return "修改失败!";
+        }else return "参数缺失！";
+    }
 
     @GetMapping("/1")
     public void getStreamData(HttpServletResponse response, String id, String zj) {
@@ -102,7 +149,7 @@ public class LearnContentController {
             String type = fileName.indexOf(".") != -1 ? fileName.substring(fileName.lastIndexOf(".") + 1, fileName.length()) : null;
             if (type != null) {
                 if ("mp4".equals(type.toUpperCase())||"MP4".equals(type.toUpperCase())) {
-                    String realPath = request.getSession().getServletContext().getRealPath("/");
+//                    String realPath = request.getSession().getServletContext().getRealPath("/");
                     String trueFileName = zj+fileName.substring(fileName.indexOf("."));
                     path = "E:\\bs\\video\\"+title+"\\" + trueFileName;
                     File dest = new File(path);
@@ -124,7 +171,6 @@ public class LearnContentController {
     @RequestMapping(value = "/3",produces = MediaType.IMAGE_PNG_VALUE)
     public ResponseEntity<byte[]> getImage(HttpServletResponse response, String a){
         int cc;
-        System.out.println(a.substring(0,2));
         if("kc".equals(a.substring(0,2))) cc=1;
         else cc=2;
         byte[] imageContent ;

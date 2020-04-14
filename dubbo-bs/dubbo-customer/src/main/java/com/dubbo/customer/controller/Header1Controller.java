@@ -20,13 +20,24 @@ public class Header1Controller {
     Header1Service header1Service;
 
     @GetMapping("/getheader1")
-    public List<Header1> findAll(){
-        return header1Service.findAll();
+    public Object findAll(){
+        List<Header1> header1s=header1Service.findAll();
+        if(header1s !=null ){
+            return header1s;
+        }else{
+            return "无数据!";
+        }
     }
 
     @GetMapping("/getbyname")
-    public List<Content> findByName(String name){return header1Service.findByName(name);}
-
-
-
+    public Object findByName(String name){
+        if(name != null) {
+            List<Content> contents = header1Service.findByName(name);
+            if (contents != null) {
+                return contents;
+            } else {
+                return "无数据!";
+            }
+        }else return "参数缺失！";
+    }
 }

@@ -50,19 +50,21 @@ public class SearchServiceImpl implements SearchService {
             return true;
         }else return false;
     }
-    public void insertlesson(Search search){
+    public int insertlesson(Search search){
         if(search != null) {
-            searchMapper.insertlesson(search);
+            int a=searchMapper.insertlesson(search);
             redisTemplate.opsForZSet().removeRange("page", 0, -1);
             search2(null, null);
-        }
+            return a;
+        }else return 0;
     }
-    public void deletelesson(String id){
+    public int deletelesson(String id){
         if(id != null) {
-            searchMapper.deletelesson(id);
+            int a = searchMapper.deletelesson(id);
             redisTemplate.opsForZSet().removeRange("page", 0, -1);
             search2(null, null);
-        }
+            return a;
+        }else return 0;
     }
     public List<Search> getHotsearch(){
         return searchMapper.getHotsearch();
@@ -74,12 +76,16 @@ public class SearchServiceImpl implements SearchService {
     }
     public Object search2(String a,String b){
         String key="page";
-        double total=findAll(null,null,null).size();
-        List<Search> search=findAll(null,null,null);
-        for(Search search3:search)
-            redisTemplate.opsForZSet().add(key, search3, 1);
-        if(a==null||b==null)
-            return redisTemplate.opsForZSet().range("page",0,-1);
+        if((redisTemplate.opsForZSet().range("page", 0, -1)).size()==0) {
+            System.out.println("数据库获取数据");
+            List<Search> search = findAll(null, null, null);
+            for (Search search3 : search)
+                redisTemplate.opsForZSet().add(key, search3, 1);
+        }else {
+            System.out.println("redis获取数据");
+        }
+        if (a == null || b == null)
+            return redisTemplate.opsForZSet().range("page", 0, -1);
         else {
             System.out.println("redis分页");
             return redisTemplate.opsForZSet().range("page", Long.parseLong(a), Long.parseLong(b) + Long.parseLong(a) - 1);

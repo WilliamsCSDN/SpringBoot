@@ -25,15 +25,17 @@ public class CommentServiceImpl implements CommentService{
             return commentMapper.findAll(articleid);
         else return null;
     }
-    public void insertcomment(String articleid, String name, String content, String createtime, String state){
+    public int insertcomment(String articleid, String name, String content, String createtime, String state){
         if(articleid!=null && name!=null && content!=null)
-             commentMapper.insertcomment(articleid,name,content,createtime,state);
+            return commentMapper.insertcomment(articleid,name,content,createtime,state);
+        else return 0;
     }
-    public void insertcomment1( String comment_id,String name,String replyname,String content,String prase_count,String createtime){
+    public int insertcomment1( String comment_id,String name,String replyname,String content,String prase_count,String createtime){
         if(comment_id!=null && name!=null && content!=null)
-              commentMapper.insertcomment1(comment_id,name,replyname,content,prase_count,createtime);
+             return commentMapper.insertcomment1(comment_id,name,replyname,content,prase_count,createtime);
+        else return 0;
     }
-    public boolean updatesh(String id,String state){
+    public  boolean updatesh(String id,String state){
         if(id!=null) {
             RLock lock = redissonClient.getLock(id);
             try {
@@ -53,11 +55,13 @@ public class CommentServiceImpl implements CommentService{
     }
 
     @Transactional(rollbackFor = {RuntimeException.class, Error.class})
-    public void deletecomment(String id){
+    public int deletecomment(String id){
+        int a;
         if(id!=null) {
-            commentMapper.deletecomment(id);
+            a=commentMapper.deletecomment(id);
             commentMapper.deletecomment1(id);
-        }
+            return a;
+        }else return 0;
     }
 
 }

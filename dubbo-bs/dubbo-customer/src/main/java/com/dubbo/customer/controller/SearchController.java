@@ -19,19 +19,27 @@ public class SearchController {
     @RequestMapping("/search")
     public Object findAll(String a,String start,String num){
         if(a==null||a=="") {
-            System.out.println("redis获取数据");
             return searchService.search2(start,num);
         }
-        else return searchService.findAll(a,start,num);
-
+        else {
+            List<Search> searches = searchService.findAll(a, start, num);
+            if(searches != null) return searches;
+            else return "课程不存在!";
+        }
     }
 
     @RequestMapping("/search1")
-    public Object findAll1(String start,String num){return searchService.findAll1(start,num);}
+    public Object findAll1(String start,String num){
+        if(start != null && num != null) {
+            return searchService.findAll1(start, num);
+        }else return "参数缺失!";
+    }
 
     @RequestMapping("/searchById")
     public Object findById(String id,String author){
-        return searchService.findById(id,author);
+        List<Search> searches = searchService.findById(id,author);
+        if(searches != null) return searches;
+        else return "课程不存在!";
     }
     @RequestMapping("/redisGetSearch")
     public Object search1(String a,String b) {
@@ -40,23 +48,42 @@ public class SearchController {
 
     @RequestMapping("/updateimg")
     public Boolean updateimg(Search search){
-       return searchService.updateimg(search);
+        if(search !=null) return searchService.updateimg(search);
+        else return false;
     }
     @RequestMapping("/insertlesson")
-    public void insertlesson(Search search){
-        searchService.insertlesson(search);
+    public String insertlesson(Search search){
+        if(search != null && (Integer)search.getId() != null) {
+            int a = searchService.insertlesson(search);
+            if (a > 0) return "添加成功!";
+            else return "添加失败!";
+        }else return "参数缺失!";
     }
     @RequestMapping("/deletelesson")
-    public void deletelesson(String id){
-        searchService.deletelesson(id);
+    public String deletelesson(String id){
+        if(id != null) {
+            int a = searchService.deletelesson(id);
+            if(a>0) return "删除成功!";
+            else return "删除失败";
+        }else return "参数缺失!";
     }
     @RequestMapping("/getHotsearch")
-    public List<Search> getHotsearch(){ return  searchService.getHotsearch();}
+    public Object getHotsearch(){
+        List<Search> searches = searchService.getHotsearch();
+        if(searches != null) return searches;
+        else return "课程不存在!";
+    }
 
     @RequestMapping("/search2")
-    public List<Search> search2(int url){return searchService.search2(url);}
+    public Object search2(int url){
+        if((Integer)url != null) {
+            List<Search> searches = searchService.search2(url);
+            if(searches != null) return searches;
+            else return "课程不存在!";
+        }else return "参数缺失!";
+    }
     @RequestMapping("/selectBestId")
-    public int selectBestId(){return searchService.selectBestId();}
+    public int selectBestId(){ return searchService.selectBestId();}
     @RequestMapping("/selectBestId1")
-    public int selectBestId1(){return searchService.selectBestId1();}
+    public int selectBestId1(){ return searchService.selectBestId1();}
 }

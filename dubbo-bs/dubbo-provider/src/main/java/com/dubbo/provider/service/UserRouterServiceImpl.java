@@ -15,25 +15,28 @@ import java.util.List;
 public class UserRouterServiceImpl implements UserRouterService {
     @Resource
     UserRouterMapper userRouterMapper;
-    public void insertrouter(String id, String learnrouter){
+    public int insertrouter(String id, String learnrouter){
         if(id != null && learnrouter != null) {
-            userRouterMapper.insertrouter(id, learnrouter);
-        }
+            return userRouterMapper.insertrouter(id, learnrouter);
+        }else return 0;
     }
     public List<UserRouter> getuserr(String id){
         if(id != null) return userRouterMapper.getuserr(id);
         else return null;
     }
-    public void deleterouter(String id,String learnrouter){
-        if(id !=null && learnrouter != null)
-           userRouterMapper.deleterouter(id,learnrouter);
+    public int deleterouter(String id,String learnrouter){
+        if(id !=null && learnrouter != null) {
+            return userRouterMapper.deleterouter(id, learnrouter);
+        }else return 0;
     }
-    public void updateLearnContent1(int id){
-        if((Integer) id != null)
-           userRouterMapper.updateLearnContent1(id);
+    public int updateLearnContent1(int id){
+        if((Integer) id != null) {
+            return userRouterMapper.updateLearnContent1(id);
+        }else return 0;
     }
-    public void updateLearnContent2(int id){
+    public int updateLearnContent2(int id){
         if((Integer)id != null)
-           userRouterMapper.updateLearnContent2(id);
+           return userRouterMapper.updateLearnContent2(id);
+        else return 0;
     }
 }

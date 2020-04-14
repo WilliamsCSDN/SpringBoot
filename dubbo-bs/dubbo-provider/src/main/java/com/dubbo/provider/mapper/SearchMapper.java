@@ -11,9 +11,9 @@ import java.util.List;
 public interface SearchMapper {
     public List<Search> findAll(@Param("a") String a, @Param("start") String start, @Param("num") String num);
     public List<Search> findById(@Param("id") String id, @Param("author") String author);
-    public void updateimg(@Param("search") Search search);
-    public void insertlesson(@Param("search") Search search);
-    public void deletelesson(@Param("id") String id);
+    public int updateimg(@Param("search") Search search);
+    public int insertlesson(@Param("search") Search search);
+    public int deletelesson(@Param("id") String id);
     public List<Search> getHotsearch();
     public List<Search> search2(@Param("url") int url);
     public int selectBestId();

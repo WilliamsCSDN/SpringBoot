@@ -17,16 +17,44 @@ public class UserKCController {
     @Resource
     UserKCService userKCService;
     @RequestMapping("/insertkc")
-    public void insertkc(String id,String kc){userKCService.insertkc(id,kc);}
+    public String insertkc(String id,String kc){
+        if(id != null && kc != null) {
+            int a = userKCService.insertkc(id, kc);
+            if(a>0) return "添加成功!";
+            else return "添加失败!";
+        }else return "参数缺失!";
+    }
 
     @RequestMapping("/getuserk")
-    public List<UserKC> getuserk(String id){
-        return userKCService.getuserk(id);
+    public Object  getuserk(String id){
+        if(id != null) {
+            List<UserKC> userkcs = userKCService.getuserk(id);
+            if(userkcs != null) return userkcs;
+            else return "该用户暂无收藏课程!";
+        }else return "参数缺失!";
     }
     @RequestMapping("/deletekc")
-    public void deletekc(String id,String kc){ userKCService.deletekc(id,kc);}
+    public String deletekc(String id,String kc){
+        if(id != null && kc != null) {
+            int a = userKCService.deletekc(id, kc);
+            if(a>0) return "删除成功!";
+            else return "删除失败!";
+        }else return "参数缺失!";
+    }
     @RequestMapping("/updateSearch1")
-    public void updateSearch1(int id){userKCService.updateSearch1(id);}
+    public String updateSearch1(int id){
+        if((Integer)id != null) {
+            int a = userKCService.updateSearch1(id);
+            if(a>0) return "修改成功!";
+            else return "修改失败!";
+        }else return "参数缺失!";
+    }
     @RequestMapping("/updateSearch2")
-    public void updateSearch2(int id){userKCService.updateSearch2(id);}
+    public String updateSearch2(int id){
+        if((Integer)id != null) {
+            int a = userKCService.updateSearch2(id);
+            if(a>0) return "修改成功!";
+            else return "修改失败!";
+        }else return "参数缺失!";
+    }
 }
