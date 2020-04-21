@@ -20,7 +20,17 @@
                                 <el-button slot="prepend" icon="el-icon-lx-lock"></el-button>
                             </el-input>
                         </el-form-item>
-                        <div class="login-btn" style="margin-top: 58px">
+
+                        
+                        <el-form-item prop="code">
+                       <img style=" margin: 20px 0 0 0" :src="imgCode" @click="changeCode"/>
+                            <el-input v-model="param.code" placeholder="code" style="width:70%;margin-left:20px;float:right;margin-top:-40px">
+                                
+                            </el-input>
+                        </el-form-item>
+
+
+                        <div class="login-btn" style="margin-top: 3px">
                             <el-button type="primary" @click="login()">登录</el-button>
                         </div>
                     </el-form>
@@ -71,6 +81,7 @@ export default {
             param: {
                 username: 'admin',
                 password: 'admin',
+                code:''
             },
             param1:{
                 username:'16',
@@ -81,32 +92,41 @@ export default {
                 username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
                 password: [{ required: true, message: '请输入密码', trigger: 'blur' }],
             },
+            imgCode:''
         };
     },
     methods: {
         login() {
             this.$refs.login.validate(valid => {
                 if (valid) {
+                    if(this.param.code != null){
                     var inputPass = this.param.password;
                     var salt = "123456";
                     var str = ""+salt.charAt(0)+salt.charAt(2) + inputPass +salt.charAt(5) + salt.charAt(4);
                     var password = md5(str);
                     var url="getUser?username="+this.param.username+"&password="+password;
-                    this.$ajax.get(url).then(res=>{
-                        if(res.data!=false) {
-                            localStorage.setItem("token", res.data,10)
-                            
-                            this.$ajax.get('getUser?token='+res.data).then(res=>{
-                                localStorage.setItem("identity",res.data[0].identity)
-                            })
+                    this.$ajax.get("code1").then(res=>{
+                        if(this.param.code==res.data.toLowerCase()){
+                            this.$ajax.get(url).then(res=>{
+                                if(res.data!=false) {
+                                    localStorage.setItem("token", res.data,10)
+                                    
+                                    this.$ajax.get('getUser?token='+res.data).then(res=>{
+                                        localStorage.setItem("identity",res.data[0].identity)
+                                    })
 
-                            this.$message.success('登录成功');
-                            this.$router.go(-1);
-                        }else {
-                            this.$message.error('请输入正确的账号和密码');
-                        }
+                                    this.$message.success('登录成功');
+                                    this.$router.go(-1);
+                                }else {
+                                    this.$message.error('请输入正确的账号和密码');
+                                }
+                            })
+                        }else this.$message.error('请输入正确验证码');
+
                     })
 
+
+                }else this.$message.error('请输入验证码');
                 }
             });
         },
@@ -123,12 +143,10 @@ export default {
                     var password = md5(str);
                     var url = 'registerUser?username=' + this.param1.username + '&password=' + password + "&identity=" + this.param1.identity;
                     this.$ajax.get(url).then(res => {
-                        alert(res.data);
-
 
                                 var url="getUser?username="+this.param1.username+"&password="+password;
                                 this.$ajax.get(url).then(res=>{
-                                    if(res.data!=false) {
+                                    if(res.data!=null) {
                                         localStorage.setItem("token", res.data)
                                         this.$ajax.get('getUser?token='+res.data).then(res=>{
                                             localStorage.setItem("identity",res.data[0].identity)
@@ -142,7 +160,15 @@ export default {
                 else this.$message.error('用户名已注册!')
             })
         },
+        changeCode(){   
+            var num=Math.ceil(Math.random()*10);
+            this.imgCode = "http://localhost:8082/code?" + num;
+        },
     },
+
+     mounted:function () {
+            this.changeCode()
+        }
 };
 </script>
 
@@ -168,7 +194,7 @@ export default {
     float: right;
 margin-right: 80px;
     margin-top: 150px;
-    height: 400px;
+    height: 440px;
     /*top: 50%;*/
     width: 350px;
     /*margin: -190px 0 0 -175px;*/

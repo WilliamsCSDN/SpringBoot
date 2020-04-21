@@ -6,7 +6,7 @@
                 <el-col :xs="2" :sm="2"  :md="2" :lg="2" :xl="2"> <li><a href="http://www.baidu.com"><router-link to='lesson?a='>免费课程</router-link></a></li></el-col>
                 <el-col :xs="2" :sm="2"  :md="2" :lg="2" :xl="2"> <li><a href="http://www.baidu.com"><router-link to='LearnR'>学习路线</router-link></a></li></el-col>
                 <el-col :xs="2" :sm="2"  :md="2" :lg="2" :xl="2"> <li><a href="http://www.baidu.com"><router-link to='YW'>社区</router-link></a></li></el-col>
-                <el-col :xs="6" :sm="6"  :md="6" :lg="9" :xl="2"><li>
+                <el-col :xs="6" :sm="6"  :md="6" :lg="9" :xl="9"><li>
                     <el-autocomplete  :fetch-suggestions="querySearchAsync" placeholder="请输入内容" v-model="input" style="width: 70%;margin-top: -30px">
                     </el-autocomplete>
                     <a href="#" @click="search">搜索</a>
@@ -45,12 +45,12 @@
                     <!--</div>-->
 
                     <a :href="'lessondetail?id='+content3[list.searchid-1].id" style="color:black;height: 150px;width: 100%;display: inline-block">
-                        <el-col :xs="19" :sm="19" :md="19" :lg="19" :xl="12" style="font-family:SimHei;margin-top: 10px ">
+                        <el-col :xs="19" :sm="19" :md="19" :lg="19" :xl="19" style="font-family:SimHei;margin-top: 10px ">
                             <div style="margin-top: 40px;">{{content3[list.searchid-1].title}}</div>
                             <p style="color: #545C63;font-size: 14px;margin-top: 20px;">{{content3[list.searchid-1].content}}</p>
                             <div style="font-size: 10px; color: #979FA6;margin-top: 20px"><span>讲师： {{content3[list.searchid-1].author}} {{content3[list.searchid-1].level}}  {{content3[list.searchid-1].sc}}  试看</span><span style="margin-left: 30px">★人收藏</span></div>
                         </el-col>
-                        <el-col :xs="19" :sm="19" :md="5" :lg="5" :xl="12" style="margin-top: 10px"> <img :src="'http://localhost:8082/3?a='+content3[list.searchid-1].src"/></el-col>
+                        <el-col :xs="19" :sm="19" :md="5" :lg="5" :xl="5" style="margin-top: 10px"> <img :src="'http://localhost:8082/3?a='+content3[list.searchid-1].src"/></el-col>
                     </a>
                 </div>
                 <p style="text-align: center;padding-top: 25px;padding-bottom: 25px">*说明：路线内每门课程都具有完整独立的学习价值，因此一部分知识点可能重合，选择前请知晓！</p>

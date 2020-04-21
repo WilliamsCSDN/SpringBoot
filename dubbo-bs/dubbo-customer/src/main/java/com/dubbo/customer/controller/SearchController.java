@@ -55,16 +55,16 @@ public class SearchController {
     public String insertlesson(Search search){
         if(search != null && (Integer)search.getId() != null) {
             int a = searchService.insertlesson(search);
-            if (a > 0) return "添加成功!";
-            else return "添加失败!";
+            if (a > 0) return "添加课程成功!";
+            else return "添加课程失败!";
         }else return "参数缺失!";
     }
     @RequestMapping("/deletelesson")
     public String deletelesson(String id){
         if(id != null) {
             int a = searchService.deletelesson(id);
-            if(a>0) return "删除成功!";
-            else return "删除失败";
+            if(a>0) return "删除课程成功!";
+            else return "删除课程失败";
         }else return "参数缺失!";
     }
     @RequestMapping("/getHotsearch")

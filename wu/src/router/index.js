@@ -28,7 +28,7 @@ export default new Router({
             path:'/lessondetail',
             // component:()=>import('../components/page/LessonDetail.vue'),
             component:resolve=>(require(['../components/page/Learn/LessonDetail.vue'],resolve)),
-            meta: { title: '课程详情',require:false }
+            meta: { title: '课程详情',require:true }
         },{
             path:'/learnrouter',
             // component:()=>import('../components/page/LearnRouter.vue'),

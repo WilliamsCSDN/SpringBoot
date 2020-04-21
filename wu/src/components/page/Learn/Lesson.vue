@@ -10,7 +10,7 @@
         <el-col :xs="2" :sm="2"  :md="2" :lg="2" :xl="2"> <li><a href="http://www.baidu.com"><router-link to='lesson?a='>免费课程</router-link></a></li></el-col>
         <el-col :xs="2" :sm="2"  :md="2" :lg="2" :xl="2"> <li><a href="http://www.baidu.com"><router-link to='LearnR'>学习路线</router-link></a></li></el-col>
         <el-col :xs="2" :sm="2"  :md="2" :lg="2" :xl="2"> <li><a href="http://www.baidu.com"><router-link to='YW'>社区</router-link></a></li></el-col>
-        <el-col :xs="6" :sm="6"  :md="6" :lg="9" :xl="2"><li>
+        <el-col :xs="6" :sm="6"  :md="6" :lg="9" :xl="9"><li>
           <el-autocomplete  :fetch-suggestions="querySearchAsync" placeholder="请输入内容" v-model="input" style="width: 70%;margin-top: -30px">
           </el-autocomplete>
           <a href="#" @click="search">搜索</a>
@@ -79,7 +79,7 @@
         <!--1-->
         <a href="learnrouter?id=2" style="color:black"><div style="height: 70px;width: 301px;background-color: white;margin-top: 20px;padding-top: 15px;padding-left: 20px">
           <el-col :xs="6" :sm="6" :md="6" :lg="6" :xl="6"><img src="../../../views/img/learn1/search2.png"></el-col>
-          <el-col :xs="6" :sm="6" :md="6" :lg="18" :xl="6">
+          <el-col :xs="6" :sm="6" :md="6" :lg="18" :xl="18">
             <b><p>Web前端工城狮</p></b>
             <p style="font-size: 10px;margin-top: 5px">踏入IT行业从此开始</p>
           </el-col>
@@ -88,7 +88,7 @@
         <!--2-->
         <a href="learnrouter?id=3" style="color:black"><div style="height: 70px;width: 301px;background-color: white;margin-top: 20px;padding-top: 15px;padding-left: 20px">
           <el-col :xs="6" :sm="6" :md="6" :lg="6" :xl="6"><img src="../../../views/img/learn1/search3.png"></el-col>
-          <el-col :xs="6" :sm="6" :md="6" :lg="18" :xl="6">
+          <el-col :xs="6" :sm="6" :md="6" :lg="18" :xl="18">
             <b><p>Java攻城狮</p></b>
             <p style="font-size: 10px;margin-top: 5px">全球3大编程语言之一</p>
           </el-col>
@@ -97,7 +97,7 @@
         <!--3-->
         <a href="learnrouter?id=4" style="color:black"><div style="height: 70px;width: 301px;background-color: white;margin-top: 20px;padding-top: 15px;padding-left: 20px">
           <el-col :xs="6" :sm="6" :md="6" :lg="6" :xl="6"><img src="../../../views/img/learn1/search4.png"></el-col>
-          <el-col :xs="6" :sm="6" :md="6" :lg="18" :xl="6">
+          <el-col :xs="6" :sm="6" :md="6" :lg="18" :xl="18">
             <b><p>Android攻城狮</p></b>
             <p style="font-size: 10px;margin-top: 5px">5G物联网通万物</p>
           </el-col>
@@ -106,7 +106,7 @@
         <!--4-->
         <a href="learnrouter?id=5" style="color:black"><div style="height: 70px;width: 301px;background-color: white;margin-top: 20px;padding-top: 15px;padding-left: 20px">
           <el-col :xs="6" :sm="6" :md="6" :lg="6" :xl="6"><img src="../../../views/img/learn1/search5.png"></el-col>
-          <el-col :xs="6" :sm="6" :md="6" :lg="18" :xl="6">
+          <el-col :xs="6" :sm="6" :md="6" :lg="18" :xl="18">
             <b><p>PHP攻城狮</p></b>
             <p style="font-size: 10px;margin-top: 5px">打通前后端一步到位</p>
           </el-col>
@@ -115,7 +115,7 @@
         <!--5-->
         <a href="learnrouter?id=6" style="color:black"><div style="height: 70px;width: 301px;background-color: white;margin-top: 20px;padding-top: 15px;padding-left: 20px">
           <el-col :xs="6" :sm="6" :md="6" :lg="6" :xl="6"><img src="../../../views/img/learn1/search6.png"></el-col>
-          <el-col :xs="6" :sm="6" :md="6" :lg="18" :xl="6">
+          <el-col :xs="6" :sm="6" :md="6" :lg="18" :xl="18">
             <b><p>Python攻城狮</p></b>
             <p style="font-size: 10px;margin-top: 5px">爬虫大数据抢占先机</p>
           </el-col>
@@ -129,7 +129,7 @@
 
 </div>
 <!--分页-->
-    <el-col  :xs="18" :sm="18" :md="18" :lg="18" :xl="18" style="text-align: center;margin-top: 50px">
+    <el-col  :xs="18" :sm="18" :md="18" :lg="20" :xl="20" style="text-align: center;margin-top: 50px">
       <el-pagination
         background
         pageSize="5"
@@ -194,15 +194,7 @@
         activeName1:'1'
       }
     },
-    created() {
-      var lett = this;
-      document.onkeydown = function(e) {
-        var key = window.event.keyCode;
-        if (key == 13) {
-          lett.search();
-        }
-      }
-    },methods:{
+    methods:{
       enter(a){
         var content = document.getElementById("content" + a);
         content.style.display = 'block';

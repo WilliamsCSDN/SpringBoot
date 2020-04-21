@@ -29,32 +29,32 @@ public class SearchContentController {
     public String insertzj(String iid,String zj,String title){
         if(iid != null && zj != null && title != null) {
             int a = searchContentService.insertzj(iid, zj, title);
-            if (a > 0) return "添加成功!";
-            else return "添加失败!";
+            if (a > 0) return "添加课程章成功!";
+            else return "添加课程章失败!";
         }else return "参数缺失！";
     }
     @RequestMapping("/insertzj1")
     public String insertzj1(SearchContent1 searchContent1){
         if(searchContent1 !=null) {
             int a = searchContentService.insertzj1(searchContent1);
-            if (a > 0) return "添加成功!";
-            else return "添加失败!";
+            if (a > 0) return "添加课程节成功!";
+            else return "添加课程节失败!";
         }else return "参数缺失！";
     }
     @RequestMapping("/updatezj")
     public String updatezj(String id,String title){
         if(id != null && title != null) {
             int a = searchContentService.updatezj(id, title);
-            if (a > 0) return "修改成功!";
-            else return "修改失败!";
+            if (a > 0) return "修改课程章成功!";
+            else return "修改课程章失败!";
         }else return "参数缺失！";
     }
     @RequestMapping("/updatezj1")
     public String updatezj1(String id,String title,String url){
         if(id != null && title != null && url != null) {
             int a = searchContentService.updatezj1(id, title, url);
-            if (a > 0) return "修改成功!";
-            else return "修改失败!";
+            if (a > 0) return "修改课程节成功!";
+            else return "修改课程节失败!";
         }else return "参数缺失！";
     }
 
@@ -62,8 +62,8 @@ public class SearchContentController {
     public String deletezj1(String id,String iid,int zj){
         if(id != null && iid != null && (Integer)zj != null) {
             int a = searchContentService.deletezj1(id, iid, zj);
-            if (a > 0) return "删除成功!";
-            else return "删除失败!";
+            if (a > 0) return "删除课程节成功!";
+            else return "删除课程节失败!";
         }else return "参数缺失！";
     }
 
@@ -71,24 +71,24 @@ public class SearchContentController {
     public String deletesearchcontent(String iid,String zj){
         if(iid != null && zj != null) {
             int a = searchContentService.deletesearchcontent(iid, zj);
-            if (a > 0) return "删除成功!";
-            else return "删除失败!";
+            if (a > 0) return "删除课程章成功!";
+            else return "删除课程章失败!";
         }else return "参数缺失！";
     }
     @RequestMapping("/updatesearchcontent")
     public String updatesearchcontent(String id,String zj){
         if(id != null && zj != null) {
             int a = searchContentService.updatesearchcontent(id, zj);
-            if (a > 0) return "修改成功!";
-            else return "修改失败!";
+            if (a > 0) return "修改课程章成功!";
+            else return "修改课程章失败!";
         }else return "参数缺失！";
     }
     @RequestMapping("/updatesearchcontent1")
     public String updatesearchcontent1(String id,String zj,String zjj){
         if(id != null && zj != null && zjj != null) {
             int a = searchContentService.updatesearchcontent1(id, zj, zjj);
-            if (a > 0) return "修改成功!";
-            else return "修改失败!";
+            if (a > 0) return "修改课程节成功!";
+            else return "修改课程节失败!";
         }else return "参数缺失！";
     }
 }

@@ -61,24 +61,24 @@ public class LearnContentController {
     public String deletelearncontent(String id){
         if(id != null) {
             int a = learnContentService.deletelearncontent(id);
-            if (a > 0) return "删除成功!";
-            else return "删除失败!";
+            if (a > 0) return "删除学习线路成功!";
+            else return "删除学习线路失败!";
         }else return "参数缺失！";
     }
     @RequestMapping("/insertlearncontent")
     public String insertlearncontent(LearnContent learnContent){
         if(learnContent != null) {
             int a = learnContentService.insertlearncontent(learnContent);
-            if (a > 0) return "添加成功!";
-            else return "添加失败!";
+            if (a > 0) return "添加学习线路成功!";
+            else return "添加学习线路失败!";
         }else return "参数缺失！";
     }
     @RequestMapping("/updatelearncontent")
     public String updatelearncontent(LearnContent learnContent){
         if(learnContent != null) {
             int a = learnContentService.updatelearncontent(learnContent);
-            if (a > 0) return "修改成功!";
-            else return "修改失败!";
+            if (a > 0) return "修改学习线路成功!";
+            else return "修改学习线路失败!";
         }else return "参数缺失！";
     }
 
@@ -86,32 +86,32 @@ public class LearnContentController {
     public String insertlearnrouter(LearnRouter1 learnRouter1){
         if(learnRouter1 != null) {
             int a = learnContentService.insertlearnrouter(learnRouter1);
-            if (a > 0) return "添加成功!";
-            else return "添加失败!";
+            if (a > 0) return "添加线路内容成功!";
+            else return "添加线路内容失败!";
         }else return "参数缺失！";
     }
     @RequestMapping("/deletelearnrouter")
     public String deletelearnrouter(String id){
         if(id != null) {
             int a = learnContentService.deletelearnrouter(id);
-            if (a > 0) return "删除成功!";
-            else return "删除失败!";
+            if (a > 0) return "删除线路内容成功!";
+            else return "删除线路内容失败!";
         }else return "参数缺失！";
     }
     @RequestMapping("/updatelearnrouter")
     public String updatelearnrouter(LearnRouter1 learnRouter1){
         if(learnRouter1 != null) {
             int a = learnContentService.updatelearnrouter(learnRouter1);
-            if (a > 0) return "修改成功!";
-            else return "修改失败!";
+            if (a > 0) return "修改线路内容成功!";
+            else return "修改线路内容失败!";
         }else return "参数缺失！";
     }
     @RequestMapping("/updatelearnrouter1")
     public String updatelearnrouter1(LearnRouter1 learnRouter1){
         if(learnRouter1 != null) {
             int a = learnContentService.updatelearnrouter1(learnRouter1);
-            if (a > 0) return "修改成功!";
-            else return "修改失败!";
+            if (a > 0) return "修改线路内容成功!";
+            else return "修改线路内容失败!";
         }else return "参数缺失！";
     }
 

@@ -20,8 +20,8 @@ public class UserKCController {
     public String insertkc(String id,String kc){
         if(id != null && kc != null) {
             int a = userKCService.insertkc(id, kc);
-            if(a>0) return "添加成功!";
-            else return "添加失败!";
+            if(a>0) return "收藏课程成功!";
+            else return "收藏课程失败!";
         }else return "参数缺失!";
     }
 
@@ -37,24 +37,24 @@ public class UserKCController {
     public String deletekc(String id,String kc){
         if(id != null && kc != null) {
             int a = userKCService.deletekc(id, kc);
-            if(a>0) return "删除成功!";
-            else return "删除失败!";
+            if(a>0) return "取消收藏成功!";
+            else return "取消收藏失败!";
         }else return "参数缺失!";
     }
     @RequestMapping("/updateSearch1")
     public String updateSearch1(int id){
         if((Integer)id != null) {
             int a = userKCService.updateSearch1(id);
-            if(a>0) return "修改成功!";
-            else return "修改失败!";
+            if(a>0) return "收藏课程+1成功!";
+            else return "收藏失败!";
         }else return "参数缺失!";
     }
     @RequestMapping("/updateSearch2")
     public String updateSearch2(int id){
         if((Integer)id != null) {
             int a = userKCService.updateSearch2(id);
-            if(a>0) return "修改成功!";
-            else return "修改失败!";
+            if(a>0) return "收藏课程-1成功!";
+            else return "收藏失败!";
         }else return "参数缺失!";
     }
 }

@@ -45,8 +45,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public int register(String username, String password, String identity) {
         if(username!=null&&password!=null&&identity!=null) {
-            String a = MD5Util.formPassToDBPass(password, "456789");
-            return userMapper.register(username,password,identity);
+            String md5password = MD5Util.formPassToDBPass(password, "456789");
+            return userMapper.register(username,md5password,identity);
         } else return 0;
     }
 
@@ -118,7 +118,7 @@ public class UserServiceImpl implements UserService {
             String md5password = MD5Util.formPassToDBPass(password, "456789");
             if(username==null||password==null) return false;
             else {
-                if(findByName(username,md5password).toString()!="[]") {
+                if(findByName(username,md5password).size()!=0) {
                     token = UUID.randomUUID().toString().replace("-", "");
                     System.out.println("添加token到reids");
                     redisUtil.set(token, findByName(username, md5password));
@@ -132,7 +132,6 @@ public class UserServiceImpl implements UserService {
                 }
             }
         }else{
-            System.out.println("从redis中获取list");
             return redisUtil.get(token);
         }
     }

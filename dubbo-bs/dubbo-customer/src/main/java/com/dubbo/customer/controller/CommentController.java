@@ -29,7 +29,7 @@ public class CommentController {
             } else {
                 return "该课程没有评论";
             }
-        }else return "课程不存在,请输入课程id!";
+        }else return "参数缺失!";
     }
     @RequestMapping("/insertcomment")
     public String insertcomment(String articleid,String name,String content,String state){
@@ -37,8 +37,8 @@ public class CommentController {
             Date date = new Date();
             SimpleDateFormat simpleDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             int a = commentService.insertcomment(articleid, name, content, valueOf(simpleDate.format(date)), state);
-            if (a > 0) return "添加成功!";
-            else return "添加失败!";
+            if (a > 0) return "添加评论成功!";
+            else return "添加评论失败!";
         }else return "参数缺失！";
     }
     @RequestMapping("/insertcomment1")
@@ -47,8 +47,8 @@ public class CommentController {
             Date date = new Date();
             SimpleDateFormat simpleDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             int a = commentService.insertcomment1(comment_id, name, replyname, content, prase_count, valueOf(simpleDate.format(date)));
-            if (a > 0) return "添加成功!";
-            else return "添加失败!";
+            if (a > 0) return "添加评论成功!";
+            else return "添加评论失败!";
         }else return "参数缺失！";
     }
     @RequestMapping("/updatesh")
@@ -61,8 +61,8 @@ public class CommentController {
     public String deletecomment(String id){
         if(id != null) {
             int a = commentService.deletecomment(id);
-            if (a > 0) return "删除成功!";
-            else return "删除失败!";
+            if (a > 0) return "删除评论成功!";
+            else return "删除评论失败!";
         }else return "参数缺失！";
     }
 }

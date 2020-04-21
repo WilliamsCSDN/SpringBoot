@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
 @Service
@@ -74,14 +75,14 @@ public class SearchServiceImpl implements SearchService {
             return redisTemplate.opsForZSet().range("page",0,-1);
         else return redisTemplate.opsForZSet().range("page",Long.parseLong(a),Long.parseLong(b)+Long.parseLong(a)-1);
     }
-    public Object search2(String a,String b){
-        String key="page";
-        if((redisTemplate.opsForZSet().range("page", 0, -1)).size()==0) {
+    public Object search2(String a,String b) {
+        String key = "page";
+        if ((redisTemplate.opsForZSet().range("page", 0, -1)).size() == 0) {
             System.out.println("数据库获取数据");
             List<Search> search = findAll(null, null, null);
             for (Search search3 : search)
                 redisTemplate.opsForZSet().add(key, search3, 1);
-        }else {
+        } else {
             System.out.println("redis获取数据");
         }
         if (a == null || b == null)
@@ -90,6 +91,8 @@ public class SearchServiceImpl implements SearchService {
             System.out.println("redis分页");
             return redisTemplate.opsForZSet().range("page", Long.parseLong(a), Long.parseLong(b) + Long.parseLong(a) - 1);
         }
+
+
     }
     public List<Search> search2(int url){
         if((Integer)url != null) return searchMapper.search2(url);
@@ -101,5 +104,6 @@ public class SearchServiceImpl implements SearchService {
         if(start !=null && num != null) return searchMapper.findAll1(start,num);
         else return null;
     }
+
 
 }

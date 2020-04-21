@@ -1,4 +1,4 @@
-package com.dubbo.provider.filter;
+package com.dubbo.customer.filter;
 
 import com.alibaba.dubbo.common.Constants;
 import com.alibaba.dubbo.common.extension.Activate;

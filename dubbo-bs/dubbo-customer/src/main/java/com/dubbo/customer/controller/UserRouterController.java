@@ -20,8 +20,8 @@ public class UserRouterController {
     public String insertrouter(String id, String learnrouter){
         if(id != null && learnrouter != null) {
             int a = userRouterService.insertrouter(id, learnrouter);
-            if(a>0) return "添加成功!";
-            else return "添加失败!";
+            if(a>0) return "收藏线路成功!";
+            else return "收藏线路失败!";
         }else return "参数缺失!";
     }
     @RequestMapping("/getuserr")
@@ -36,24 +36,24 @@ public class UserRouterController {
     public String deleterouter(String id,String learnrouter){
         if(id != null && learnrouter != null) {
             int a = userRouterService.deleterouter(id, learnrouter);
-            if(a>0) return "删除成功!";
-            else return "删除失败!";
+            if(a>0) return "取消收藏成功!";
+            else return "取消收藏失败!";
         }else return "参数缺失!";
     }
     @RequestMapping("/updateLearnContent1")
     public String updateLearnContent1(int id){
         if((Integer)id != null) {
             int a = userRouterService.updateLearnContent1(id);
-            if(a>0) return "修改成功!";
-            else return "修改失败!";
+            if(a>0) return "收藏+1成功!";
+            else return "收藏+1失败!";
         }else return "参数缺失!";
     }
     @RequestMapping("/updateLearnContent2")
     public String updateLearnContent2(int id){
         if((Integer)id != null) {
             int a = userRouterService.updateLearnContent2(id);
-            if(a>0) return "修改成功!";
-            else return "修改失败!";
+            if(a>0) return "收藏-1成功!";
+            else return "收藏-1失败!";
         }else return "参数缺失!";
     }
 }

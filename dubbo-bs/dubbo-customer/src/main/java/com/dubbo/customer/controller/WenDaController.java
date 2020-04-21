@@ -37,8 +37,8 @@ public class WenDaController {
     public String insertwenda(String iid,String name,String content){
         if(iid != null && name !=null && content != null) {
             int a = wenDaService.insertwenda(iid, name, content);
-            if(a>0) return "添加成功!";
-            else return "添加失败!";
+            if(a>0) return "评论成功!";
+            else return "评论失败!";
         }else return "参数缺失!";
     }
     @RequestMapping("insertwenda1")
@@ -47,16 +47,16 @@ public class WenDaController {
             Date date = new Date();
             SimpleDateFormat simpleDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             int a = wenDaService.insertwenda1(id, name, replyname, content, valueOf(simpleDate.format(date)));
-            if(a>0) return "添加成功!";
-            else return "添加失败!";
+            if(a>0) return "回复成功!";
+            else return "回复失败!";
         }else return "参数缺失!";
     }
     @RequestMapping("deletewenda")
     public String deletewenda(String id){
         if(id != null) {
             int a = wenDaService.deletewenda(id);
-            if(a>0) return "删除成功!";
-            else return "删除失败!";
+            if(a>0) return "删除评论成功!";
+            else return "删除评论失败!";
         }else return "参数缺失!";
     }
     @RequestMapping("insertwenda2")
@@ -65,8 +65,8 @@ public class WenDaController {
             Date date = new Date();
             SimpleDateFormat simpleDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             int a = wenDaService.insertwenda2(question, content, author, valueOf(simpleDate.format(date)));
-            if(a>0) return "添加成功!";
-            else return "添加失败!";
+            if(a>0) return "添加提问成功!";
+            else return "添加提问失败!";
         }else return "参数缺失!";
     }
     @RequestMapping("countWenDa")

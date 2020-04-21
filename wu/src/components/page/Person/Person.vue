@@ -9,7 +9,7 @@
                     <el-col :xs="2" :sm="2"  :md="2" :lg="2" :xl="2"> <li><a href="http://www.baidu.com"><router-link to='lesson?a='>免费课程</router-link></a></li></el-col>
                     <el-col :xs="2" :sm="2"  :md="2" :lg="2" :xl="2"> <li><a href="http://www.baidu.com"><router-link to='LearnR'>学习路线</router-link></a></li></el-col>
                     <el-col :xs="2" :sm="2"  :md="2" :lg="2" :xl="2"> <li><a href="http://www.baidu.com"><router-link to='YW'>社区</router-link></a></li></el-col>
-                    <el-col :xs="6" :sm="6"  :md="6" :lg="9" :xl="2"><li>
+                    <el-col :xs="6" :sm="6"  :md="6" :lg="9" :xl="9"><li>
                         <el-autocomplete  :fetch-suggestions="querySearchAsync" placeholder="请输入内容" v-model="input" style="width: 70%;margin-top: -30px">
                         </el-autocomplete>
                         <a href="#" @click="search">搜索</a>
