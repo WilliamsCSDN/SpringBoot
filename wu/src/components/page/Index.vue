@@ -39,7 +39,7 @@
         <div style="height: 224px;margin-left: 0px">
           <div style="margin-top: 20px"><b><span>{{this.con[0].name}}</span></b></div>
           <div style="margin-top: 20px">
-            <a :href="lesson=list.href" v-for="list in con[0].content">{{list.name}}</a>
+            <a :href="lesson=list.href" v-for="(list,index) in con[0].content" :key="index">{{list.name}}</a>
           </div>
         </div>
         <div><img src="../../views/img/menu1.png"/></div>
@@ -48,10 +48,10 @@
         <div style="height: 224px;margin-left: 0px">
           <div style="margin-top: 20px"><b><span>{{this.con[1].name}}</span></b></div>
           <div style="margin-top: 20px;">
-            <a :href="lesson=list.href" v-for="list in con[1].content.slice(0,8)">{{list.name}}</a>
+            <a :href="lesson=list.href" v-for="(list,index) in con[1].content.slice(0,8)"  :key="index">{{list.name}}</a>
           </div>
           <div style="margin-top: 20px">
-            <a :href="lesson=list.href" v-for="list in con[1].content.slice(8,con[1].content.length)">{{list.name}}</a>
+            <a :href="lesson=list.href" v-for="(list,index) in con[1].content.slice(8,con[1].content.length)"  :key="index">{{list.name}}</a>
           </div>
         </div>
         <div><img src="../../views/img/menu2.png"/></div>
@@ -62,10 +62,10 @@
 
           <div style="margin-top: 20px"><b><span>{{this.con[2].name}}</span></b></div>
           <div style="margin-top: 20px">
-            <a href="#" v-for="list in con[2].content.slice(0,8)">{{list.name}}</a>
+            <a href="#" v-for="(list,index) in con[2].content.slice(0,8)"  :key="index">{{list.name}}</a>
           </div>
           <div style="margin-top: 20px">
-            <a href="#" v-for="list in con[2].content.slice(8,con[2].content.length)">{{list.name}}</a>
+            <a href="#" v-for="(list,index) in con[2].content.slice(8,con[2].content.length)"  :key="index">{{list.name}}</a>
           </div>
         </div>
         <div><img src="../../views/img/menu3.png"/></div>
@@ -74,7 +74,7 @@
         <div style="height: 224px;margin-left: 0px">
           <div style="margin-top: 20px"><b><span>{{this.con[3].name}}</span></b></div>
           <div style="margin-top: 20px">
-            <a :href="lesson=list.href" v-for="list in this.con[3].content">{{list.name}}</a>
+            <a :href="lesson=list.href" v-for="(list,index) in this.con[3].content"  :key="index">{{list.name}}</a>
           </div>
         </div>
         <div><img src="../../views/img/menu4.png"/></div>
@@ -83,11 +83,11 @@
         <div style="height: 224px;margin-left: 0px">
           <div style="margin-top: 20px"><b><span>{{this.con[4].name}}</span></b></div>
           <div style="margin-top: 20px">
-            <a :href="lesson=list.href" v-for="list in this.con[4].content">{{list.name}}</a>
+            <a :href="lesson=list.href" v-for="(list,index) in this.con[4].content" :key="index">{{list.name}}</a>
           </div>
           <div style="margin-top: 20px"><b><span>{{this.con[5].name}}</span></b></div>
           <div style="margin-top: 20px">
-            <a :href="lesson=list.href" v-for="list in this.con[5].content">{{list.name}}</a>
+            <a :href="lesson=list.href" v-for="(list,index) in this.con[5].content" :key="index">{{list.name}}</a>
           </div>
         </div>
         <div><img src="../../views/img/menu5.png"/></div>
@@ -96,14 +96,14 @@
         <div style="height: 224px;margin-left: 0px">
           <div style="margin-top: 20px"><b><span>{{this.con[6].name}}</span></b></div>
           <div style="margin-top: 20px">
-            <a :href="lesson=list.href" v-for="list in this.con[6].content.slice(0,8)">{{list.name}}</a>
+            <a :href="lesson=list.href" v-for="(list,index) in this.con[6].content.slice(0,8)" :key="index">{{list.name}}</a>
           </div>
           <div style="margin-top: 20px">
-            <a :href="lesson=list.href" v-for="list in this.con[6].content.slice(8,this.con[6].content.length)">{{list.name}}</a>
+            <a :href="lesson=list.href" v-for="(list,index) in this.con[6].content.slice(8,this.con[6].content.length)" :key="index">{{list.name}}</a>
           </div>
           <div style="margin-top: 20px"><b><span>{{this.con[7].name}}</span></b></div>
           <div style="margin-top: 20px">
-            <a :href="lesson=list.href" v-for="list in this.con[7].content">{{list.name}}</a>
+            <a :href="lesson=list.href" v-for="(list,index) in this.con[7].content" :key="index">{{list.name}}</a>
           </div>
 
 
@@ -113,11 +113,11 @@
         <div style="height: 224px;margin-left: 0px">
           <div style="margin-top: 20px"><b><span>{{this.con[8].name}}</span></b></div>
           <div style="margin-top: 20px">
-            <a :href="lesson=list.href" v-for="list in this.con[8].content">{{list.name}}</a>
+            <a :href="lesson=list.href" v-for="(list,index) in this.con[8].content" :key="index">{{list.name}}</a>
           </div>
           <div style="margin-top: 20px"><b><span>{{this.con[9].name}}</span></b></div>
           <div style="margin-top: 20px">
-            <a :href="lesson=list.href" v-for="list in this.con[9].content">{{list.name}}</a>
+            <a :href="lesson=list.href" v-for="(list,index) in this.con[9].content" :key="index">{{list.name}}</a>
           </div>
         </div>
         <div><img src="../../views/img/menu7.png"/></div>
@@ -131,10 +131,10 @@
     <div style="width: 100%">
 
       <b><div style="margin-left: 215px">学习线路</div></b>
-      <el-tabs  class="learn" stretch=true v-model="activeName" @tab-click="handleClick" style="margin: 0 auto;width: 1100px">
-        <el-tab-pane label="热门" name=1>
+      <el-tabs  class="learn" :stretch='true' v-model="activeName"  style="margin: 0 auto;width: 1100px">
+        <el-tab-pane label="热门" name="first">
           <el-row style="margin-left: 45px">
-            <el-col :xs="12" :sm="12" :md="12" :lg="8" :xl="8" style="margin-top: 30px"  v-for="list in this.hotlearn">
+            <el-col :xs="12" :sm="12" :md="12" :lg="8" :xl="8" style="margin-top: 30px"  v-for="(list,index) in this.hotlearn" :key="index">
               <!--<a :href="'/lessondetail?title='+list.learnContent[0].title" style="color:black;">-->
               <a :href="'/learnrouter?id='+list.learnContent[0].id" style="color:black;">
                 <img :src="'http://localhost:8082/3?a='+list.learnContent[0].src" style="width: 80%;height: 160px;" />
@@ -150,9 +150,9 @@
           </el-row>
         </el-tab-pane>
 
-        <el-tab-pane :label="list.name" :name="list.id" v-for="list in this.learn">
+        <el-tab-pane :label="list.name"  v-for="(list,index) in this.learn" :key="index">
           <el-row style="margin-left: 45px">
-            <el-col :xs="24" :sm="24" :md="12" :lg="8" :xl="8" style="margin-top: 30px" v-for="(list1,index) in list.learnContent">
+            <el-col :xs="12" :sm="12" :md="12" :lg="8" :xl="8" style="margin-top: 30px" v-for="(list1,index) in list.learnContent" :key="index">
               <a :href="'/learnrouter?id='+list1.id" style="color:black;">
                 <img :src="'http://localhost:8082/3?a='+list1.src"  style="width:80%;height: 160px;"/>
 
@@ -174,10 +174,10 @@
     <div style="width: 100%;margin-top: 100px">
 
       <b><div style="margin-left: 215px">热门课程</div></b>
-    <el-tabs  class="learn" stretch=true v-model="activeName1" @tab-click="handleClick" style="margin: 0 auto;width: 1100px">
-      <el-tab-pane label="热门" name=1>
+    <el-tabs  class="learn" :stretch='true' v-model="activeName1" style="margin: 0 auto;width: 1100px">
+      <el-tab-pane label="热门" name="first">
         <el-row>
-        <el-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12" style="margin-top: 30px"  v-for="list in this.hotsearch">
+        <el-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12" style="margin-top: 30px"  v-for="(list,index) in this.hotsearch" :key="index">
           <!--<a :href="'/lessondetail?title='+list.learnContent[0].title" style="color:black;">-->
           <a :href="'/lessondetail?id='+list.id" style="color:black;">
             <el-col :xs="4" :sm="4" :md="4" :lg="7" :xl="7"> <img :src="'http://localhost:8082/3?a='+list.src" style="width: 140px;height: 150px" /></el-col>
@@ -196,9 +196,10 @@
 
 
 
-      <el-tab-pane label="推荐课程" name="2">
+      <el-tab-pane label="推荐课程" name="second">
         <el-row>
-          <el-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12" style="margin-top: 30px" v-for="list in search" v-if="list.id<=6">
+          <el-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12" style="margin-top: 30px" v-if="list.id<=6"  v-for="(list,index) in search" :key="index" >
+            
             <a :href="'/learnrouter?id='+list.id" style="color:black;">
             <el-col :xs="4" :sm="4" :md="4" :lg="7" :xl="7"> <img :src="'http://localhost:8082/3?a='+list.src"  style="height: 150px"/></el-col>
             <el-col :xs="20" :sm="20" :md="20" :lg="17" :xl="17" style="font-family:SimHei ">
@@ -257,10 +258,20 @@
     components: {ElButton, ElInput, ElFormItem, ElForm, ElTabPane, ElTabs, ElCol, ElContainer, ElRow}, data () {
       return {
           user:'',
+          
         dialogTableVisible:false,
-        activeName:'1',
-        activeName1:'1',
-        con:'',
+        activeName:'first',
+        activeName1:'first',
+        con:{
+          id:'',
+          name:'',
+          type:'',
+          content:[
+           
+            ]
+            
+          
+        },
         learn:'',
         search:'',
         hotlearn:'',
@@ -279,16 +290,6 @@
           { "value": "Java"},
           { "value": "Python" }]
       }
-    },
-    created() {
-      var lett = this;
-      document.onkeydown = function(e) {
-        var key = window.event.keyCode;
-        if (key == 13) {
-          lett.search1();
-        }
-      }
-
     }
     ,methods: {
       enter(a){
@@ -312,6 +313,7 @@
           .get('getheader1')
           .then(res => {
             this.con = res.data
+            // console.log(this.con)
               this.get2();
           })
       },
@@ -319,6 +321,7 @@
         this.$ajax
           .get('getlearncontent')
           .then(res => {
+
             this.learn = res.data
               this.get3();
           })
@@ -350,17 +353,10 @@
       },
       exit(){
         this.$ajax.get('remove?token='+localStorage.getItem('token')).then(res=>{
-          alert('后台删除token成功！')
+          this.$router.push('login')
         })
         localStorage.removeItem('token');
-        var a=document.getElementById("user");
-        a.style.setProperty('display','none')
-        var e=document.getElementById("log")
-        e.style.setProperty('display','inline');
-        var b=document.getElementById("reg")
-        b.style.setProperty('display','inline');
-        var c=document.getElementById("person");
-        c.style.setProperty('display','none')
+        localStorage.removeItem('identity');
       },
       search1(){
         this.$router.push({path:'lesson',query:{a:this.input}})
@@ -378,8 +374,10 @@
               if(i!=null){
                   this.$ajax.get('getUser?token='+i).then(res=>{
                       this.identity=res.data[0].identity;
+                      
                       if(res.data[0].name==null)this.user="欢迎你!"+res.data[0].username;
                       else this.user="欢迎你!"+res.data[0].name;
+                      // this.user="欢迎你!"+res.data[0].username;
                       var a=document.getElementById("user");
                       a.style.setProperty('display','inline')
                       var e=document.getElementById("log")

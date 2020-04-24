@@ -8,12 +8,12 @@
             <el-button type="primary" style="margin-left: 20px" @click="aaa">搜索</el-button>
         </div>
         <el-button type="primary" style="width: 20%;margin-top: 10px" @click="bbb">添加章节</el-button>
-        <div v-for="list in this.content1" style="width: 100%;margin: 0 auto; border-radius: 5px; background-color: #E5EAF0; text-align: left; padding: 20px 20px 20px 20px; margin-top: 20px;">
-            <span style="font-size: 22px"><b>第{{list.zj}}章&nbsp&nbsp&nbsp{{list.title}}</b></span>
+        <div v-for="(list,index) in this.content1" :key="index" style="width: 100%;margin: 0 auto; border-radius: 5px; background-color: #E5EAF0; text-align: left; padding: 20px 20px 20px 20px; margin-top: 20px;">
+            <span style="font-size: 22px"><b>第{{list.zj}}章&nbsp;&nbsp;&nbsp;{{list.title}}</b></span>
             <el-button type="primary" style="float: right;margin-right: 550px" @click="ccc(list.zj)">+</el-button>
-            <div v-for="list1 in list.searchContent1" style="width: 100%;margin-top: 20px;">
+            <div v-for="(list1,index) in list.searchContent1" :key="index" style="width: 100%;margin-top: 20px;">
                 <div style="text-align: left;margin-left: 0px;width: 750px;height: 50px;padding-left: 20px;padding-top: 10px;  ">
-                    <span><i class="el-icon-lx-crown"></i> {{list1.zjj}}&nbsp&nbsp&nbsp{{list1.title}} </span>
+                    <span><i class="el-icon-lx-crown"></i> {{list1.zjj}}&nbsp;&nbsp;&nbsp;{{list1.title}} </span>
 
                     <el-button style="float: right" type="danger" @click="remove(list1.id,list.iid,list.zj)">删除</el-button>
                     <el-button style="float: right;" type="primary" @click="handleEdit(list.zj,list1.zjj)">编辑</el-button>
@@ -25,7 +25,7 @@
         <el-dialog title="添加章" :visible.sync="editVisible" width="30%">
             <el-form ref="form" :model="form" label-width="70px">
                 <el-form-item label="章节:">
-                    <el-input disabled="true" v-model="form.zj"></el-input>
+                    <el-input :disabled="true" v-model="form.zj"></el-input>
                 </el-form-item>
                 <el-form-item label="章名:">
                     <el-input v-model="form.title"></el-input>
@@ -40,7 +40,7 @@
         <el-dialog title="添加节" :visible.sync="editVisible1" width="30%">
             <el-form ref="form1" :model="form1" label-width="70px">
                 <el-form-item label="章节:">
-                    <el-input disabled="true" v-model="form1.zj"></el-input>
+                    <el-input :disabled="true" v-model="form1.zj"></el-input>
                 </el-form-item>
                 <el-form-item label="章名:">
                     <el-input v-model="form1.title"></el-input>
@@ -61,7 +61,7 @@
         <el-dialog title="编辑节" :visible.sync="editVisible2" width="30%">
             <el-form ref="form3" :model="form3" label-width="70px">
                 <el-form-item label="章ID:">
-                    <el-input v-model="form3.id" disabled="true"></el-input>
+                    <el-input v-model="form3.id" :disabled="true"></el-input>
                 </el-form-item>
                 <el-form-item label="章名:">
                     <el-input v-model="form3.title"></el-input>
@@ -70,10 +70,10 @@
 
             <el-form ref="form2" :model="form2" label-width="70px">
                 <el-form-item label="节ID:">
-                    <el-input v-model="form2.id" disabled="true"></el-input>
+                    <el-input v-model="form2.id" :disabled="true"></el-input>
                 </el-form-item>
                 <el-form-item label="节:">
-                    <el-input disabled="true" v-model="form2.zjj"></el-input>
+                    <el-input :disabled="true" v-model="form2.zjj"></el-input>
                 </el-form-item>
                 <el-form-item label="节名:">
                     <el-input v-model="form2.title"></el-input>
@@ -269,7 +269,7 @@
                             //这里是为了解决跨域问题，但是博主并没有用这种方式解决。后面会给出解决方案
                         }
                     }).then((res) => {
-                        console.log(res.data);
+                        // console.log(res.data);
                     })
 
                     var url = "insertzj1?iid=" + this.title + "&zj=" + this.zj1 + "&zjj=" + this.form1.zj + "&title=" +
@@ -306,7 +306,7 @@
                         //这里是为了解决跨域问题，但是博主并没有用这种方式解决。后面会给出解决方案
                     }
                 }).then((res) => {
-                    console.log(res.data);
+                    // console.log(res.data);
                 })
 
                 var url = "updatezj?id=" + this.form3.id + "&title=" + this.form3.title;

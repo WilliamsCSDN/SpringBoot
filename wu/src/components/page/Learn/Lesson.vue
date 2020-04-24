@@ -18,7 +18,7 @@
         <el-col :xs="2" :sm="2"  :md="2" :lg="2" :xl="2"> <li><a href="http://www.baidu.com"><router-link to='Person1'>个人中心</router-link></a></li></el-col>
         <el-col :xs="2" :sm="2"  :md="2" :lg="2" :xl="2"> <li><a id="log" href="#"><router-link to="login">登陆</router-link></a></li></el-col>
         <el-col :xs="2" :sm="2"  :md="2" :lg="2" :xl="2"> <li><a id="reg" href="#"><router-link to="login">注册</router-link></a></li></el-col>
-        <el-col :xs="2" :sm="2"  :md="2" :lg="2" :xl="2"> <li><a id="user" href="#"  style="display:none" @click="gg">{{user}}</a></li></el-col>
+        <el-col :xs="2" :sm="2"  :md="2" :lg="2" :xl="2"> <li><a id="user" href="#"  style="display:none" @click="gg">{{this.user}}</a></li></el-col>
         <el-col :xs="2" :sm="2"  :md="2" :lg="2" :xl="2"> <li><a id="person" href="#"  style="display:none"  @click="exit">退出</a></li></el-col>
       </ul>
       </div>
@@ -51,7 +51,7 @@
     <el-col  :xs="18" :sm="18" :md="18" :lg="18" :xl="18" style="background-color: #F3F5F6;padding-top: 20px">
       <a style="font-size: 20px;margin-left: 15px;font-family: SimHei;text-decoration: none;color: red" href="#">全部结果</a>
 
-      <el-col style="margin-top: 30px;margin-left: 15px" v-for="list in this.search2">
+      <el-col style="margin-top: 30px;margin-left: 15px" v-for="(list,index) in this.search2" :key="index">
         <a :href="'lessondetail?id='+list.id" style="color:black;">
           <el-col :xs="5" :sm="5" :md="5" :lg="5" :xl="5"> <img :src="'http://localhost:8082/3?a='+list.src"/></el-col>
           <el-col :xs="19" :sm="19" :md="19" :lg="19" :xl="19" style="font-family:SimHei;margin-top: 10px ">
@@ -132,7 +132,7 @@
     <el-col  :xs="18" :sm="18" :md="18" :lg="20" :xl="20" style="text-align: center;margin-top: 50px">
       <el-pagination
         background
-        pageSize="5"
+        :pageSize="5"
         @current-change="currentchange"
         layout="prev, pager, next"
         :total="this.total">
@@ -174,13 +174,14 @@
   export default{
     components: {ElButton, ElInput, ElFormItem, ElForm, ElTabPane, ElTabs, ElCol, ElContainer, ElRow}, data(){
       return{
+        user:'',
         hotselect:'',
         suggestion:[{ "value": "Vue" },
           { "value": "Java"},
           { "value": "Python" }],
         input:'',
         search2:'',
-        total:'',
+        total:1,
         form:{
           username:'',
           password:''
@@ -253,7 +254,7 @@
           this.total=res.data.length;
         })
           this.$ajax.get("/search?a=" + a+"&start=0&num=5").then(res => {
-            console.log(res.data)
+            // console.log(res.data)
             this.search2 = res.data;
           })
       },
@@ -266,17 +267,10 @@
       },
       exit(){
         this.$ajax.get('remove?token='+localStorage.getItem('token')).then(res=>{
-          alert('后台删除token成功！')
+          this.$router.push('login')
         })
         localStorage.removeItem('token');
-        var a=document.getElementById("user");
-        a.style.setProperty('display','none')
-        var e=document.getElementById("log")
-        e.style.setProperty('display','inline');
-        var b=document.getElementById("reg")
-        b.style.setProperty('display','inline');
-        var c=document.getElementById("person");
-        c.style.setProperty('display','none')
+        localStorage.removeItem('identity');
       },
       xxx(){
           var i=localStorage.getItem('token')

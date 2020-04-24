@@ -1,7 +1,7 @@
 <template>
     <div>
         <el-row style="margin-left: 45px">
-            <el-col :xs="24" :sm="24" :md="12" :lg="8" :xl="8" style="margin-top: 30px"  v-for="list in this.hotlearn">
+            <el-col :xs="8" :sm="8" :md="8" :lg="8" :xl="8" style="margin-top: 30px"  v-for="(list,index) in this.hotlearn" :key="index">
                 <!--<a :href="'/lessondetail?title='+list.learnContent[0].title" style="color:black;">-->
                 <a :href="'/learnrouter?id='+list.id" style="color:black;">
                     <img :src="'http://localhost:8082/3?a='+list.src" style="width: 80%" />

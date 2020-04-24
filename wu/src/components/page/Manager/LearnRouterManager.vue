@@ -8,8 +8,8 @@
             <el-button type="primary" style="margin-left: 20px" @click="aaa">搜索</el-button>
         </div>
         <el-button type="primary" style="width: 20%;margin-top: 10px" @click="bbb">添加步骤</el-button>
-        <div v-for="list in this.content1" style="width: 100%; border-radius: 5px; background-color: white; text-align: left; padding: 20px 20px 20px 20px; margin-top: 40px;">
-            <span style="font-size: 22px"><b>Step{{list.bz}}&nbsp&nbsp&nbsp{{list.name}}</b></span>
+        <div v-for="(list,index) in this.content1" :key="index" style="width: 100%; border-radius: 5px; background-color: white; text-align: left; padding: 20px 20px 20px 20px; margin-top: 40px;">
+            <span style="font-size: 22px"><b>Step{{list.bz}}&nbsp;&nbsp;&nbsp;{{list.name}}</b></span>
             <p>{{list.title}}</p>
             <div style="float: right;margin-right: 250px;margin-top: -20px">
                 <el-button style="float: right" type="danger" @click="remove(list.id)">删除</el-button>
@@ -29,7 +29,7 @@
         <el-dialog title="添加步骤" :visible.sync="editVisible" width="35%">
             <el-form ref="form" :model="form" label-width="70px">
                 <el-form-item label="Step:">
-                    <el-input disabled="true" v-model="form.bz"></el-input>
+                    <el-input :disabled="true" v-model="form.bz"></el-input>
                 </el-form-item>
                 <el-form-item label="步骤名:">
                     <el-input v-model="form.name"></el-input>
@@ -52,7 +52,7 @@
         <el-dialog title="编辑节" :visible.sync="editVisible2" width="35%">
             <el-form ref="form2" :model="form2" label-width="70px">
                 <el-form-item label="Step:">
-                    <el-input v-model="form2.bz" disabled="true"></el-input>
+                    <el-input v-model="form2.bz" :disabled="true"></el-input>
                 </el-form-item>
                 <el-form-item label="步骤名:">
                     <el-input v-model="form2.name"></el-input>

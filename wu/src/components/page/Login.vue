@@ -2,11 +2,11 @@
     <div class="login-wrap">
         <div class="ms-login">
             <div class="ms-title">E-learning平台登陆</div>
-            <el-tabs stretch="true" style="color: white;" type="border-card">
+            <el-tabs :stretch="true" style="color: white;" type="border-card">
                 <el-tab-pane label="登陆">
                     <el-form :model="param" :rules="rules" ref="login" label-width="0px" class="ms-content">
                         <el-form-item prop="username">
-                            <el-input v-model="param.username" placeholder="username">
+                            <el-input v-model="param.username" placeholder="username" @keyup.enter.native="login()">
                                 <el-button slot="prepend" icon="el-icon-lx-people"></el-button>
                             </el-input>
                         </el-form-item>
@@ -24,7 +24,7 @@
                         
                         <el-form-item prop="code">
                        <img style=" margin: 20px 0 0 0" :src="imgCode" @click="changeCode"/>
-                            <el-input v-model="param.code" placeholder="code" style="width:70%;margin-left:20px;float:right;margin-top:-40px">
+                            <el-input v-model="param.code" placeholder="code" style="width:70%;margin-left:20px;float:right;margin-top:-40px" @keyup.enter.native="login()">
                                 
                             </el-input>
                         </el-form-item>
@@ -106,12 +106,13 @@ export default {
                     var password = md5(str);
                     var url="getUser?username="+this.param.username+"&password="+password;
                     this.$ajax.get("code1").then(res=>{
-                        if(this.param.code==res.data.toLowerCase()){
+                        if((this.param.code).toLowerCase()==res.data.toLowerCase()){
                             this.$ajax.get(url).then(res=>{
                                 if(res.data!=false) {
                                     localStorage.setItem("token", res.data,10)
                                     
                                     this.$ajax.get('getUser?token='+res.data).then(res=>{
+                                        localStorage.setItem("name",res.data[0].name)
                                         localStorage.setItem("identity",res.data[0].identity)
                                     })
 
@@ -161,7 +162,7 @@ export default {
             })
         },
         changeCode(){   
-            var num=Math.ceil(Math.random()*10);
+            var num=Math.ceil(Math.random()*1000000);
             this.imgCode = "http://localhost:8082/code?" + num;
         },
     },

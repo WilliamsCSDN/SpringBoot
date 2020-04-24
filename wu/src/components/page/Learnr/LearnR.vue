@@ -28,13 +28,13 @@
             </div>
             <div style="width: 1100px;margin: 0 auto">
                 <el-row>
-                    <el-col  :xs="18" :sm="18" :md="18" :lg="24" :xl="24" style="background-color: #F3F5F6;padding-top: 20px">
+                    <el-col  :xs="24" :sm="24" :md="24" :lg="24" :xl="24" style="background-color: #F3F5F6;padding-top: 20px">
                         <a style="font-size: 20px;margin-left: 15px;font-family: SimHei;text-decoration: none;color: red" href="#" >全部结果</a>
-                        <div v-for="list1 in this.search2">
-                        <el-col style="margin-top: 30px;margin-left: 15px" v-for="list in list1.learnContent">
+                        <div v-for="(list1,index) in this.search2" :key="index">
+                        <el-col style="margin-top: 30px;margin-left: 15px" v-for="(list,index) in list1.learnContent" :key="index">
                             <a :href="'learnrouter?id='+list.id" style="color:black;">
-                                <el-col :xs="5" :sm="5" :md="5" :lg="10" :xl="10"> <img :src="'http://localhost:8082/3?a='+list.src"/></el-col>
-                                <el-col :xs="19" :sm="19" :md="19" :lg="14" :xl="14" style="font-family:SimHei;margin-top: 50px ">
+                                <el-col :xs="10" :sm="10" :md="10" :lg="10" :xl="10"> <img :src="'http://localhost:8082/3?a='+list.src"/></el-col>
+                                <el-col :xs="14" :sm="14" :md="14" :lg="14" :xl="14" style="font-family:SimHei;margin-top: 50px ">
                                     <div style="margin-top: 10px;font-size: 20px"><b> {{list.title}}</b></div>
                                     <p style="color: #545C63;font-size: 14px;margin-top: 20px;">{{list.content}}</p>
                                     <div style="font-size: 10px; color: #979FA6;margin-top: 20px"><span>{{list.bz}}步骤 · {{list.kc}}门课</span><span style="margin-left: 30px">★{{list.sc}}人收藏</span></div>
@@ -54,7 +54,7 @@
         <el-col  :xs="18" :sm="18" :md="18" :lg="24" :xl="24" style="text-align: center;margin-top: 50px">
             <el-pagination
                     background
-                    pageSize="5"
+                    :pageSize="5"
                     @current-change="currentchange"
                     layout="prev, pager, next"
                     :total="this.total">
@@ -96,13 +96,14 @@
     export default{
         components: {ElButton, ElInput, ElFormItem, ElForm, ElTabPane, ElTabs, ElCol, ElContainer, ElRow}, data(){
             return{
+                user:'',
                 hotselect:'',
                 suggestion:[{ "value": "Vue" },
                     { "value": "Java"},
                     { "value": "Python" }],
                 input:'',
                 search2:'',
-                total:'',
+                total:1,
                 form:{
                     username:'',
                     password:''
@@ -116,15 +117,7 @@
                 activeName1:'1'
             }
         },
-        created() {
-            var lett = this;
-            document.onkeydown = function(e) {
-                var key = window.event.keyCode;
-                if (key == 13) {
-                    lett.search();
-                }
-            }
-        },methods:{
+         methods:{
             enter(a){
                 var content = document.getElementById("content" + a);
                 content.style.display = 'block';
@@ -198,17 +191,11 @@
             },
             exit(){
                 this.$ajax.get('remove?token='+localStorage.getItem('token')).then(res=>{
-                    alert('后台删除token成功！')
+                    this.$router.push('login')
                 })
                 localStorage.removeItem('token');
-                var a=document.getElementById("user");
-                a.style.setProperty('display','none')
-                var e=document.getElementById("log")
-                e.style.setProperty('display','inline');
-                var b=document.getElementById("reg")
-                b.style.setProperty('display','inline');
-                var c=document.getElementById("person");
-                c.style.setProperty('display','none')
+                localStorage.removeItem('identity');
+               
             },
             xxx(){
                 var i=localStorage.getItem('token')

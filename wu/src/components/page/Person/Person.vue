@@ -59,7 +59,7 @@
                     </el-menu-item>
                 </el-menu>
             </el-col>
-            <el-col span="18">
+            <el-col :span="18">
                 <router-view></router-view>
             </el-col>
         </el-row>
@@ -121,20 +121,12 @@
 
             }
         },
-        created() {
-            var lett = this;
-            document.onkeydown = function(e) {
-                var key = window.event.keyCode;
-                if (key == 13) {
-                    lett.search();
-                }
-            }
-        },methods:{
+        methods:{
             handleOpen(key, keyPath) {
-                console.log(key, keyPath);
+                // console.log(key, keyPath);
             },
             handleClose(key, keyPath) {
-                console.log(key, keyPath);
+                // console.log(key, keyPath);
             },
 
             select(){
@@ -160,17 +152,10 @@
 
             exit(){
                 this.$ajax.get('remove?token='+localStorage.getItem('token')).then(res=>{
-                    alert('后台删除token成功！')
+                    this.$router.push('login')
                 })
                 localStorage.removeItem('token');
-                var a=document.getElementById("user");
-                a.style.setProperty('display','none')
-                var e=document.getElementById("log")
-                e.style.setProperty('display','inline');
-                var b=document.getElementById("reg")
-                b.style.setProperty('display','inline');
-                var c=document.getElementById("person");
-                c.style.setProperty('display','none')
+                localStorage.removeItem('identity');
             },
             xxx(){
                 var i=localStorage.getItem('token')

@@ -7,7 +7,7 @@
             <el-button type="primary" style="margin-left: 20px" @click="aaa">搜索</el-button>
         </div>
 
-        <div v-for="list in this.comment" style="width: 100%; border-radius: 5px;background-color: #E5EAF0; text-align: left; padding: 30px 30px 30px 30px; margin-top: 50px;font-size: 20px">
+        <div v-for="(list,index) in this.comment" :key="index" style="width: 100%; border-radius: 5px;background-color: #E5EAF0; text-align: left; padding: 30px 30px 30px 30px; margin-top: 50px;font-size: 20px">
             <div style="font-size: 25px"><img src="../../../assets/img/img.jpg" style=" width: 40px; height: 40px;border-radius: 50%;"/>{{list.name}}</div>
             <div style="margin-left: 40px;margin-top: 10px">{{list.content}}</div>
             <span v-if="list.state==0"><el-button type="primary" style="float: right;margin-right: 500px;margin-top: -50px" @click="bbb(list.comment_id)">审核</el-button></span>

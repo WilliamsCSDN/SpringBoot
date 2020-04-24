@@ -21,22 +21,22 @@
                 <div>
                 <div style="font-size: 30px"> {{content.title}}</div>
 
-                <span><img src="../../../assets/img/img.jpg" style=" width: 40px; height: 40px;border-radius: 50%;"/>{{content.author}}</span>&nbsp&nbsp&nbsp&nbsp&nbsp<span style="font-size: 25px">难度</span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{content.level}}</span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-                <span><span style="font-size: 25px">学习人数</span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{content.sc}}</span>
+                <span><img src="../../../assets/img/img.jpg" style=" width: 40px; height: 40px;border-radius: 50%;"/>{{content.author}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 25px">难度</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{content.level}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <span><span style="font-size: 25px">学习人数</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{content.sc}}</span>
                 </div>
                 <div style="float: right;margin-right: 200px;margin-top: -80px"><el-button type="danger" style="height: 50px;width: 200px" @click="jr">加入学习</el-button></div>
             </div>
 
         </div>
 
-        <el-tabs stretch="true" style="padding-top: 200px" v-model="activeName">
+        <el-tabs :stretch="true" style="padding-top: 200px" v-model="activeName">
             <el-tab-pane label="课程章节" class="content2" name=1>
                 <div style="width: 50%; margin: 0 auto; border-radius: 5px;background-color: #E5EAF0; text-align: left; padding: 30px 30px 30px 30px; margin-top: 20px;">简介:{{content.content}}</div>
-                <div v-for="list in this.content1" style="width: 51%;margin: 0 auto; border-radius: 5px; background-color: #E5EAF0; text-align: left; padding: 20px 20px 20px 20px; margin-top: 20px;">
-                    <span style="font-size: 22px"><b>第{{list.zj}}章&nbsp&nbsp&nbsp{{list.title}}</b></span>
-                    <div v-for="list1 in list.searchContent1" style="width: 100%;margin-top: 20px;">
+                <div v-for="(list,index) in this.content1" :key="index" style="width: 51%;margin: 0 auto; border-radius: 5px; background-color: #E5EAF0; text-align: left; padding: 20px 20px 20px 20px; margin-top: 20px;">
+                    <span style="font-size: 22px"><b>第{{list.zj}}章&nbsp;&nbsp;&nbsp;{{list.title}}</b></span>
+                    <div v-for="(list1,index) in list.searchContent1" :key="index" style="width: 100%;margin-top: 20px;">
                         <a :href="list1.url"><div style="text-align: left;margin-left: 0px;width: 750px;height: 50px;padding-left: 20px;padding-top: 10px  ">
-                        <span><i class="el-icon-lx-crown"></i> {{list1.zjj}}&nbsp&nbsp&nbsp{{list1.title}} </span>
+                        <span><i class="el-icon-lx-crown"></i> {{list1.zjj}}&nbsp;&nbsp;&nbsp;{{list1.title}} </span>
                             <el-button style="float: right">开始学习</el-button>
                     </div></a>
                     </div>
@@ -44,14 +44,14 @@
 
             </el-tab-pane>
             <el-tab-pane label="用户评论" name=2 class="content3">
-                <div v-for="list in this.comment" v-if="list.state==1" style="width: 50%; margin: 0 auto; border-radius: 5px;background-color: #E5EAF0; text-align: left; padding: 30px 30px 30px 30px; margin-top: 20px;font-size: 20px">
+                <div v-for="(list,index) in this.comment" :key="index" v-if="list.state==1" style="width: 50%; margin: 0 auto; border-radius: 5px;background-color: #E5EAF0; text-align: left; padding: 30px 30px 30px 30px; margin-top: 20px;font-size: 20px">
 
                     <div style="font-size: 25px"><img src="../../../assets/img/img.jpg" style=" width: 40px; height: 40px;border-radius: 50%;"/>{{list.name}}</div>
                     <div style="float: right;margin-top: -30px;font-size:15px;color: #99A1A6;">{{list.createtime}}</div>
                     <a href="javascript:void(0);" @click="a(list.comment_id)" :id="'a'+list.comment_id"><i class="el-icon-lx-like" style="float: right"></i></a>
                     <a href="javascript:void(0);" @click="b(list.comment_id)" :id="'a'+list.comment_id+list.comment_id" style="display: none;"><i class="el-icon-lx-likefill" style="float: right"></i></a>
                     <div style="margin-left: 40px;margin-top: 10px">{{list.content}}</div>
-                    <div style="margin-top: 10px;margin-left: 100px;" v-for="list1 in list.commentReplyList">
+                    <div style="margin-top: 10px;margin-left: 100px;" v-for="(list1,index) in list.commentReplyList" :key="index">
                         <!--<span v-if="(list.name==list1.replyname)&(list1.replyname!=list1.name)"><a href="javascript:void(0);" style="color: black;" @click="reply(list1.replyname,list.comment_id)"> {{list1.replyname}}回复{{list1.name}}:{{list1.content}}</a></span>-->
                         <!--<span v-else=""> <a href="javascript:void(0);" style="color: black;" @click="reply(list1.replyname,list.comment_id)"> {{list1.replyname}}:{{list1.content}}</a></span>-->
                         <span v-if="(list.name==list1.name)"><a href="javascript:void(0);" style="color: black;" @click="reply(list1.replyname,list.comment_id)"> {{list1.replyname}}:{{list1.content}} </a></span>
@@ -63,6 +63,7 @@
                         <el-input type="textarea" style="margin-top: 10px" v-model="content3" :placeholder=placeholer1></el-input>
                         <el-button class="editor-btn" type="primary" @click="submit1(list.comment_id,list.name)" style="margin-top: 10px">提交</el-button>
                     </div>
+
                 </div>
                 <div v-else=""></div>
                 <div style="width: 55% ;margin: 0 auto;margin-top: 50px;padding-top: 10px">
@@ -84,7 +85,7 @@
                 <a href="#">代码托管</a>
                 <a href="#">友情链接</a>
 
-            </div>
+            </div>  
             <div class="footer2">
                 © 2019 imooc.com  京ICP备 12003892号-11 京公网安备11010802030151号 北京奥鹏文化传媒有限公司 营业执照
                </div>
@@ -153,17 +154,10 @@
             },
             exit(){
                 this.$ajax.get('remove?token='+localStorage.getItem('token')).then(res=>{
-                    alert('后台删除token成功！')
+                    this.$router.push('login')
                 })
                 localStorage.removeItem('token');
-                var a=document.getElementById("user");
-                a.style.setProperty('display','none')
-                var e=document.getElementById("log")
-                e.style.setProperty('display','inline');
-                var b=document.getElementById("reg")
-                b.style.setProperty('display','inline');
-                var c=document.getElementById("person");
-                c.style.setProperty('display','none')
+                localStorage.removeItem('identity');
             },
             search(){
                 this.$router.push({path:'lesson',query:{a:this.input}})
@@ -278,6 +272,7 @@
 
             },
             jr(){
+                if(localStorage.getItem('token')!=null){
                 this.$ajax.get('getuserk?id='+this.idname).then(res=>{
                     if(res.data[0]!=null) {
                         for (var i = 0; i < res.data[0].search.length; i++) {
@@ -309,6 +304,7 @@
                             })
                     }
                 })
+            }else this.$router.push('/login');
             },
             gg(){
                 if(this.identity==1||this.identity==2) this.$router.push('manager')

@@ -6,6 +6,7 @@ import com.dubbo.api.service.UserService;
 import com.dubbo.provider.mapper.UserMapper;
 import com.dubbo.provider.util.MD5Util;
 import com.dubbo.provider.util.RedisUtil;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -122,6 +123,10 @@ public class UserServiceImpl implements UserService {
                     token = UUID.randomUUID().toString().replace("-", "");
                     System.out.println("添加token到reids");
                     redisUtil.set(token, findByName(username, md5password));
+//                    Cookie cookie = new Cookie("token", token);
+//                    cookie.setMaxAge(24*3600);
+//                    cookie.setPath("/");
+//                    response.addCookie(cookie);
                     return token;
                 }else{
                     return false;

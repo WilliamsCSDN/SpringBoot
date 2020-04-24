@@ -17,7 +17,7 @@
                     class="table"
                     ref="multipleTable"
                     header-cell-class-name="table-header"
-                    @selection-change="handleSelectionChange"
+                    
                     :default-sort="{prop: 'id', order: 'ascending'}"
             >
                 <el-table-column type="selection" width="55" align="center"></el-table-column>
@@ -53,7 +53,7 @@
                         background
                         layout="total, prev, pager, next"
                         :total="tableData.length"
-                        @current-change="handlePageChange"
+                       
                 ></el-pagination>
             </div>
         </div>
@@ -83,8 +83,8 @@
                 <el-form-item label="步骤"> <el-input  v-model="form.bz"></el-input></el-form-item>
                 <el-form-item label="课程"> <el-input  v-model="form.kc"></el-input></el-form-item>
 
-                <el-form-item label="收藏"> <el-input  v-model="form.sc" disabled="true"></el-input></el-form-item>
-                <el-form-item label="作者"> <el-input  v-model="form.author" disabled="true"></el-input></el-form-item>
+                <el-form-item label="收藏"> <el-input  v-model="form.sc" :disabled="true"></el-input></el-form-item>
+                <el-form-item label="作者"> <el-input  v-model="form.author" :disabled="true"></el-input></el-form-item>
                 <el-form-item label="图片"> <input type="file" id="saveImage" name="myphoto" accept="image/png,image/gif,image/jpeg"
            ref="new_image"></el-form-item>
 
@@ -120,8 +120,8 @@
                 <el-form-item label="步骤"> <el-input  v-model="form1.bz"></el-input></el-form-item>
                 <el-form-item label="课程"> <el-input  v-model="form1.kc"></el-input></el-form-item>
 
-                <el-form-item label="收藏"> <el-input  v-model="form1.sc" disabled="true"></el-input></el-form-item>
-                <el-form-item label="作者"> <el-input  v-model="form1.author" disabled="true"></el-input></el-form-item>
+                <el-form-item label="收藏"> <el-input  v-model="form1.sc" :disabled="true"></el-input></el-form-item>
+                <el-form-item label="作者"> <el-input  v-model="form1.author" :disabled="true"></el-input></el-form-item>
                 <el-form-item label="图片"> <input type="file" id="saveImage" name="myphoto" accept="image/png,image/gif,image/jpeg"
            ref="new_image"></el-form-item>
 
@@ -134,7 +134,7 @@
 
 
         <el-dialog title="图片选择" :visible.sync="editVisible2">
-            <div v-for="count in 16">
+            <div v-for="(count,index) in 16" :key="index">
                 <el-col :xs="6" :sm="6" :md="6" :lg="6" :xl="6">
                     <img :src="'/learn1/kc'+count+'.jpg'" style="width: 180px;height: 100px"/>
                     <el-radio v-model="radio" :label="count">{{count}}</el-radio>

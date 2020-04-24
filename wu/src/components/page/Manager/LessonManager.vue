@@ -17,7 +17,7 @@
                     class="table"
                     ref="multipleTable"
                     header-cell-class-name="table-header"
-                    @selection-change="handleSelectionChange"
+                    
                     :default-sort="{prop: 'id', order: 'ascending'}"
             >
                 <el-table-column type="selection" width="55" align="center"></el-table-column>
@@ -49,7 +49,7 @@
                         background
                         layout="total, prev, pager, next"
                         :total="tableData.length"
-                        @current-change="handlePageChange"
+                       
                 ></el-pagination>
             </div>
         </div>
@@ -87,7 +87,7 @@
 
                     </el-select>
                 </el-form-item>
-                <el-form-item label="收藏"> <el-input  v-model="form.sc" disabled="true"></el-input></el-form-item>
+                <el-form-item label="收藏"> <el-input  v-model="form.sc" :disabled="true"></el-input></el-form-item>
                 <el-form-item label="图片"><input type="file" id="saveImage" name="myphoto" accept="image/png,image/gif,image/jpeg"
            ref="new_image"></el-form-item>
 
@@ -110,7 +110,7 @@
                     <el-input v-model="form1.content" type="textarea"></el-input>
                 </el-form-item>
 
-                <el-form-item label="作者"> <el-input  v-model="form1.author" disabled="true"></el-input></el-form-item>
+                <el-form-item label="作者"> <el-input  v-model="form1.author" :disabled="true"></el-input></el-form-item>
 
                 <el-form-item label="难度">
                     <!--<el-input  v-model="form1.level"></el-input>-->
@@ -131,7 +131,7 @@
                         <el-option label="UI设计/3D动画/游戏" value="7"></el-option>
                     </el-select>
                 </el-form-item>
-                <el-form-item label="收藏"> <el-input  v-model="form1.sc" disabled="true"></el-input></el-form-item>
+                <el-form-item label="收藏"> <el-input  v-model="form1.sc" :disabled="true"></el-input></el-form-item>
                 <el-form-item label="图片"> <input type="file" id="saveImage" name="myphoto" accept="image/png,image/gif,image/jpeg"
            ref="new_image"></el-form-item>
 
@@ -144,7 +144,7 @@
 
 
         <el-dialog title="图片选择" :visible.sync="editVisible2">
-            <div v-for="count in 12">
+            <div v-for="(count,index) in 12" :key="index">
                 <el-col :xs="6" :sm="6" :md="6" :lg="6" :xl="6">
                 <img :src="'/learn1/learn'+count+'.png'" />
                 <el-radio v-model="radio" :label="count">{{count}}</el-radio>

@@ -14,14 +14,14 @@
 </video>
   </div>
     <!--用户评论-->
-<el-tabs stretch="true" style="padding-top:10px">
+<el-tabs :stretch="true" style="padding-top:10px">
     <el-tab-pane label="用户评论" class="content3">
-      <div v-for="list in this.comment" style="width: 50%; margin: 0 auto; border-radius: 5px;background-color: #E5EAF0; text-align: left; padding: 30px 30px 30px 30px; margin-top: 20px;font-size: 20px">
+      <div v-for="(list,index) in this.comment" :key="index" style="width: 50%; margin: 0 auto; border-radius: 5px;background-color: #E5EAF0; text-align: left; padding: 30px 30px 30px 30px; margin-top: 20px;font-size: 20px">
         <div style="font-size: 25px"><img src="../../../assets/img/img.jpg" style=" width: 40px; height: 40px;border-radius: 50%;"/>{{list.name}}</div>
         <a href="javascript:void(0);" @click="a(list.comment_id)" :id="'a'+list.comment_id"><i class="el-icon-lx-like" style="float: right"></i></a>
         <a href="javascript:void(0);" @click="b(list.comment_id)" :id="'a'+list.comment_id+list.comment_id" style="display: none;"><i class="el-icon-lx-likefill" style="float: right"></i></a>
         <div style="margin-left: 40px;margin-top: 10px">{{list.content}}</div>
-        <div style="margin-top: 10px;margin-left: 100px;" v-for="list1 in list.commentReplyList">
+        <div style="margin-top: 10px;margin-left: 100px;" v-for="(list1,index) in list.commentReplyList" :key="index">
           <span v-if="list.name==list1.replyname"><a href="javascript:void(0);" style="color: black;" @click="reply(list1.replyname,list.comment_id)"> {{list1.replyname}}回复{{list1.name}}:{{list1.content}}</a></span>
           <span v-else=""> <a href="javascript:void(0);" style="color: black;" @click="reply(list1.replyname,list.comment_id)"> {{list1.replyname}}:{{list1.content}}</a></span>
         </div>
@@ -37,8 +37,8 @@
 
       </div>
       <div style="width: 55% ;margin: 0 auto;margin-top: 50px;padding-top: 10px">
-        <span style="font-size: 25px;background-color: yellowgreen">评论区&nbsp&nbsp&nbsp(目前仅支持文字)</span>
-        <quill-editor ref="myTextEditor" v-model="content2" :options="editorOption" style="margin-top: 25px"></quill-editor>
+        <span style="font-size: 25px;background-color: yellowgreen">评论区&nbsp;&nbsp;&nbsp;(目前仅支持文字)</span>
+        <quill-editor ref="myTextEditor" v-model="content2"  style="margin-top: 25px"></quill-editor>
         <el-button class="editor-btn" type="primary" @click="submit" style="margin-top: 25px">提交</el-button>
       </div>
 

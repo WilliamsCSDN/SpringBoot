@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div v-for="list1 in this.search2">
+        <div v-for="(list1,index) in this.search2"  :key="index">
             <el-col style="margin-top: 30px;margin-left: 15px">
                 <a :href="'YWdetail?id='+list1.id" style="color:black;">
                     <el-col :xs="19" :sm="19" :md="19" :lg="24" :xl="24" style="font-family:SimHei;margin-top: 50px ">

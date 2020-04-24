@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import Cookie from 'vue-cookies'
 import App from './App.vue';
 import router from './router';
 import ElementUI from 'element-ui';
@@ -17,6 +18,7 @@ Vue.prototype.$ajax=axios
 axios.defaults.timeout = 5000;
 axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8';
 axios.defaults.baseURL = 'http://localhost:8082/';
+// axios.defaults.withCredentials = true
 Vue.config.productionTip = false;
 Vue.use(VueI18n);
 Vue.use(ElementUI, {
@@ -48,6 +50,36 @@ router.beforeEach((to, from, next) => {
 
 
 });
+
+axios.interceptors.request.use(function (config) {
+    // 在发送请求之前做些什么
+    // 判断是否存在token,如果存在将每个页面header添加token
+    if (localStorage.getItem('token')) {
+      config.headers.common['token'] = localStorage.getItem('token')
+    }
+    return config
+  }, function (error) {
+    router.push('/login')
+    return Promise.reject(error)
+  })
+
+
+  axios.interceptors.response.use(function (config) {
+    // 在发送请求之前做些什么
+    // 判断是否存在token,如果存在将每个页面header添加token
+    // alert(JSON.stringify(config.headers))
+    // console.log(config.headers)
+    // alert(Cookie.get("token"))
+    if (Cookie.get("name")!=null) {
+        
+      localStorage.setItem('name',Cookie.get("name"))
+    }
+    return config
+  }, function (error) {
+    router.push('/login')
+    return Promise.reject(error)
+  })
+
 
 new Vue({
     router,

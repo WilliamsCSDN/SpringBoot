@@ -1,7 +1,7 @@
 <template>
     <div>
         <el-row style="margin-left: 45px">
-            <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" style="margin-top: 30px"  v-for="list in this.hotsearch">
+            <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" style="margin-top: 30px"  v-for="(list,index) in this.hotsearch" :key="index">
                 <!--<a :href="'/lessondetail?title='+list.learnContent[0].title" style="color:black;">-->
                 <el-col :xs="5" :sm="5" :md="5" :lg="5" :xl="5">
                     <a :href="'/lessondetail?id='+list.id" style="color:black;">

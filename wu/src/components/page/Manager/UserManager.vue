@@ -17,7 +17,7 @@
                     class="table"
                     ref="multipleTable"
                     header-cell-class-name="table-header"
-                    @selection-change="handleSelectionChange"
+                   
                     :default-sort="{prop: 'id', order: 'ascending'}"
             >
                 <el-table-column type="selection" width="55" align="center"></el-table-column>
@@ -46,7 +46,7 @@
                         background
                         layout="total, prev, pager, next"
                         :total="tableData.length"
-                        @current-change="handlePageChange"
+                     
                 ></el-pagination>
             </div>
         </div>

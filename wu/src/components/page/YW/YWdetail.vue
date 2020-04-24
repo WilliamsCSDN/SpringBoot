@@ -31,13 +31,13 @@
                    <div style="width: 50%; margin: 0 auto; border-radius: 5px;background-color: #E5EAF0; text-align: left; padding: 30px 30px 30px 30px; margin-top: 20px;font-size: 20px">
                        {{comment[0].content}}
                    </div>
-                <div v-for="list in this.comment[0].wenDaComment"  style="width: 50%; margin: 0 auto; border-radius: 5px;background-color: #E5EAF0; text-align: left; padding: 30px 30px 30px 30px; margin-top: 20px;font-size: 20px">
+                <div v-for="(list,index) in this.comment[0].wenDaComment" :key="index"  style="width: 50%; margin: 0 auto; border-radius: 5px;background-color: #E5EAF0; text-align: left; padding: 30px 30px 30px 30px; margin-top: 20px;font-size: 20px">
 
                     <div style="font-size: 25px"><img src="../../../assets/img/img.jpg" style=" width: 40px; height: 40px;border-radius: 50%;"/>{{list.name}}</div>
                     <a href="javascript:void(0);" @click="a(list.id)" :id="'a'+list.id"><i class="el-icon-lx-like" style="float: right"></i></a>
                     <a href="javascript:void(0);" @click="b(list.id)" :id="'a'+list.id+list.id" style="display: none;"><i class="el-icon-lx-likefill" style="float: right"></i></a>
                     <div style="margin-left: 40px;margin-top: 10px">{{list.content}}</div>
-                    <div style="margin-top: 10px;margin-left: 100px;" v-for="list1 in list.wenDaReply">
+                    <div style="margin-top: 10px;margin-left: 100px;" v-for="(list1,index) in list.wenDaReply" :key="index">
                         <span v-if="(list.name!=list1.name)&(list1.replyname!=list1.name)"><a href="javascript:void(0);" style="color: black;" @click="reply(list1.replyname,list.id)"> {{list1.replyname}}回复{{list1.name}}:{{list1.content}}</a></span>
                         <span v-else=""> <a href="javascript:void(0);" style="color: black;" @click="reply(list1.replyname,list.id)"> {{list1.replyname}}:{{list1.content}}</a></span>
                     </div>
@@ -51,7 +51,7 @@
                 </div>
                </div>
                 <div style="width: 55% ;margin: 0 auto;margin-top: 50px;padding-top: 10px">
-                    <span style="font-size: 25px;background-color: yellowgreen">评论区&nbsp&nbsp&nbsp(目前仅支持文字)</span>
+                    <span style="font-size: 25px;background-color: yellowgreen">评论区&nbsp;&nbsp;&nbsp;(目前仅支持文字)</span>
                     <quill-editor ref="myTextEditor" v-model="content2" :options="editorOption" style="margin-top: 25px"></quill-editor>
                     <el-button class="editor-btn" type="primary" @click="submit" style="margin-top: 25px">提交</el-button>
                 </div>
@@ -140,17 +140,11 @@
             },
             exit(){
                 this.$ajax.get('remove?token='+localStorage.getItem('token')).then(res=>{
-                    alert('后台删除token成功！')
+                   this.$router.push('login')
                 })
                 localStorage.removeItem('token');
-                var a=document.getElementById("user");
-                a.style.setProperty('display','none')
-                var e=document.getElementById("log")
-                e.style.setProperty('display','inline');
-                var b=document.getElementById("reg")
-                b.style.setProperty('display','inline');
-                var c=document.getElementById("person");
-                c.style.setProperty('display','none')
+                localStorage.removeItem('identity');
+                
             },
             search(){
                 this.$router.push({path:'lesson',query:{a:this.input}})
@@ -319,7 +313,7 @@
     .footer2{margin: 0 auto;width: 1000px;margin-top: 30px;text-align: center}
     .content2 div div a{color: black;}
     .content2 div div a div:hover{background-color:#FFF3F3 ;}
-    .content3{
+    /* .content3{
 
-    }
+    } */
 </style>

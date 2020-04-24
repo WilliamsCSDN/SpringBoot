@@ -31,25 +31,6 @@ public class SearchServiceImpl implements SearchService {
     }
     public List<Search> findById(String id,String author){return searchMapper.findById(id,author);}
     public Boolean updateimg(Search search){
-<<<<<<< HEAD
-        String searchId=""+search.getId();
-        RLock lock = redissonClient.getLock(searchId);
-        try{
-            boolean res=lock.tryLock(100,10,TimeUnit.SECONDS);
-            if(!res) return false;
-            System.out.println("加锁成功！");
-        searchMapper.updateimg(search);
-        }catch (Exception e){
-            e.printStackTrace();
-            return false;
-        }finally {
-            lock.unlock();
-            redisTemplate.opsForZSet().removeRange("page",0,-1);
-            search2(null,null);
-            System.out.println("解锁成功！");
-        }
-        return true;
-=======
         if(search != null) {
             String searchId = "" + search.getId();
             RLock lock = redissonClient.getLock(searchId);
@@ -77,7 +58,6 @@ public class SearchServiceImpl implements SearchService {
             search2(null, null);
             return a;
         }else return 0;
->>>>>>> b817bb3d3a22c0c4694457d79fcc82f7f0c6e5d4
     }
     public int deletelesson(String id){
         if(id != null) {

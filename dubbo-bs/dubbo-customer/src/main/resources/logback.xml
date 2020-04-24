@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" debug="false">
+	<property name="log.base" value="e:/logs/manager" />
+	<jmxConfigurator />
+	<appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>%date{yyyy-MM-dd HH:mm:ss} [%thread] %yellow(%-5level) %logger{80} - %green(%msg%n)</pattern>
+		</layout>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<pattern>%date{yyyy-MM-dd HH:mm:ss} [%thread] %yellow(%-5level) %logger{80} - %green(%msg%n)</pattern>
+		</encoder>
+	</appender>
+	<appender name="logfile"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<File>${log.base}.log</File>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${log.base}.%d{yyyy-MM-dd}.%i.log.zip</fileNamePattern>
+			<MaxHistory>10</MaxHistory>
+			<timeBasedFileNamingAndTriggeringPolicy
+				class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<maxFileSize>50MB</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>%date{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{80} - %msg%n</pattern>
+		</layout>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<pattern>%date{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{80} - %msg%n</pattern>
+		</encoder>
+	</appender>
+	<logger name="org.mybatis">
+		<level value="DEBUG" />
+	</logger>
+	<logger name="org.springframework">
+		<level value="DEBUG" />
+	</logger>
+	<logger name="com.babt.manager.pm.controller" />
+	<root>
+		<level value="DEBUG" />
+		<appender-ref ref="stdout" />
+		<appender-ref ref="logfile" />
+	</root>
+</configuration>

@@ -3,7 +3,7 @@
         <div class="form-box">
             <el-form ref="form" :model="form" label-width="80px">
                 <el-form-item label="用户名">
-                    <el-input v-model="form.username" disabled="true"></el-input>
+                    <el-input v-model="form.username" :disabled="true"></el-input>
                 </el-form-item>
                 <el-form-item label="昵称">
                     <el-input v-model="form.name"></el-input>
@@ -14,7 +14,7 @@
 
                 <el-form-item label="身份">
                     <!--<el-input v-model="form.usertype.name"></el-input>-->
-                    <el-select v-model="form.usertype.name" placeholder="请选择" disabled="true">
+                    <el-select v-model="form.usertype.name" placeholder="请选择" :disabled="true">
                         <el-option key="bbk" label="管理员" value="1"></el-option>
                         <el-option key="xtc" label="教师" value="2"></el-option>
                         <el-option key="imoo" label="学生" value="3"></el-option>

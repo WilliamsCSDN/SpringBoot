@@ -32,10 +32,10 @@ public class TestAspect {
         RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = ((ServletRequestAttributes)requestAttributes).getRequest();
 
-        logger.info("***********URL  : "+request.getRequestURL().toString());
-        logger.info("***********HTTP_METHOD : "+request.getMethod());
-        logger.info("***********IP: " +request.getRemoteAddr());
-        logger.info("################THE ARGS OF THE CONTROLLER : " + Arrays.toString(joinPoint.getArgs()));
-        logger.info("################CLASS_METHOD : " + joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature().getName());
+//        logger.info("***********URL  : "+request.getRequestURL().toString());
+//        logger.info("***********HTTP_METHOD : "+request.getMethod());
+//        logger.info("***********IP: " +request.getRemoteAddr());
+//        logger.info("################THE ARGS OF THE CONTROLLER : " + Arrays.toString(joinPoint.getArgs()));
+//        logger.info("################CLASS_METHOD : " + joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature().getName());
     }
 }

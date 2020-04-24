@@ -5,12 +5,12 @@
 
             <div>
                 <el-row>
-                    <el-col  :xs="18" :sm="18" :md="18" :lg="24" :xl="24" style="background-color: #F3F5F6;padding-top: 20px">
+                    <el-col  :xs="24" :sm="24" :md="24" :lg="24" :xl="24" style="background-color: #F3F5F6;padding-top: 20px">
                         <a style="font-size: 20px;margin-left: 15px;font-family: SimHei;text-decoration: none;color: red" href="#" >全部问答</a>
-                        <div v-for="list1 in this.search2">
+                        <div v-for="(list1,index) in this.search2" :key="index">
                             <el-col style="margin-top: 30px;margin-left: 15px">
                                 <!--<a :href="'YWdetail?id='+list1.id" style="color:black;">-->
-                                    <el-col :xs="19" :sm="19" :md="19" :lg="24" :xl="24" style="font-family:SimHei;margin-top: 50px ">
+                                    <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" style="font-family:SimHei;margin-top: 50px ">
                                         <div style="margin-top: 10px;font-size: 20px"><b> {{list1.question}}</b><div style="float: right;margin-right: 400px"><el-button type="danger" @click="aaa(list1.id)">删除</el-button></div></div>
 
                                     </el-col>
@@ -31,7 +31,7 @@
         <el-col  :xs="18" :sm="18" :md="18" :lg="18" :xl="18" style="text-align: center;margin-top: 50px">
             <el-pagination
                     background
-                    pageSize="5"
+                    :pageSize="5"
                     @current-change="currentchange"
                     layout="prev, pager, next"
                     :total="this.total">
@@ -63,7 +63,7 @@
                     { "value": "Python" }],
                 input:'',
                 search2:'',
-                total:'',
+                total:1,
                 form:{
                     username:'',
                     password:''

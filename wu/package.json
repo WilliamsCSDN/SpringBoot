@@ -16,6 +16,7 @@
     "mavon-editor": "^2.6.17",
     "video.js": "^7.6.6",
     "vue": "^2.6.10",
+    "vue-cookies": "^1.7.0",
     "vue-cropperjs": "^3.0.0",
     "vue-i18n": "^8.10.0",
     "vue-quill-editor": "^3.0.6",

@@ -20,22 +20,22 @@
             <div class="content1">
                 <div>
                 <div style="font-size: 30px"> {{content.learnContent[0].title}}</div>
-                <span><img src="../../../assets/img/img.jpg" style=" width: 40px; height: 40px;border-radius: 50%;"/>{{content.learnContent[0].author}}</span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-                <span><span style="font-size: 25px"></span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{content.learnContent[0].bz}}步骤</span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-                <span><span style="font-size: 25px"></span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{content.learnContent[0].kc}}门课</span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-                <span><span style="font-size: 25px"></span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{content.learnContent[0].sc}}收藏</span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                <span><img src="../../../assets/img/img.jpg" style=" width: 40px; height: 40px;border-radius: 50%;"/>{{content.learnContent[0].author}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <span><span style="font-size: 25px"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{content.learnContent[0].bz}}步骤</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <span><span style="font-size: 25px"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{content.learnContent[0].kc}}门课</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <span><span style="font-size: 25px"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{content.learnContent[0].sc}}收藏</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 </div>
                 <div style="float: right;margin-right: 200px;margin-top: -80px"><el-button type="danger" style="height: 50px;width: 200px" @click="jr">加入学习</el-button></div>
             </div>
 
         </div>
 
-        <el-tabs stretch="true" style="padding-top: 200px" v-model="activeName">
+        <el-tabs :stretch="true" style="padding-top: 200px" v-model="activeName">
             <el-tab-pane label="课程安排" class="content2" name=1 style="background-color: #E5EAF0">
-                <p style="margin-top: 50px">&nbsp</p>
+                <p style="margin-top: 50px">&nbsp;</p>
                 <div style="width: 50%; margin: 0 auto; border-radius: 5px;background-color: white; text-align: left; padding: 30px 30px 30px 30px; margin-top: 20px;">简介:{{content.learnContent[0].content}}</div>
-                <div v-for="list in this.content1" style="width: 51%;margin: 0 auto; border-radius: 5px; background-color: white; text-align: left; padding: 20px 20px 20px 20px; margin-top: 20px;">
-                    <span style="font-size: 22px"><b>Step{{list.bz}}&nbsp&nbsp&nbsp{{list.name}}</b></span>
+                <div v-for="(list,index) in this.content1" :key="index" style="width: 51%;margin: 0 auto; border-radius: 5px; background-color: white; text-align: left; padding: 20px 20px 20px 20px; margin-top: 20px;">
+                    <span style="font-size: 22px"><b>Step{{list.bz}}&nbsp;&nbsp;&nbsp;{{list.name}}</b></span>
                     <p>{{list.title}}</p>
                     <!--<div v-for="list1 in list.searchContent1" style="width: 100%;margin-top: 20px;">-->
                         <!--<a :href="list1.url"><div style="text-align: left;margin-left: 0px;width: 750px;height: 50px;padding-left: 20px;padding-top: 10px  ">-->
@@ -140,17 +140,11 @@
             },
             exit(){
                 this.$ajax.get('remove?token='+localStorage.getItem('token')).then(res=>{
-                    alert('后台删除token成功！')
+                    this.$router.push('login')
                 })
                 localStorage.removeItem('token');
-                var a=document.getElementById("user");
-                a.style.setProperty('display','none')
-                var e=document.getElementById("log")
-                e.style.setProperty('display','inline');
-                var b=document.getElementById("reg")
-                b.style.setProperty('display','inline');
-                var c=document.getElementById("person");
-                c.style.setProperty('display','none')
+                localStorage.removeItem('identity');
+
             },
             search(){
                 this.$router.push({path:'lesson',query:{a:this.input}})
@@ -180,6 +174,7 @@
                 }
             },
             jr(){
+              if(localStorage.getItem('token')!=null){
                 this.$ajax.get('getuserr?id='+this.idname).then(res=>{
                     if(res.data[0]!=null) {
                         for (var i = 0; i < res.data[0].learnContent.length; i++) {
@@ -209,7 +204,9 @@
                         })
                     }
                 })
-            }
+
+            }else this.$router.push('/login');
+         }
 
         },
         mounted:function () {
@@ -271,7 +268,5 @@
     .footer2{margin: 0 auto;width: 1000px;margin-top: 30px;text-align: center}
     .content2 div div a{color: black;}
     .content2 div div a div:hover{background-color:#FFF3F3 ;}
-    .content3{
 
-    }
 </style>
