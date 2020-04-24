@@ -1,7 +1,7 @@
 <template>
     <div>
         <el-row style="margin-left: 45px">
-            <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="12" style="margin-top: 30px"  v-for="list in this.hotsearch">
+            <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" style="margin-top: 30px"  v-for="list in this.hotsearch">
                 <!--<a :href="'/lessondetail?title='+list.learnContent[0].title" style="color:black;">-->
                 <el-col :xs="5" :sm="5" :md="5" :lg="5" :xl="5">
                     <a :href="'/lessondetail?id='+list.id" style="color:black;">
@@ -9,7 +9,7 @@
                     </a>
                 </el-col>
 
-                    <!--<el-col :xs="4" :sm="4" :md="4" :lg="7" :xl="4"> <img src='../../views/img/learn1/learn1.png' style="width: 140px;height: 150px" /></el-col>-->
+                    <!--<el-col :xs="4" :sm="4" :md="4" :lg="7" :xl="7"> <img src='../../views/img/learn1/learn1.png' style="width: 140px;height: 150px" /></el-col>-->
                 <el-col :xs="19" :sm="19" :md="19" :lg="19" :xl="19">
                         <div style="margin-top: 10px;font-size: 20px;height: 40px;"><b> {{list.title}}</b></div>
                         <p style="color: #545C63;font-size: 14px;margin-top: 15px;height: 40px;">{{list.content}}</p>

@@ -19,12 +19,17 @@ import java.util.concurrent.TimeUnit;
 public class LearnContentServiceImpl implements LearnContentService {
     @Resource
     LearnContentMapper learnContentMapper;
+<<<<<<< HEAD
     @Autowired
     private RedissonClient redissonClient;
+=======
+
+>>>>>>> b817bb3d3a22c0c4694457d79fcc82f7f0c6e5d4
     public List<LearnContent> selectAll(String id, String start, String num){
         return learnContentMapper.selectAll(id,start,num);
     }
     public List<LearnContent> selectHot(String id){ return learnContentMapper.selectHot(id);}
+<<<<<<< HEAD
     public List<LearnRouter1> getrouterbyid(String id) {return  learnContentMapper.getrouterbyid(id);}
     public List<LearnContent> getlearncontent(String id,String author){return learnContentMapper.getlearncontent(id,author);}
     public void deletelearncontent(String id){learnContentMapper.deletelearncontent(id);}
@@ -51,6 +56,45 @@ public class LearnContentServiceImpl implements LearnContentService {
     public void deletelearnrouter(String id){learnContentMapper.deletelearnrouter(id);}
     public void updatelearnrouter(LearnRouter1 learnRouter1){learnContentMapper.updatelearnrouter(learnRouter1);}
     public void updatelearnrouter1(LearnRouter1 learnRouter1){learnContentMapper.updatelearnrouter1(learnRouter1);}
+=======
+    public List<LearnRouter1> getrouterbyid(String id) {
+        if(id != null) return  learnContentMapper.getrouterbyid(id);
+        else return null;
+    }
+    public List<LearnContent> getlearncontent(String id,String author){
+        return learnContentMapper.getlearncontent(id,author);
+    }
+    public int deletelearncontent(String id){
+        if(id!=null) return learnContentMapper.deletelearncontent(id);
+        else return 0;
+    }
+    public int insertlearncontent(LearnContent learnContent){
+        if(learnContent != null) return learnContentMapper.insertlearncontent(learnContent);
+        else return 0;
+    }
+    public int updatelearncontent(LearnContent learnContent){
+        if(learnContent != null && (Integer)learnContent.getId() != null)
+          return learnContentMapper.updatelearncontent(learnContent);
+        else return 0;
+    }
+    public int insertlearnrouter(LearnRouter1 learnRouter1){
+        if(learnRouter1 != null && (Integer)learnRouter1.getIid() != null)
+        return   learnContentMapper.insertlearnrouter(learnRouter1);
+        else return 0;
+    }
+    public int deletelearnrouter(String id){
+        if(id != null) return learnContentMapper.deletelearnrouter(id);
+        else return 0;
+    }
+    public int updatelearnrouter(LearnRouter1 learnRouter1){
+        if(learnRouter1 != null) return learnContentMapper.updatelearnrouter(learnRouter1);
+        else return 0;
+    }
+    public int updatelearnrouter1(LearnRouter1 learnRouter1){
+        if(learnRouter1 != null)  return learnContentMapper.updatelearnrouter1(learnRouter1);
+        else return 0;
+    }
+>>>>>>> b817bb3d3a22c0c4694457d79fcc82f7f0c6e5d4
 
 
 }

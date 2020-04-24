@@ -17,18 +17,18 @@ public interface UserService {
     public List<User> findAll();
     public List<User> findByName(String username,String password);
 
-    public String register(String username,String password,String identity) ;
+    public int register(String username,String password,String identity) ;
 
     public List<Permission> getpermission(String iid);
-    public void updateUser(User user);
-    public void updateUser1(User user);
+    public int updateUser(User user);
+    public int updateUser1(User user);
     public List<User> findById(String id);
-    public void deleteById(String id);
+    public int deleteById(String id);
 //    public void updatePassword(String id,String password);
-   public void updatePassword(String username,String password,String oldpassword);
+   public int updatePassword(String username,String password,String oldpassword);
 
-    public void addUser(User user);
+    public int addUser(User user);
     public Object getUser(String username, String password, String token);
-    public void remove(String token);
+    public int remove(String token);
 
 }

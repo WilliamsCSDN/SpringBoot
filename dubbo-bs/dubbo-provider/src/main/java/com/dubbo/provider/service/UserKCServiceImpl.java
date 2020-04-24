@@ -16,10 +16,30 @@ public class UserKCServiceImpl implements UserKCService {
     @Resource
     UserKCMapper userKCMapper;
 
-    public void insertkc(String id,String kc){userKCMapper.insertkc(id,kc);}
+    public int insertkc(String id,String kc){
+        if(id !=null &&kc != null) {
+            return userKCMapper.insertkc(id, kc);
+        }else return 0;
+    }
 
-    public List<UserKC> getuserk(String id){return userKCMapper.getuserk(id);}
-    public void deletekc(String id,String kc){ userKCMapper.deletekc(id,kc);}
-    public void updateSearch1(int id){userKCMapper.updateSearch1(id);}
-    public void updateSearch2(int id){userKCMapper.updateSearch2(id);}
+    public List<UserKC> getuserk(String id){
+        if(id != null) {
+            return userKCMapper.getuserk(id);
+        }else return null;
+    }
+    public int deletekc(String id,String kc){
+        if(id != null && kc != null) {
+           return userKCMapper.deletekc(id, kc);
+        }else return 0;
+    }
+    public int updateSearch1(int id){
+        if((Integer)id != null) {
+           return userKCMapper.updateSearch1(id);
+        }else return 0;
+    }
+    public int updateSearch2(int id){
+        if((Integer)id != null) {
+           return userKCMapper.updateSearch2(id);
+        }else return 0;
+    }
 }

@@ -17,17 +17,43 @@ public class UserRouterController {
     @Resource
     UserRouterService userRouterService;
     @RequestMapping("/insertrouter")
-    public void insertrouter(String id, String learnrouter){
-        userRouterService.insertrouter(id,learnrouter);
+    public String insertrouter(String id, String learnrouter){
+        if(id != null && learnrouter != null) {
+            int a = userRouterService.insertrouter(id, learnrouter);
+            if(a>0) return "收藏线路成功!";
+            else return "收藏线路失败!";
+        }else return "参数缺失!";
     }
     @RequestMapping("/getuserr")
-    public List<UserRouter> getuserr(String id){
-        return userRouterService.getuserr(id);
+    public Object getuserr(String id){
+        if(id != null) {
+            List<UserRouter> userRouters = userRouterService.getuserr(id);
+            if(userRouters != null) return userRouters;
+            else return "用户暂无收藏线路!";
+        }else return "参数缺失!";
     }
     @RequestMapping("/deleterouter")
-    public void deleterouter(String id,String learnrouter){userRouterService.deleterouter(id,learnrouter);}
+    public String deleterouter(String id,String learnrouter){
+        if(id != null && learnrouter != null) {
+            int a = userRouterService.deleterouter(id, learnrouter);
+            if(a>0) return "取消收藏成功!";
+            else return "取消收藏失败!";
+        }else return "参数缺失!";
+    }
     @RequestMapping("/updateLearnContent1")
-    public void updateLearnContent1(int id){userRouterService.updateLearnContent1(id);}
+    public String updateLearnContent1(int id){
+        if((Integer)id != null) {
+            int a = userRouterService.updateLearnContent1(id);
+            if(a>0) return "收藏+1成功!";
+            else return "收藏+1失败!";
+        }else return "参数缺失!";
+    }
     @RequestMapping("/updateLearnContent2")
-    public void updateLearnContent2(int id){userRouterService.updateLearnContent2(id);}
+    public String updateLearnContent2(int id){
+        if((Integer)id != null) {
+            int a = userRouterService.updateLearnContent2(id);
+            if(a>0) return "收藏-1成功!";
+            else return "收藏-1失败!";
+        }else return "参数缺失!";
+    }
 }

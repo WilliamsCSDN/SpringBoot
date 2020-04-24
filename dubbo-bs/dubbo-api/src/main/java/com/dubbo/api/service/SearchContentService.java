@@ -10,13 +10,13 @@ import java.util.List;
 public interface SearchContentService {
 
     public List<SearchContent> findAll(String id);
-    public void insertzj(String iid,String zj,String title);
-    public void insertzj1(SearchContent1 searchContent1);
-    public void updatezj(String id,String title);
-    public void updatezj1(String id,String title,String url);
-    public void deletezj1(String id,String iid,int zj);
-    public void deletesearchcontent(String iid,String zj);
-    public void updatesearchcontent(String id,String zj);
-    public void updatesearchcontent1(String id,String zj,String zjj);
+    public int insertzj(String iid,String zj,String title);
+    public int insertzj1(SearchContent1 searchContent1);
+    public int updatezj(String id,String title);
+    public int updatezj1(String id,String title,String url);
+    public int deletezj1(String id,String iid,int zj);
+    public int deletesearchcontent(String iid,String zj);
+    public int updatesearchcontent(String id,String zj);
+    public int updatesearchcontent1(String id,String zj,String zjj);
 
 }

@@ -14,12 +14,12 @@ public interface LearnContentMapper {
     public List<LearnContent> selectHot(@Param("id") String id);
     public List<LearnRouter1> getrouterbyid(@Param("id") String id);
     public List<LearnContent> getlearncontent(@Param("id") String id, @Param("author") String author);
-    public void deletelearncontent(@Param("id") String id);
-    public void insertlearncontent(@Param("lc") LearnContent learnContent);
-    public void updatelearncontent(@Param("lc") LearnContent learnContent);
+    public int deletelearncontent(@Param("id") String id);
+    public int insertlearncontent(@Param("lc") LearnContent learnContent);
+    public int updatelearncontent(@Param("lc") LearnContent learnContent);
 
-    public void insertlearnrouter(@Param("lr") LearnRouter1 learnRouter1);
-    public void deletelearnrouter(@Param("id") String id);
-    public void updatelearnrouter(@Param("lr") LearnRouter1 learnRouter1);
-    public void updatelearnrouter1(@Param("lr") LearnRouter1 learnRouter1);
+    public int insertlearnrouter(@Param("lr") LearnRouter1 learnRouter1);
+    public int deletelearnrouter(@Param("id") String id);
+    public int updatelearnrouter(@Param("lr") LearnRouter1 learnRouter1);
+    public int updatelearnrouter1(@Param("lr") LearnRouter1 learnRouter1);
 }

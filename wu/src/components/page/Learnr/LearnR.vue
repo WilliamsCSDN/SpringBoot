@@ -8,7 +8,7 @@
                     <el-col :xs="2" :sm="2"  :md="2" :lg="2" :xl="2"> <li><a href="http://www.baidu.com"><router-link to='lesson?a='>免费课程</router-link></a></li></el-col>
                     <el-col :xs="2" :sm="2"  :md="2" :lg="2" :xl="2"> <li><a href="http://www.baidu.com"><router-link to='LearnR'>学习路线</router-link></a></li></el-col>
                     <el-col :xs="2" :sm="2"  :md="2" :lg="2" :xl="2"> <li><a href="http://www.baidu.com"><router-link to='YW'>社区</router-link></a></li></el-col>
-                    <el-col :xs="6" :sm="6"  :md="6" :lg="9" :xl="2"><li>
+                    <el-col :xs="6" :sm="6"  :md="6" :lg="9" :xl="9"><li>
                         <el-autocomplete  :fetch-suggestions="querySearchAsync" placeholder="请输入内容" v-model="input" style="width: 70%;margin-top: -30px">
                         </el-autocomplete>
                         <a href="#" @click="search">搜索</a>
@@ -28,13 +28,13 @@
             </div>
             <div style="width: 1100px;margin: 0 auto">
                 <el-row>
-                    <el-col  :xs="18" :sm="18" :md="18" :lg="24" :xl="18" style="background-color: #F3F5F6;padding-top: 20px">
+                    <el-col  :xs="18" :sm="18" :md="18" :lg="24" :xl="24" style="background-color: #F3F5F6;padding-top: 20px">
                         <a style="font-size: 20px;margin-left: 15px;font-family: SimHei;text-decoration: none;color: red" href="#" >全部结果</a>
                         <div v-for="list1 in this.search2">
                         <el-col style="margin-top: 30px;margin-left: 15px" v-for="list in list1.learnContent">
                             <a :href="'learnrouter?id='+list.id" style="color:black;">
-                                <el-col :xs="5" :sm="5" :md="5" :lg="10" :xl="5"> <img :src="'http://localhost:8082/3?a='+list.src"/></el-col>
-                                <el-col :xs="19" :sm="19" :md="19" :lg="14" :xl="19" style="font-family:SimHei;margin-top: 50px ">
+                                <el-col :xs="5" :sm="5" :md="5" :lg="10" :xl="10"> <img :src="'http://localhost:8082/3?a='+list.src"/></el-col>
+                                <el-col :xs="19" :sm="19" :md="19" :lg="14" :xl="14" style="font-family:SimHei;margin-top: 50px ">
                                     <div style="margin-top: 10px;font-size: 20px"><b> {{list.title}}</b></div>
                                     <p style="color: #545C63;font-size: 14px;margin-top: 20px;">{{list.content}}</p>
                                     <div style="font-size: 10px; color: #979FA6;margin-top: 20px"><span>{{list.bz}}步骤 · {{list.kc}}门课</span><span style="margin-left: 30px">★{{list.sc}}人收藏</span></div>
@@ -51,7 +51,7 @@
 
         </div>
         <!--分页-->
-        <el-col  :xs="18" :sm="18" :md="18" :lg="24" :xl="18" style="text-align: center;margin-top: 50px">
+        <el-col  :xs="18" :sm="18" :md="18" :lg="24" :xl="24" style="text-align: center;margin-top: 50px">
             <el-pagination
                     background
                     pageSize="5"

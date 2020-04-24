@@ -1,23 +1,37 @@
 package com.dubbo.provider.filter;
 
-import javax.servlet.*;
+import com.alibaba.dubbo.common.Constants;
+import com.alibaba.dubbo.common.extension.Activate;
+import com.alibaba.dubbo.common.logger.LoggerFactory;
+import com.alibaba.dubbo.rpc.*;
+import org.springframework.stereotype.Component;
+
+
 import javax.servlet.annotation.WebFilter;
 import java.io.IOException;
+import java.util.logging.Logger;
 
-@WebFilter(urlPatterns = "/*",filterName = "TestFilter")
+//@Component
+//@WebFilter(urlPatterns = "/*",filterName = "TestFilter")
+@Activate( group = Constants.PROVIDER , order = 20000)
 public class TestFilter implements Filter {
-    public void destroy() {
-    }
 
-    public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws ServletException, IOException {
-        long start = System.currentTimeMillis();
-        chain.doFilter(req, resp);
-        System.out.println("Execute cost="+(System.currentTimeMillis()-start));
 
-    }
+//        long start = System.currentTimeMillis();
+//        System.out.println("filter1");
+//        chain.doFilter(req, resp);
+//        System.out.println("Execute cost="+(System.currentTimeMillis()-start));
 
-    public void init(FilterConfig config) throws ServletException {
 
+
+
+    /* (non-Javadoc)
+     * @see com.alibaba.dubbo.rpc.Filter#invoke(com.alibaba.dubbo.rpc.Invoker, com.alibaba.dubbo.rpc.Invocation)
+     */
+    @Override
+    public Result invoke(Invoker<?> invoker, Invocation invocation) throws RpcException {
+        System.out.println("filter1111");
+        return  invoker.invoke(invocation);
     }
 
 }

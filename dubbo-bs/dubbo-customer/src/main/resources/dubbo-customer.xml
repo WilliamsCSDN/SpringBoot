@@ -22,7 +22,6 @@
     <dubbo:reference id="wenDaService" interface="com.dubbo.api.service.WenDaService" loadbalance="random"/>
 
 
-
     <!--    <dubbo:reference interface="com.babt.interfaces.service.BabtAdminService" id="babtAdminService" />-->
     <!--    <dubbo:reference interface="com.babt.interfaces.service.BabtMenuService" id="babtMenuService" />-->
     <!--    <dubbo:reference interface="com.babt.interfaces.service.TestByPageService" id="testByPageService" />-->

@@ -74,6 +74,19 @@
                         <el-option label="高级" value="高级"></el-option>
                     </el-select>
                 </el-form-item>
+                <el-form-item label="类型">
+                    <!--<el-input  v-model="form.url"></el-input>-->
+                    <el-select v-model="form.url" placeholder="请选择">
+                        <el-option label="前沿/区块链/人工智能" value="1"></el-option>
+                        <el-option label="前端/小程序/JS" value="2"></el-option>
+                        <el-option label="后端/JAVA/Python" value="3"></el-option>
+                        <el-option label="移动/Android/IOS" value="4"></el-option>
+                        <el-option label="云计算/大数据/容器" value="5"></el-option>
+                        <el-option label="运维/测试/数据库" value="6"></el-option>
+                        <el-option label="UI设计/3D动画/游戏" value="7"></el-option>
+
+                    </el-select>
+                </el-form-item>
                 <el-form-item label="收藏"> <el-input  v-model="form.sc" disabled="true"></el-input></el-form-item>
                 <el-form-item label="图片"><input type="file" id="saveImage" name="myphoto" accept="image/png,image/gif,image/jpeg"
            ref="new_image"></el-form-item>
@@ -100,11 +113,22 @@
                 <el-form-item label="作者"> <el-input  v-model="form1.author" disabled="true"></el-input></el-form-item>
 
                 <el-form-item label="难度">
-                    <!--<el-input  v-model="form.level"></el-input>-->
+                    <!--<el-input  v-model="form1.level"></el-input>-->
                     <el-select v-model="form1.level" placeholder="请选择">
                         <el-option key="1" label="初级" value="初级"></el-option>
                         <el-option key="2" label="中级" value="中级"></el-option>
                         <el-option key="3" label="高级" value="高级"></el-option>
+                    </el-select>
+                </el-form-item>
+                <el-form-item label="类型">
+                    <el-select v-model="form1.url" placeholder="请选择">
+                        <el-option label="前沿/区块链/人工智能" value="1"></el-option>
+                        <el-option label="前端/小程序/JS" value="2"></el-option>
+                        <el-option label="后端/JAVA/Python" value="3"></el-option>
+                        <el-option label="移动/Android/IOS" value="4"></el-option>
+                        <el-option label="云计算/大数据/容器" value="5"></el-option>
+                        <el-option label="运维/测试/数据库" value="6"></el-option>
+                        <el-option label="UI设计/3D动画/游戏" value="7"></el-option>
                     </el-select>
                 </el-form-item>
                 <el-form-item label="收藏"> <el-input  v-model="form1.sc" disabled="true"></el-input></el-form-item>
@@ -161,7 +185,8 @@
                     author:'',
                     level:'初级',
                     sc:'0',
-                    src:''
+                    src:'',
+                    url:''
                 },
                 form2:{
                     usertype:{name:''}
@@ -203,7 +228,7 @@
             // 保存编辑
             saveEdit() {
                 if(this.radio!='') var url='updateimg?id='+this.form.id+'&src=learn'+this.form.id+'.png'+'&title='+this.form.title+' &content='+this.form.content+' &author='+this.form.author+' &level='+this.form.level+'&sc='+this.form.sc;
-                else var url='updateimg?id='+this.form.id+'&src=learn'+this.form.id+'.png'+'&title='+this.form.title+' &content='+this.form.content+' &author='+this.form.author+' &level='+this.form.level+'&sc='+this.form.sc;
+                else var url='updateimg?id='+this.form.id+'&src=learn'+this.form.id+'.png'+'&title='+this.form.title+' &content='+this.form.content+' &author='+this.form.author+' &level='+this.form.level+'&sc='+this.form.sc+'&url='+this.form.url;
                 this.$ajax.get(url).then(res=>{
                     if(res.status==200) {
 
@@ -237,7 +262,7 @@
                 }else{
                     this.$ajax.get('/selectBestId').then(res=>{
                         var aaa=res.data
-                    var url='insertlesson?title='+this.form1.title+'&content='+this.form1.content+'&author='+this.form1.author+'&level='+this.form1.level+'&sc='+this.form1.sc+'&src=learn'+(res.data+1)+'.png'
+                    var url='insertlesson?title='+this.form1.title+'&content='+this.form1.content+'&author='+this.form1.author+'&level='+this.form1.level+'&sc='+this.form1.sc+'&src=learn'+(res.data+1)+'.png'+'&url='+this.form1.url
                     this.$ajax.get(url).then(res=>{
                         if(res.status==200) {
 

@@ -7,7 +7,7 @@
       <el-col :xs="2" :sm="2"  :md="2" :lg="2" :xl="2"> <li><a><router-link to='lesson?a='>免费课程</router-link></a></li></el-col>
       <el-col :xs="2" :sm="2"  :md="2" :lg="2" :xl="2"> <li><a><router-link to='LearnR'>学习路线</router-link></a></li></el-col>
       <el-col :xs="2" :sm="2"  :md="2" :lg="2" :xl="2"> <li><a><router-link to='YW'>社区</router-link></a></li></el-col>
-      <el-col :xs="6" :sm="6"  :md="6" :lg="9" :xl="2"><li>
+      <el-col :xs="6" :sm="6"  :md="6" :lg="9" :xl="9"><li>
         <el-autocomplete  :fetch-suggestions="querySearchAsync" placeholder="请输入内容" v-model="input" style="width: 70%;margin-top: -30px">
         </el-autocomplete>
         <a href="#" @click="search1">搜索</a>
@@ -180,9 +180,9 @@
         <el-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12" style="margin-top: 30px"  v-for="list in this.hotsearch">
           <!--<a :href="'/lessondetail?title='+list.learnContent[0].title" style="color:black;">-->
           <a :href="'/lessondetail?id='+list.id" style="color:black;">
-            <el-col :xs="4" :sm="4" :md="4" :lg="7" :xl="4"> <img :src="'http://localhost:8082/3?a='+list.src" style="width: 140px;height: 150px" /></el-col>
-            <!--<el-col :xs="4" :sm="4" :md="4" :lg="7" :xl="4"> <img src='../../views/img/learn1/learn1.png' style="width: 140px;height: 150px" /></el-col>-->
-            <el-col :xs="20" :sm="20" :md="20" :lg="17" :xl="20" style="font-family:SimHei ">
+            <el-col :xs="4" :sm="4" :md="4" :lg="7" :xl="7"> <img :src="'http://localhost:8082/3?a='+list.src" style="width: 140px;height: 150px" /></el-col>
+            <!--<el-col :xs="4" :sm="4" :md="4" :lg="7" :xl="7"> <img src='../../views/img/learn1/learn1.png' style="width: 140px;height: 150px" /></el-col>-->
+            <el-col :xs="20" :sm="20" :md="20" :lg="17" :xl="17" style="font-family:SimHei ">
             <div style="margin-top: 10px;font-size: 20px;height: 40px;"><b> {{list.title}}</b></div>
             <p style="color: #545C63;font-size: 14px;margin-top: 15px;height: 40px;">{{list.content}}</p>
             <div style="font-size: 10px; color: #979FA6;margin-top: 15px"><span>作者:{{list.author}} 难度:{{list.level}}</span><span style="margin-left: 30px">★{{list.sc}}人收藏</span></div>
@@ -200,8 +200,8 @@
         <el-row>
           <el-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12" style="margin-top: 30px" v-for="list in search" v-if="list.id<=6">
             <a :href="'/learnrouter?id='+list.id" style="color:black;">
-            <el-col :xs="4" :sm="4" :md="4" :lg="7" :xl="4"> <img :src="'http://localhost:8082/3?a='+list.src"  style="height: 150px"/></el-col>
-            <el-col :xs="20" :sm="20" :md="20" :lg="17" :xl="20" style="font-family:SimHei ">
+            <el-col :xs="4" :sm="4" :md="4" :lg="7" :xl="7"> <img :src="'http://localhost:8082/3?a='+list.src"  style="height: 150px"/></el-col>
+            <el-col :xs="20" :sm="20" :md="20" :lg="17" :xl="17" style="font-family:SimHei ">
               <div style="margin-top: 10px;font-size: 20px;height: 40px;"><b> {{list.title}}</b></div>
               <p style="color: #545C63;font-size: 14px;margin-top: 15px;height: 40px;">{{list.content}}</p>
               <div style="font-size: 10px; color: #979FA6;margin-top: 15px"><span>作者:{{list.author}} 难度:{{list.level}}</span><span style="margin-left: 30px">★{{list.sc}}人收藏</span></div>

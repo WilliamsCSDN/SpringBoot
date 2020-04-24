@@ -4,6 +4,8 @@ import com.dubbo.api.model.Permission;
 import com.dubbo.api.model.User;
 import com.dubbo.api.service.UserService;
 import com.dubbo.provider.mapper.UserMapper;
+import com.dubbo.provider.util.MD5Util;
+import com.dubbo.provider.util.RedisUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -22,7 +24,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findByUsername(String username) {
-        return userMapper.findByUsername(username);
+        if(username != null) {
+            return userMapper.findByUsername(username);
+        }else return null;
     }
 
     @Override
@@ -32,66 +36,81 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> findByName(String username, String password) {
-        String md5password = MD5Util.formPassToDBPass(password, "456789");
-        return userMapper.findByName(username, password);
+        if(username != null && password != null) {
+            String md5password = MD5Util.formPassToDBPass(password, "456789");
+            return userMapper.findByName(username, password);
+        }else return null;
     }
 
     @Override
-    public String register(String username, String password, String identity) {
+    public int register(String username, String password, String identity) {
         if(username!=null&&password!=null&&identity!=null) {
-            String a = MD5Util.formPassToDBPass(password, "456789");
-            userMapper.register(username,password,identity);
-            return "添加成功！";
-        }
-        else return "添加失败";
+            String md5password = MD5Util.formPassToDBPass(password, "456789");
+            return userMapper.register(username,md5password,identity);
+        } else return 0;
     }
 
     @Override
     public List<Permission> getpermission(String iid) {
-        return userMapper.getpermission(iid);
+        if(iid != null) {
+            return userMapper.getpermission(iid);
+        }
+        else return null;
     }
 
     @Override
-    public void updateUser(User user) {
-        if(user.getPassword()!=null){
+    public int updateUser(User user) {
+        if(user != null && user.getPassword()!=null && user.getUsername() != null) {
             String md5password = MD5Util.formPassToDBPass(user.getPassword(), "456789");
             user.setPassword(md5password);
-        }
-        userMapper.updateUser(user);
+            return userMapper.updateUser(user);
+        }else return 0;
     }
 
     @Override
-    public void updateUser1(User user) {
-        userMapper.updateUser1(user);
+    public int updateUser1(User user) {
+        if(user != null && user.getUsername() != null) {
+            return userMapper.updateUser1(user);
+        }else return 0;
     }
 
     @Override
     public List<User> findById(String id) {
-        return userMapper.findById(id);
-    }
-
-    @Override
-    public void deleteById(String id) {
-        userMapper.deleteById(id);
-    }
-
-    @Override
-    public void updatePassword(String username,String password,String oldpassword) {
-        for(User a:findByName(username,oldpassword)) {
-            if (String.valueOf(a.getId())!="") {
-                String md5password = MD5Util.formPassToDBPass(password, "456789");
-                userMapper.updatePassword(String.valueOf(a.getId()), md5password);
-
-            }
+        if(id != null) {
+            return userMapper.findById(id);
         }
+        else return null;
+    }
+
+    @Override
+    public int deleteById(String id) {
+        if(id != null) {
+            return userMapper.deleteById(id);
+        }else return 0;
+    }
+
+    @Override
+    public int updatePassword(String username,String password,String oldpassword) {
+        if(username != null && password != null && oldpassword != null) {
+            int aa = 0;
+            for (User a : findByName(username, oldpassword)) {
+                if (String.valueOf(a.getId()) != "") {
+                    String md5password = MD5Util.formPassToDBPass(password, "456789");
+                   aa = userMapper.updatePassword(String.valueOf(a.getId()), md5password);
+                }
+            }
+            return aa;
+        }else return 0;
 
     }
 
     @Override
-    public void addUser(User user) {
-        String md5password = MD5Util.formPassToDBPass(user.getPassword(), "456789");
-        user.setPassword(md5password);
-        userMapper.addUser(user);
+    public int addUser(User user) {
+        if(user != null && user.getUsername() != null &&user.getPassword() != null) {
+            String md5password = MD5Util.formPassToDBPass(user.getPassword(), "456789");
+            user.setPassword(md5password);
+            return userMapper.addUser(user);
+        }else return 0;
     }
 
     public Object getUser(String username, String password, String token){
@@ -99,23 +118,24 @@ public class UserServiceImpl implements UserService {
             String md5password = MD5Util.formPassToDBPass(password, "456789");
             if(username==null||password==null) return false;
             else {
-                System.out.println(findByName(username,password).toString());
-                if(findByName(username,md5password).toString()!="[]") {
+                if(findByName(username,md5password).size()!=0) {
                     token = UUID.randomUUID().toString().replace("-", "");
                     System.out.println("添加token到reids");
                     redisUtil.set(token, findByName(username, md5password));
                     return token;
                 }else{
-                    System.out.println(md5password+"123");
                     return false;
                 }
             }
         }else{
-            System.out.println("从redis中获取list");
             return redisUtil.get(token);
         }
     }
-    public void remove(String token){
-        redisUtil.del(token);
+    public int remove(String token){
+        if(token != null) {
+            redisUtil.del(token);
+            return 1;
+        }else  return 0;
+        
     }
 }

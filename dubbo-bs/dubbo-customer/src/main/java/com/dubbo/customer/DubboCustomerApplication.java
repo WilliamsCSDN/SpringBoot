@@ -4,6 +4,7 @@ import com.dubbo.api.model.User;
 import com.dubbo.api.service.UserService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.ImportResource;
 
@@ -11,6 +12,7 @@ import java.util.List;
 
 @SpringBootApplication
 @ImportResource(value = {"classpath:dubbo-customer.xml"})
+
 public class DubboCustomerApplication {
 
     public static void main(String[] args) {

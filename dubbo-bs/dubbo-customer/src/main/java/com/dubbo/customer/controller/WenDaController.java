@@ -22,9 +22,7 @@ public class WenDaController {
     @Resource
     WenDaService wenDaService;
     @RequestMapping("wenda")
-    public List<WenDa> findAll(String id){
-        return wenDaService.findAll(id);
-    }
+    public List<WenDa> findAll(String id){ return wenDaService.findAll(id); }
     @RequestMapping("wenda1")
     public List<WenDa> find(String start,String num,String author){
 //        return wenDaService.find(start,num,author);
@@ -36,24 +34,43 @@ public class WenDaController {
         return a;
     }
     @RequestMapping("insertwenda")
-    public void insertwenda(String iid,String name,String content){
-        wenDaService.insertwenda(iid,name,content);}
+    public String insertwenda(String iid,String name,String content){
+        if(iid != null && name !=null && content != null) {
+            int a = wenDaService.insertwenda(iid, name, content);
+            if(a>0) return "评论成功!";
+            else return "评论失败!";
+        }else return "参数缺失!";
+    }
     @RequestMapping("insertwenda1")
-    public void insertwenda1(String id,String name,String replyname,String content){
-        Date date=new Date();
-        SimpleDateFormat simpleDate=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        wenDaService.insertwenda1(id,name,replyname,content,valueOf(simpleDate.format(date)));
+    public String insertwenda1(String id,String name,String replyname,String content){
+        if(id != null && name !=null && replyname !=null && content != null ) {
+            Date date = new Date();
+            SimpleDateFormat simpleDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            int a = wenDaService.insertwenda1(id, name, replyname, content, valueOf(simpleDate.format(date)));
+            if(a>0) return "回复成功!";
+            else return "回复失败!";
+        }else return "参数缺失!";
     }
     @RequestMapping("deletewenda")
-    public void deletewenda(String id){
-        wenDaService.deletewenda(id);
+    public String deletewenda(String id){
+        if(id != null) {
+            int a = wenDaService.deletewenda(id);
+            if(a>0) return "删除评论成功!";
+            else return "删除评论失败!";
+        }else return "参数缺失!";
     }
     @RequestMapping("insertwenda2")
-    public void insertwenda2(String question,String content,String author){
-        Date date=new Date();
-        SimpleDateFormat simpleDate=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        wenDaService.insertwenda2(question,content,author,valueOf(simpleDate.format(date)));
+    public String insertwenda2(String question,String content,String author){
+        if(question != null && content != null && author != null ) {
+            Date date = new Date();
+            SimpleDateFormat simpleDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            int a = wenDaService.insertwenda2(question, content, author, valueOf(simpleDate.format(date)));
+            if(a>0) return "添加提问成功!";
+            else return "添加提问失败!";
+        }else return "参数缺失!";
     }
     @RequestMapping("countWenDa")
-    public int countWenDa(int iid){return wenDaService.countWenDa(iid);}
+    public int countWenDa(int iid){
+            return wenDaService.countWenDa(iid);
+    }
 }

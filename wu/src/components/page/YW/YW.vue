@@ -8,7 +8,7 @@
                     <el-col :xs="2" :sm="2"  :md="2" :lg="2" :xl="2"> <li><a href="http://www.baidu.com"><router-link to='lesson?a='>免费课程</router-link></a></li></el-col>
                     <el-col :xs="2" :sm="2"  :md="2" :lg="2" :xl="2"> <li><a href="http://www.baidu.com"><router-link to='LearnR'>学习路线</router-link></a></li></el-col>
                     <el-col :xs="2" :sm="2"  :md="2" :lg="2" :xl="2"> <li><a href="http://www.baidu.com"><router-link to='YW'>社区</router-link></a></li></el-col>
-                    <el-col :xs="6" :sm="6"  :md="6" :lg="9" :xl="2"><li>
+                    <el-col :xs="6" :sm="6"  :md="6" :lg="9" :xl="9"><li>
                         <el-autocomplete  :fetch-suggestions="querySearchAsync" placeholder="请输入内容" v-model="input" style="width: 70%;margin-top: -30px">
                         <a href="#" @click="search">搜索</a>
                         </el-autocomplete>
@@ -29,12 +29,12 @@
             <div style="float: right;margin-right: 200px;margin-top: -110px"><el-button type="danger" style="height: 50px;width: 200px" @click="question">提问</el-button></div>
             <div style="width: 1100px;margin: 0 auto">
                 <el-row>
-                    <el-col  :xs="18" :sm="18" :md="18" :lg="24" :xl="18" style="background-color: #F3F5F6;padding-top: 20px">
+                    <el-col  :xs="18" :sm="18" :md="18" :lg="24" :xl="24" style="background-color: #F3F5F6;padding-top: 20px">
                         <a style="font-size: 20px;margin-left: 15px;font-family: SimHei;text-decoration: none;color: red" href="#" >全部问答</a>
                         <div v-for="list1 in this.search2">
                             <el-col style="margin-top: 30px;margin-left: 15px">
                                 <a :href="'YWdetail?id='+list1.id" style="color:black;">
-                                    <el-col :xs="19" :sm="19" :md="19" :lg="24" :xl="19" style="font-family:SimHei;margin-top: 50px ">
+                                    <el-col :xs="19" :sm="19" :md="19" :lg="24" :xl="24" style="font-family:SimHei;margin-top: 50px ">
                                     
                                         <div style="margin-top: 10px;font-size: 20px"><b> 总评论：{{list1.countwenda}}&nbsp&nbsp&nbsp{{list1.question}}</b></div>
                                         <p style="margin-left: 880px;margin-top: -20px"><b>作者:{{list1.author}}</b></p>

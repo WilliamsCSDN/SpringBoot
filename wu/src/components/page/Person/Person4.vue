@@ -3,7 +3,7 @@
         <div v-for="list1 in this.search2">
             <el-col style="margin-top: 30px;margin-left: 15px">
                 <a :href="'YWdetail?id='+list1.id" style="color:black;">
-                    <el-col :xs="19" :sm="19" :md="19" :lg="24" :xl="19" style="font-family:SimHei;margin-top: 50px ">
+                    <el-col :xs="19" :sm="19" :md="19" :lg="24" :xl="24" style="font-family:SimHei;margin-top: 50px ">
                         <div style="margin-top: 10px;font-size: 20px"><b> {{list1.question}}</b></div>
                         <div style="float: right;margin-right: 400px">
                         <el-button type="danger" @click="aaa(list1.id)">删除</el-button>

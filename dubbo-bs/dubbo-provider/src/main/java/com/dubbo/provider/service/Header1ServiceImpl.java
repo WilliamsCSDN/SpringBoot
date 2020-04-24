@@ -21,7 +21,8 @@ public class Header1ServiceImpl implements Header1Service {
 
     }
     public List<Content> findByName(String name){
-        return header1Mapper.findByName(name);
+        if(name != null) return header1Mapper.findByName(name);
+        else return null;
     }
 
 }
