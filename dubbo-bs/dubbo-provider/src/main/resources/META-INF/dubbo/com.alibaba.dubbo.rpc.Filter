@@ -1,2 +1,0 @@
-andyFilter=com.dubbo.provider.filter.TestFilter
-testInterceptor=com.dubbo.provider.filter.TestInterceptor
